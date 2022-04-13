@@ -19,4 +19,4 @@ This example deploys self-hosted version of [Remix](https://remix.run/) using th
 ## 📝 Notes
 
 - [Official docs](https://remix.run/docs/en/v1)
-- A [video](https://www.youtube.com/watch?v=1uebyGwAGvg) introducing the stack
+- A [video](https://youtu.be/1uebyGwAGvg) introducing the stack
