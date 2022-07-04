@@ -37,19 +37,4 @@ export const exampleRouter = createRouter()
         },
       });
     },
-  })
-  .mutation("newsletterVerifyAddress", {
-    input: z.object({
-      id: z.string(),
-    }),
-    async resolve({ ctx, input }) {
-      ctx.prisma.newsletterSubscription.update({
-        data: {
-          verified: true,
-        },
-        where: {
-          id: input.id,
-        },
-      });
-    },
   });
