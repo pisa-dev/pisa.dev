@@ -1,8 +1,24 @@
 import Image from "next/image";
-import { FC, forwardRef, LegacyRef } from "react";
+import { FC, FormEvent, forwardRef, LegacyRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
+import { trpc } from "../../utils/trpc";
 
-const NewsletterBanner = () => {
+const NewsletterBanner: FC = () => {
+  const [email, setEmail] = useState("");
+  const newsletterMutation = trpc.useMutation("example.newsletterSubscribe");
+
+  const onFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    newsletterMutation.mutate({ email });
+  };
+
+  const disabled =
+    newsletterMutation.isLoading ||
+    newsletterMutation.isError ||
+    newsletterMutation.isSuccess;
+  const success = newsletterMutation.isSuccess;
+  const errored = newsletterMutation.isError;
+
   return (
     <section className="sm:my-20">
       <h2 className="sr-only">Newsletter</h2>
@@ -25,24 +41,27 @@ const NewsletterBanner = () => {
                 Iscrivendoti non rischierai di arrivare tardi!
               </p>
             </div>
-            <form>
+            <form onSubmit={onFormSubmit}>
               <h3 className="text-lg font-semibold tracking-tight text-indigo-800">
                 Iscriviti alla nostra newsletter{" "}
                 <span aria-hidden="true">↓</span>
               </h3>
               <div className="mt-5 flex rounded-3xl bg-white py-2.5 pr-2.5 shadow-xl shadow-blue-900/5 focus-within:ring-2 focus-within:ring-indigo-800">
-                <label htmlFor="" className="sr-only">
+                <label htmlFor="email" className="sr-only">
                   Indirizzo email
                 </label>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="Indirizzo email"
                   className="-my-2.5 border-none flex-auto bg-transparent pl-6 pr-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:ring-0"
                 />
                 <button
-                  className="inline-flex justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 sm:p-4 text-base font-semibold text-white hover:bg-blue-500 active:text-white/70 focus:outline-none focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-500"
+                  className="inline-flex justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 sm:p-4 text-base font-semibold text-white hover:bg-blue-500 active:text-white/70 focus:outline-none focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-500 disabled:opacity-40"
                   type="submit"
+                  disabled={disabled}
                 >
                   <span className="sr-only sm:not-sr-only">
                     Iscriviti subito
@@ -52,6 +71,20 @@ const NewsletterBanner = () => {
                   </span>
                 </button>
               </div>
+              {success && (
+                <p className="text-lg font-semibold text-black mt-4">
+                  Fatto! Da adesso riceverai le nostre email.
+                  {/* TODO: when we can send email for real we should send a verification email first and the message should become:
+                      Controlla la tua casella per verificare il tuo indirizzo e iniziare a ricevere le nostre email.
+                  */}
+                </p>
+              )}
+              {errored && (
+                <p className="text-lg font-semibold text-red-700 mt-4">
+                  Oops! Si è verificato un errore nel gestire la richiesta,
+                  riprova più tardi.
+                </p>
+              )}
             </form>
           </div>
         </div>
