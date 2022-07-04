@@ -15,7 +15,7 @@ const Hero: FC<HeroProps> = ({ cta }) => {
             <Image
               layout="fill"
               objectFit="cover"
-              src="/hero.avif"
+              src="/hero.jpeg"
               alt="Conference crowd"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-800 mix-blend-multiply" />
