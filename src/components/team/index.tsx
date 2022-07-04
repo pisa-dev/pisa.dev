@@ -71,6 +71,7 @@ const Team = () => {
               >
                 <div className="space-y-6">
                   <Image
+                    objectFit="cover"
                     height="100px"
                     width="100px"
                     className="mx-auto rounded-full"
