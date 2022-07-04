@@ -38,7 +38,7 @@ const NewsletterBanner = () => {
                   type="email"
                   required
                   placeholder="Indirizzo email"
-                  className="-my-2.5 border-none flex-auto bg-transparent pl-6 pr-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  className="-my-2.5 border-none flex-auto bg-transparent pl-6 pr-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:ring-0"
                 />
                 <button
                   className="inline-flex justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 sm:p-4 text-base font-semibold text-white hover:bg-blue-500 active:text-white/70 focus:outline-none focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-500"
