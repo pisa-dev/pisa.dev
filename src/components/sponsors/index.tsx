@@ -31,7 +31,7 @@ const Sponsors = () => {
               key={href}
               className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1"
             >
-              <a href={href} key={src}>
+              <a target="_blank" rel="noreferrer" href={href} key={src}>
                 <Image
                   className="saturate-0 opacity-80 hover:opacity-100 hover:saturate-100"
                   width="64px"

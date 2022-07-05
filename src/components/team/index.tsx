@@ -89,6 +89,8 @@ const Team = () => {
                           <a
                             href={person.githubUrl}
                             className="text-gray-100 hover:text-white"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <span className="sr-only">GitHub</span>
                             <BsGithub />
@@ -100,6 +102,8 @@ const Team = () => {
                           <a
                             href={person.twitterUrl}
                             className="text-gray-100 hover:text-white"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <span className="sr-only">Twitter</span>
                             <BsTwitter />
@@ -111,6 +115,8 @@ const Team = () => {
                           <a
                             href={person.linkedinUrl}
                             className="text-gray-100 hover:text-white"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <span className="sr-only">LinkedIn</span>
                             <BsLinkedin />
