@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { FC, FormEvent, forwardRef, LegacyRef, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { trpc } from "../../utils/trpc";
 
