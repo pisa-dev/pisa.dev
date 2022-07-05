@@ -73,10 +73,8 @@ const NewsletterBanner: FC = () => {
               </div>
               {success && (
                 <p className="text-lg font-semibold text-black mt-4">
-                  Fatto! Da adesso riceverai le nostre email.
-                  {/* TODO: when we can send email for real we should send a verification email first and the message should become:
-                      Controlla la tua casella per verificare il tuo indirizzo e iniziare a ricevere le nostre email.
-                  */}
+                  Fatto! Controlla la tua casella per verificare il tuo
+                  indirizzo e iniziare a ricevere le nostre email.
                 </p>
               )}
               {errored && (
