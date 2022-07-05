@@ -40,7 +40,11 @@ const Footer = () => {
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
             &copy; 2022 pisa.dev - Tutti i diritti riservati.
+            <a className="mr-4 hover:underline md:mr-6 "></a>
+            <a href="#" className="mr-4 hover:underline md:mr-6 "> Codice di condotta</a>
+            <a href="#" className="mr-4 hover:underline md:mr-6 "> Privacy Policy</a>
           </p>
+         
         </div>
       </div>
     </footer>
