@@ -1,5 +1,5 @@
 import { BsGithub, BsLinkedin, BsTelegram } from "react-icons/bs";
-import Link from 'next/link'
+import Link from "next/link";
 
 const socials = [
   {
@@ -41,18 +41,16 @@ const Footer = () => {
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
             &copy; 2022 pisa.dev - Tutti i diritti riservati.
-            <a className="mr-4 hover:underline md:mr-6 "></a>
-            
-            <Link href="/coc">
-              <a>Codice di condotta</a>
+            <span className="mx-2">|</span>
+            <Link href="/code-of-conduct">
+              Codice di condotta
             </Link>
-            <a className="mr-4 hover:underline md:mr-6 "></a>
-
-            <Link href="#"> 
-              <a>Privacy Policy</a>
+            <span className="mx-2">|</span>
+            <Link href="/privacy-policy">
+              Privacy Policy
             </Link>
+            <span className="mx-2">|</span>
           </p>
-         
         </div>
       </div>
     </footer>
