@@ -12,9 +12,9 @@ const people = [
   {
     name: "Federico Gerardi",
     imageUrl: "/federico.jpg",
-    // twitterUrl: "https://twitter.com/pitasiantonio",
-    // linkedinUrl: "https://linkedin.com/in/pitasi",
-    // githubUrl: "https://github.com/pitasi",
+    twitterUrl: "https://twitter.com/azraelsec",
+    linkedinUrl: "https://linkedin.com/in/azraelsec",
+    githubUrl: "https://github.com/azraelsec",
   },
   {
     name: "Alessandro Berti",
