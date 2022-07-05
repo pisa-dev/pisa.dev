@@ -26,9 +26,9 @@ const people = [
   {
     name: "Luca Corbucci",
     imageUrl: "/luca.webp",
-    // twitterUrl: "https://twitter.com/pitasiantonio",
-    // linkedinUrl: "https://linkedin.com/in/pitasi",
-    // githubUrl: "https://github.com/pitasi",
+    twitterUrl: "https://twitter.com/lucacorbucci",
+    linkedinUrl: "https://www.linkedin.com/in/lucacorbucci/",
+    githubUrl: "https://github.com/lucacorbucci",
   },
   {
     name: "Davide Anzalone",
