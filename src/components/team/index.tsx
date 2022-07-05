@@ -1,10 +1,16 @@
 import Image from "next/image";
-import { BsLinkedin, BsGithub, BsTwitter } from "react-icons/bs";
+import {
+  BsLinkedin,
+  BsGithub,
+  BsTwitter,
+  BsFillHouseDoorFill,
+} from "react-icons/bs";
 
 const people = [
   {
     name: "Antonio Pitasi",
     imageUrl: "/antonio.jpg",
+    // website: "https://www.pisa.dev",
     twitterUrl: "https://twitter.com/pitasiantonio",
     linkedinUrl: "https://linkedin.com/in/pitasi",
     githubUrl: "https://github.com/pitasi",
@@ -12,6 +18,7 @@ const people = [
   {
     name: "Federico Gerardi",
     imageUrl: "/federico.jpg",
+    website: "https://azraelsec.it",
     twitterUrl: "https://twitter.com/azraelsec",
     linkedinUrl: "https://linkedin.com/in/azraelsec",
     githubUrl: "https://github.com/azraelsec",
@@ -19,6 +26,7 @@ const people = [
   {
     name: "Alessandro Berti",
     imageUrl: "/alessandro.webp",
+    // website: "https://www.pisa.dev",
     // twitterUrl: "https://twitter.com/pitasiantonio",
     // linkedinUrl: "https://linkedin.com/in/pitasi",
     // githubUrl: "https://github.com/pitasi",
@@ -26,6 +34,7 @@ const people = [
   {
     name: "Luca Corbucci",
     imageUrl: "/luca.webp",
+    // website: "https://www.pisa.dev",
     twitterUrl: "https://twitter.com/lucacorbucci",
     linkedinUrl: "https://www.linkedin.com/in/lucacorbucci/",
     githubUrl: "https://github.com/lucacorbucci",
@@ -33,6 +42,7 @@ const people = [
   {
     name: "Davide Anzalone",
     imageUrl: "/davide.jpeg",
+    // website: "https://www.pisa.dev",
     // twitterUrl: "https://twitter.com/pitasiantonio",
     // linkedinUrl: "https://linkedin.com/in/pitasi",
     // githubUrl: "https://github.com/pitasi",
@@ -40,6 +50,7 @@ const people = [
   {
     name: "Andrea Canciani",
     imageUrl: "/andrea.jpeg",
+    // website: "https://www.pisa.dev",
     // twitterUrl: "https://twitter.com/pitasiantonio",
     // linkedinUrl: "https://linkedin.com/in/pitasi",
     // githubUrl: "https://github.com/pitasi",
@@ -84,6 +95,19 @@ const Team = () => {
                     </div>
 
                     <ul role="list" className="flex justify-center space-x-5">
+                      {person.website && (
+                        <li>
+                          <a
+                            href={person.website}
+                            className="text-gray-100 hover:text-white"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <span className="sr-only">Website</span>
+                            <BsFillHouseDoorFill />
+                          </a>
+                        </li>
+                      )}
                       {person.githubUrl && (
                         <li>
                           <a
