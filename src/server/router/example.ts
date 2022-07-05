@@ -24,17 +24,4 @@ export const exampleRouter = createRouter()
       }
       return await ctx.prisma.example.findMany();
     },
-  })
-  .mutation("newsletterSubscribe", {
-    input: z.object({
-      email: z.string().email(),
-    }),
-    async resolve({ ctx, input }) {
-      await ctx.prisma.newsletterSubscription.create({
-        data: {
-          email: input.email,
-          verified: false,
-        },
-      });
-    },
   });

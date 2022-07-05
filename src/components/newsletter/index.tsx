@@ -5,7 +5,7 @@ import { trpc } from "../../utils/trpc";
 
 const NewsletterBanner: FC = () => {
   const [email, setEmail] = useState("");
-  const newsletterMutation = trpc.useMutation("example.newsletterSubscribe");
+  const newsletterMutation = trpc.useMutation("newsletter.subscribe");
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
