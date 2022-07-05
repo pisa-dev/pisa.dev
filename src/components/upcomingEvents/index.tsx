@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { BsFillCalendar2EventFill } from "react-icons/bs";
-import { FaMapPin } from "react-icons/fa";
+import EventCard from "../eventCard";
 
 const posts = [
   {
@@ -16,6 +14,7 @@ const posts = [
       href: "#",
       imageUrl: "/alessandro.webp",
     },
+    past: false,
   },
 ];
 
@@ -39,68 +38,8 @@ const UpcomingEvents = () => {
           <div
           // filler for when we have less than 2 events
           />
-          {posts.map((post) => (
-            <div
-              key={post.title}
-              className="flex flex-col rounded-lg shadow-lg overflow-hidden"
-            >
-              <div className="flex-shrink-0">
-                <Image
-                  width="1000px"
-                  height="500px"
-                  objectFit="cover"
-                  className="w-full"
-                  src={post.imageUrl}
-                  alt=""
-                />
-              </div>
-              <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                <div className="flex-1 text-sm font-medium text-purple-600 gap-4">
-                  <div className="flex items-center gap-1">
-                    <BsFillCalendar2EventFill />
-                    <p>
-                      {post.date.toLocaleString(new Intl.Locale("it"), {
-                        dateStyle: "full",
-                        timeStyle: "short",
-                      })}{" "}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FaMapPin />
-                    <p>{post.venue}</p>
-                  </div>
-                  <a href={post.href} className="block mt-4">
-                    <p className="text-xl font-semibold text-gray-900">
-                      {post.title}
-                    </p>
-                    <p className="mt-3 text-base text-gray-500">
-                      {post.description}
-                    </p>
-                  </a>
-                </div>
-                <div className="mt-6 flex items-center">
-                  <div className="flex-shrink-0">
-                    <a href={post.author.href}>
-                      <span className="sr-only">{post.author.name}</span>
-                      <Image
-                        height="40px"
-                        width="40px"
-                        className="rounded-full"
-                        src={post.author.imageUrl}
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
-                      <a href={post.author.href} className="hover:underline">
-                        {post.author.name}
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {posts.map((post, i) => (
+            <EventCard key={i} {...post} />
           ))}
         </div>
       </div>
