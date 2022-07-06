@@ -8,9 +8,32 @@ import Header from "../components/header";
 import HeaderBanner from "../components/headerbanner";
 import Hero from "../components/hero";
 import NewsletterBanner from "../components/newsletter";
+import { Speaker } from "../components/speakerInfo";
 import Sponsors from "../components/sponsors";
 import Team from "../components/team";
 import UpcomingEvents from "../components/upcomingEvents";
+import { Event } from "../components/upcomingEvents";
+
+const speaker: Speaker = {
+  name: "Alessandro Berti",
+  title: "PhD Quantum Computing @ UniPi",
+  imageUrl: "/alessandro.webp",
+};
+
+const events: Event[] = [
+  {
+    title: "Quantum Computing: Lov Grover",
+    href: "/event/quantum-computing-lov-grover",
+    description: `
+      Quanto costa cercare classicamente un elemento in un array non ordinato? Nel peggiore dei casi, dovrai guardare tutti gli elementi del tuo array, uno ad uno.
+      Questo però non è vero con la computazione quantistica!
+    `,
+    date: new Date(2022, 6, 15, 18, 30),
+    venue: "Borgo Stretto 3, Pisa",
+    imageUrl: "/quantum.jpeg",
+    speaker,
+  },
+];
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -30,23 +53,18 @@ const Home: NextPage = () => {
           text="Il tuo indirizzo email è stato verificato con successo!"
         />
       )}
-      <Announcement
-        title="Quantum computing: hands on"
-        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-        date={new Date(2022, 6, 15)}
-      />
+      {events.length && events[0] && <Announcement event={events[0]} />}
       <Header />
       <main>
         <Hero
           cta={() => {
-            console.log(newsletterRef.current);
             newsletterRef.current?.scrollIntoView({
               behavior: "smooth",
               block: "center",
             });
           }}
         />
-        <UpcomingEvents />
+        <UpcomingEvents events={events} />
         <Team />
         <div ref={newsletterRef}>
           <NewsletterBanner />

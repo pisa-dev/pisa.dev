@@ -29,9 +29,9 @@ const Hero: FC<HeroProps> = ({ cta }) => {
             </h1>
             <p className="mt-6 max-w-lg mx-auto text-center text-xl text-purple-100 sm:max-w-3xl">
               Eventi gratuiti e informali per favorire lo scambio di conoscenza
-              e favorire la crescita professionale.
+              e la crescita professionale.
             </p>
-            <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+            <div className="mt-10 mx-auto flex justify-center">
               <button
                 onClick={cta}
                 className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-purple-600 bg-opacity-80 hover:bg-opacity-70 sm:px-8 backdrop-blur-sm"
