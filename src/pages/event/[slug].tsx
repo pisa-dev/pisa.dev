@@ -12,6 +12,8 @@ const speaker: Speaker = {
   imageUrl: "/alessandro.webp",
 };
 
+const eventbriteID = "380159706917";
+
 const EventPage = () => {
   return (
     <>
@@ -39,7 +41,7 @@ const EventPage = () => {
               </div>
 
               <div className="sticky flex flex-col gap-2 py-4 mt-4 items-center w-full bg-white bg-opacity-90 backdrop-blur-sm top-0 left-0 border-y border-slate-200">
-                <EventbriteCheckout eventId="379517786917" />
+                <EventbriteCheckout eventId={eventbriteID} />
                 <span className="text-xs">
                   Evento gratuito previa registrazione
                 </span>
