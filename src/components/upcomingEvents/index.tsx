@@ -1,24 +1,22 @@
+import { FC } from "react";
 import EventCard from "../eventCard";
+import { Speaker } from "../speakerInfo";
 
-const posts = [
-  {
-    title: "Quantum computing: hands on",
-    href: "#",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.",
-    date: new Date(2022, 6, 15, 18, 30),
-    venue: "Borgo Stretto 3, Pisa",
-    imageUrl: "/quantum.jpeg",
-    author: {
-      name: "Alessandro Berti",
-      href: "#",
-      imageUrl: "/alessandro.webp",
-    },
-    past: false,
-  },
-];
+export interface Event {
+  title: string;
+  href: string;
+  description: string;
+  date: Date;
+  venue: string;
+  imageUrl: string;
+  speaker: Speaker;
+}
 
-const UpcomingEvents = () => {
+export interface UpcomingEventsProps {
+  events: Event[];
+}
+
+const UpcomingEvents: FC<UpcomingEventsProps> = ({ events }) => {
   return (
     <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
@@ -38,8 +36,8 @@ const UpcomingEvents = () => {
           <div
           // filler for when we have less than 2 events
           />
-          {posts.map((post, i) => (
-            <EventCard key={i} {...post} />
+          {events.map((event) => (
+            <EventCard key={event.href} event={event} />
           ))}
         </div>
       </div>
