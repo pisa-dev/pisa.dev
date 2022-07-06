@@ -59,14 +59,17 @@ const Header = () => {
               </div>
               <div className="w-full flex-1 flex items-center justify-center lg:items-stretch lg:justify-between">
                 <div className="flex-shrink-0 flex items-center">
-                  <Image
-                    className="cursor-pointer"
-                    height="60px"
-                    width="200px"
-                    src="/logo.svg"
-                    alt="pisa.dev"
-                    title="Home"
-                  />
+                  <Link href="/">
+                    <a>
+                      <Image
+                        height="60px"
+                        width="200px"
+                        src="/logo.svg"
+                        alt="pisa.dev"
+                        title="Home"
+                      />
+                    </a>
+                  </Link>
                 </div>
                 <div className="hidden lg:flex items-center sm:ml-6">
                   <div className="flex space-x-4">
