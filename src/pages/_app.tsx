@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import "@fontsource/inter/variable.css";
 import "../styles/globals.css";
 import Head from "next/head";
+import Script from "next/script";
 
 const MyApp: AppType = ({
   Component,
@@ -37,6 +38,11 @@ const MyApp: AppType = ({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
+      <Script
+        defer
+        data-domain="pisa.dev"
+        src="https://plausible.anto.pt/js/plausible.js"
+      />
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
