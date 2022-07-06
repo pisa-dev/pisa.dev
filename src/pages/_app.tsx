@@ -39,8 +39,9 @@ const MyApp: AppType = ({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <PlausibleProvider
+        trackLocalhost
         trackOutboundLinks
-        customDomain="https://plausible.anto.pt/js/plausible.js"
+        customDomain="https://plausible.anto.pt"
         domain="pisa.dev"
       >
         <SessionProvider session={session}>
