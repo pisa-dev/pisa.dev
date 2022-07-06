@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
+import { usePlausible } from "next-plausible";
 import Announcement from "../components/announcement";
 import Footer from "../components/footer";
 import Header from "../components/header";
@@ -38,6 +39,7 @@ const events: Event[] = [
 const Home: NextPage = () => {
   const router = useRouter();
   const newsletterRef = useRef<HTMLDivElement>(null);
+  const plausible = usePlausible();
 
   const showEmailVerifiedBanner = !!router.query.email_verified;
 
@@ -58,6 +60,7 @@ const Home: NextPage = () => {
       <main>
         <Hero
           cta={() => {
+            plausible("newsletter-cta");
             newsletterRef.current?.scrollIntoView({
               behavior: "smooth",
               block: "center",
