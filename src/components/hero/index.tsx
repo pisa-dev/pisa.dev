@@ -13,6 +13,7 @@ const Hero: FC<HeroProps> = ({ cta }) => {
         <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
           <div className="absolute inset-0">
             <Image
+              priority
               layout="fill"
               objectFit="cover"
               src="/hero.jpeg"
