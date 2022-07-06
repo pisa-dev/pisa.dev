@@ -8,7 +8,7 @@ import SpeakerInfo, { Speaker } from "../../components/speakerInfo";
 
 const speaker: Speaker = {
   name: "Alessandro Berti",
-  title: "PhD Quantum Computing @ UniPi",
+  title: "PhD Student in Quantum Computing @ UniPi",
   imageUrl: "/alessandro.webp",
 };
 
