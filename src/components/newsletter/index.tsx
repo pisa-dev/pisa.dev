@@ -1,10 +1,12 @@
 import { FC, FormEvent, useState } from "react";
 import { IoMdSend } from "react-icons/io";
+import { usePlausible } from "next-plausible";
 import { trpc } from "../../utils/trpc";
 
 const NewsletterBanner: FC = () => {
   const [email, setEmail] = useState("");
   const newsletterMutation = trpc.useMutation("newsletter.subscribe");
+  const plausible = usePlausible();
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -56,6 +58,7 @@ const NewsletterBanner: FC = () => {
                   required
                   placeholder="Indirizzo email"
                   className="-my-2.5 border-none flex-auto bg-transparent pl-6 pr-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:ring-0"
+                  onFocus={() => plausible("newsletter-input-focus")}
                 />
                 <button
                   className="inline-flex justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 sm:p-4 text-base font-semibold text-white hover:bg-blue-500 active:text-white/70 focus:outline-none focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-500 disabled:opacity-40"

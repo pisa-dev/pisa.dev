@@ -1,4 +1,5 @@
 import { FC, useEffect } from "react";
+import { usePlausible } from "next-plausible";
 import useScript from "../../hooks/useScript";
 
 export interface EventbriteCheckoutProps {
@@ -22,26 +23,29 @@ declare global {
 }
 
 const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({ eventId }) => {
+  const plausible = usePlausible();
+
   const status = useScript(
     "https://www.eventbrite.it/static/widgets/eb_widgets.js"
   );
 
-  var exampleCallback = function () {
-    console.log("Ordine completato.");
-  };
-
   useEffect(() => {
+    const onOrderComplete = () => {
+      plausible("eventbrite-checkout-success", { props: { eventId } });
+    };
+
     if (!eventId || status !== "ready") {
       return;
     }
+
     window.EBWidgets.createWidget({
       widgetType: "checkout",
       eventId,
       modal: true,
       modalTriggerElementId: "eventbrite-widget-modal-trigger",
-      onOrderComplete: exampleCallback, // Method called when an order has successfully completed
+      onOrderComplete,
     });
-  }, [eventId, status]);
+  }, [eventId, status, plausible]);
 
   return (
     <div className="mt-2 flex-shrink-0 w-full flex rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:w-auto sm:inline-flex">
