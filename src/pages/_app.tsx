@@ -39,8 +39,7 @@ const MyApp: AppType = ({
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <PlausibleProvider
-        trackLocalhost
-        trackOutboundLinks
+        selfHosted
         customDomain="https://plausible.anto.pt"
         domain="pisa.dev"
       >
