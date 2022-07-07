@@ -20,9 +20,9 @@ const sponsors = [
 
 const Sponsors = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-semibold uppercase text-gray-500 tracking-wide">
+        <p className="text-center text-sm font-semibold uppercase text-gray-500 dark:text-slate-500 tracking-wide">
           In collaborazione con
         </p>
         <div className="mt-6 grid grid-cols-3 gap-8 md:grid-cols-6 lg:grid-cols-3">
@@ -33,7 +33,7 @@ const Sponsors = () => {
             >
               <a target="_blank" rel="noreferrer" href={href} key={src}>
                 <Image
-                  className="saturate-0 opacity-80 hover:opacity-100 hover:saturate-100"
+                  className="saturate-0 opacity-80 hover:opacity-100 hover:saturate-100 dark:opacity-90"
                   width="64px"
                   height="64px"
                   src={src}

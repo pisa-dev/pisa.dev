@@ -13,7 +13,7 @@ export interface EventCardProps {
 const EventCard: FC<EventCardProps> = ({ event }) => (
   <div
     key={event.title}
-    className={`flex flex-col rounded-lg shadow-lg overflow-hidden ${
+    className={`flex flex-col rounded-lg shadow-lg overflow-hidden bg-white dark:bg-slate-800 ${
       new Date() > event.date ? "grayscale opacity-80" : ""
     }`}
   >
@@ -27,8 +27,8 @@ const EventCard: FC<EventCardProps> = ({ event }) => (
         alt=""
       />
     </div>
-    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-      <div className="flex-1 text-sm font-medium gap-4 text-gray-500">
+    <div className="flex-1 p-6 flex flex-col justify-between">
+      <div className="flex-1 text-sm font-medium gap-4 text-gray-500 dark:text-slate-400">
         <div className="flex items-center gap-4">
           <BsFillCalendarFill />
           <p>
@@ -44,8 +44,12 @@ const EventCard: FC<EventCardProps> = ({ event }) => (
         </div>
         <Link href={event.href}>
           <a className="block mt-4">
-            <p className="text-xl font-semibold text-gray-900">{event.title}</p>
-            <p className="mt-3 text-base text-gray-500">{event.description}</p>
+            <p className="text-xl font-semibold text-gray-900 dark:text-slate-300">
+              {event.title}
+            </p>
+            <p className="mt-3 text-base text-gray-500 dark:text-slate-400">
+              {event.description}
+            </p>
           </a>
         </Link>
       </div>

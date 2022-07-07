@@ -2,13 +2,13 @@ const EventContent = () => {
   return (
     <>
       <div className="flex flex-col col-span-2 gap-6">
-        <p className="mt-8 text-xl text-gray-500 leading-8">
+        <p className="mt-8 text-xl prose dark:prose-invert leading-8">
           Quanto costa cercare classicamente un elemento in un array non
           ordinato? Nel peggiore dei casi, dovrai guardare tutti gli elementi
           del tuo array, uno ad uno.
         </p>
       </div>
-      <div className="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
+      <div className="mt-6 dark:prose-invert prose prose-indigo prose-lg  mx-auto">
         <p>Questo però non è vero con la computazione quantistica!</p>
         <p>
           In questo talk sarà presentato uno degli algoritmi quantistici più

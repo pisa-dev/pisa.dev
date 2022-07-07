@@ -48,7 +48,7 @@ const Header = () => {
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-200">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:bg-slate-300 dark:text-slate-400 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-200 dark:focus:ring-slate-800">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -67,6 +67,7 @@ const Header = () => {
                         src="/logo.svg"
                         alt="pisa.dev"
                         title="Home"
+                        className="dark:drop-shadow-xl"
                       />
                     </a>
                   </Link>
@@ -83,8 +84,8 @@ const Header = () => {
                         <a
                           className={classNames(
                             item.current
-                              ? "bg-slate-700 text-white"
-                              : "text-slate-600 hover:bg-slate-200",
+                              ? "bg-slate-700 text-white dark:text-slate-300 dark:bg-black dark:bg-opacity-40"
+                              : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
                             "px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -112,8 +113,8 @@ const Header = () => {
                   <span
                     className={classNames(
                       item.current
-                        ? "bg-slate-700 text-white"
-                        : "text-slate-600 hover:bg-slate-200",
+                        ? "bg-slate-700 text-white dark:text-slate-300 dark:bg-black dark:bg-opacity-40"
+                        : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
                       "cursor-pointer px-3 py-2 rounded-md text-base font-medium flex items-center gap-2"
                     )}
                   >

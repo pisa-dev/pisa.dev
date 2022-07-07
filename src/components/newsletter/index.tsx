@@ -24,16 +24,16 @@ const NewsletterBanner: FC = () => {
     <section className="sm:my-20">
       <h2 className="sr-only">Newsletter</h2>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative -mx-4 overflow-hidden bg-pink-50 py-20 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:rounded-3xl md:px-16 xl:px-24 xl:py-36">
-          <div className="absolute top-0 left-8 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-          <div className="absolute top-0 right-20 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+        <div className="relative -mx-4 overflow-hidden bg-pink-50 dark:bg-slate-800 py-20 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:rounded-3xl md:px-16 xl:px-24 xl:py-36">
+          <div className="absolute top-0 left-8 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl opacity-70 animate-blob" />
+          <div className="absolute top-0 right-20 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl opacity-70 animate-blob animation-delay-4000" />
 
-          <div className="relative mx-auto grid max-w-2xl grid-cols-1 gap-x-32 gap-y-14 xl:max-w-none xl:grid-cols-2">
+          <div className="relative mx-auto grid max-w-2xl grid-cols-1 gap-x-32 gap-y-14 xl:max-w-none xl:grid-cols-2 text-gray-900 dark:text-slate-200">
             <div>
-              <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              <h2 className="text-4xl font-extrabold tracking-tight  sm:text-4xl">
                 <span className="block">Sei pronto a partecipare?</span>
-                <span className="block bg-gradient-to-br from-pink-500 to-purple-600 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-br from-pink-500 to-purple-600 dark:from-pink-400 dark:to-purple-500 bg-clip-text text-transparent">
                   Rimaniamo in contatto.
                 </span>
               </h2>
@@ -43,7 +43,7 @@ const NewsletterBanner: FC = () => {
               </p>
             </div>
             <form onSubmit={onFormSubmit}>
-              <h3 className="text-lg font-semibold tracking-tight text-indigo-800">
+              <h3 className="text-lg font-semibold tracking-tight text-indigo-800 dark:text-indigo-300">
                 Iscriviti alla nostra newsletter{" "}
                 <span aria-hidden="true">↓</span>
               </h3>
