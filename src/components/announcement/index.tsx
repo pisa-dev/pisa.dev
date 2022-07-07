@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { Event } from "../upcomingEvents";
 
@@ -17,12 +18,14 @@ const Announcement: FC<AnnouncementProps> = ({ event }) => {
                 day: "numeric",
                 month: "long",
               })}
+              &nbsp;
             </span>
             <span className="block sm:inline-block ml-2">
-              <a href={event.href} className="text-white font-bold underline">
-                {" "}
-                Info e registrazione<span aria-hidden="true">&rarr;</span>
-              </a>
+              <Link href={event.href}>
+                <a className="text-white font-bold underline">
+                  Info e registrazione<span aria-hidden="true">&rarr;</span>
+                </a>
+              </Link>
             </span>
           </p>
         </div>
