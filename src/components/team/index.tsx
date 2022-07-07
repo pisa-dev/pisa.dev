@@ -55,6 +55,11 @@ const people = [
     // linkedinUrl: "https://linkedin.com/in/pitasi",
     // githubUrl: "https://github.com/pitasi",
   },
+  {
+    name: "Marco Zeo",
+    imageUrl: "/marco.jpeg",
+    linkedinUrl: "https://www.linkedin.com/in/marcozeo/",
+  },
 ];
 
 const Team = () => {
