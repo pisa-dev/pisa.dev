@@ -27,6 +27,34 @@ const EventContent = () => {
         </p>
         <h4>Come è possibile questa magia?</h4>
         <p>Beh, non ti rimane che venire al talk!</p>
+
+        <h3>Informazioni utili</h3>
+        <p>
+          Questo è il primo di molti eventi gratuiti di cui si renderà
+          protagonista Pisa.dev: la nuova fantastica community degli
+          sviluppatori pisani! 🎉🎉
+        </p>
+        <p>
+          Pisa.dev nasce dall{"'"}esigenza di formare un gruppo di
+          professionisti, studenti ed appassionati del mondo IT sul territorio
+          pisano con il chiaro obiettivo di condividere idee, conoscenze e
+          curiosità.
+        </p>
+        <p>
+          L{"'"}evento sarà ospitato da Geckosoft, uno dei principali partner
+          della community e sponsor delle sue attività, che ringraziamo per il
+          supporto. La sala a nostra disposizione si trova al primo piano del
+          centralissimo Casino dei Nobili, in via Borgo Stretto, 3.
+        </p>
+        <p>
+          Terminato l{"'"}evento ci sarà un aperitivo, così da discutere gli
+          argomenti trattati (e non), condividere le proprie impressioni e fare
+          conoscenza 🍻🍻🍻
+        </p>
+        <p>
+          Ti abbiamo incuriosito? Ottimo, vieni a trovarci venerdì 15 alle ore
+          18:30!
+        </p>
       </div>
     </>
   );
