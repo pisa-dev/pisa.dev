@@ -1,10 +1,14 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
+import AdminOnly from "../../components/adminOnly";
+import EventAdminInfo from "../../components/eventAdminInfo";
 import EventbriteCheckout from "../../components/eventbriteCheckout";
 import EventContent from "../../components/eventContent";
 import EventLocationInfo from "../../components/eventLocationInfo";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 import SpeakerInfo, { Speaker } from "../../components/speakerInfo";
+import { trpc } from "../../utils/trpc";
 
 const speaker: Speaker = {
   name: "Alessandro Berti",
@@ -27,6 +31,9 @@ const EventPage = () => {
           <div className="text-lg max-w-prose mx-auto mb-16">
             <div className="mt-8 w-full items-center justify-between">
               <div className="flex flex-col col-span-2 gap-6">
+                <AdminOnly>
+                  <EventAdminInfo eventId={eventbriteID} />
+                </AdminOnly>
                 <SpeakerInfo speaker={speaker} />
                 <h1 className="my-3 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
                   Quantum Computing: Lov Grover
