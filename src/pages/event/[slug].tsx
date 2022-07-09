@@ -1,12 +1,12 @@
 import Head from "next/head";
-import AdminOnly from "../../components/adminOnly";
-import EventAdminInfo from "../../components/eventAdminInfo";
-import EventbriteCheckout from "../../components/eventbriteCheckout";
-import EventContent from "../../components/eventContent";
-import EventLocationInfo from "../../components/eventLocationInfo";
-import Footer from "../../components/footer";
-import Header from "../../components/header";
-import SpeakerInfo from "../../components/speakerInfo";
+import AdminOnly from "../../components/AdminOnly";
+import EventAdminInfo from "../../components/EventAdminInfo";
+import EventbriteCheckout from "../../components/EventbriteCheckout";
+import EventContent from "../../components/EventContent";
+import EventLocationInfo from "../../components/EventLocationInfo";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import SpeakerInfo from "../../components/SpeakerInfo";
 
 const event = {
   speaker: {

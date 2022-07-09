@@ -1,5 +1,5 @@
-import EventDetailsForm from "../../../components/dashboard/eventDetailsForm";
-import Layout from "../../../components/dashboard/layout";
+import EventDetailsForm from "../../../components/Dashboard/EventDetailsForm";
+import Layout from "../../../components/Dashboard/Layout";
 
 const NewEventPage = () => {
   return (
