@@ -55,6 +55,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    events        Event[]
 }
 
 model VerificationToken {
@@ -63,4 +64,13 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Event {
+    id           String  @id @default(cuid())
+    title        String
+    description  String
+    creatorEmail String
+    creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: NoAction)
+    eventbriteId String?
 }

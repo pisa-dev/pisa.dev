@@ -1,12 +1,13 @@
 // src/server/router/index.ts
 import { createRouter } from "./context";
 import superjson from "superjson";
+import { TRPCError } from "@trpc/server";
 
 import { exampleRouter } from "./example";
 import { newsletterRouter } from "./newsletter";
 import { eventbriteRouter } from "./eventbrite";
 import { getServerSession } from "../auth";
-import { TRPCError } from "@trpc/server";
+import { eventsRouter } from "./events";
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -23,6 +24,7 @@ export const appRouter = createRouter()
       })
       .merge("eventbrite.", eventbriteRouter)
   )
+  .merge("events.", eventsRouter)
   .merge("example.", exampleRouter);
 
 // export type definition of API
