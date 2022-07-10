@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { usePlausible } from "next-plausible";
-import { trpc } from "../../utils/trpc";
+import { trpc } from "@/utils/trpc";
 
 export const NewsletterBanner: FC = () => {
   const [email, setEmail] = useState("");

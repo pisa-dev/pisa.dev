@@ -1,5 +1,5 @@
 import { createRouter } from "./context";
-import { getServerSession } from "../auth";
+import { getServerSession } from "@/server/auth";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 

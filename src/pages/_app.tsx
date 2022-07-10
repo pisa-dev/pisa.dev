@@ -1,11 +1,11 @@
 // src/pages/_app.tsx
 import { withTRPC } from "@trpc/next";
-import type { AppRouter } from "../server/router";
+import type { AppRouter } from "@/server/router";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "@fontsource/inter/variable.css";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import Head from "next/head";
 import PlausibleProvider from "next-plausible";
 

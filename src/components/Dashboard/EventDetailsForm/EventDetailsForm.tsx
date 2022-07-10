@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "@/utils/trpc";
 
 type FormValues = {
   title: string;

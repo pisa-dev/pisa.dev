@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { EventCard } from "../EventCard";
-import { Speaker } from "../SpeakerInfo";
+import { EventCard } from "@/components/EventCard";
+import { Speaker } from "@/components/SpeakerInfo";
 
 export interface Event {
   title: string;

@@ -1,6 +1,6 @@
 import { createRouter } from "./context";
 import { z } from "zod";
-import { registerUser } from "../sendinblue";
+import { registerUser } from "@/server/sendinblue";
 
 export const newsletterRouter = createRouter().mutation("subscribe", {
   input: z.object({

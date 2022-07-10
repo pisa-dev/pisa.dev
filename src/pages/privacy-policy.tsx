@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { CentralContent } from "../components/CentralContent";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
+import { CentralContent } from "@/components/CentralContent";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 
 const PrivacyPolicyPage: NextPage = () => {
   return (
