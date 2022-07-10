@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import EventDetailsForm from "../../../components/dashboard/eventDetailsForm";
-import Layout from "../../../components/dashboard/layout";
-import { trpc } from "../../../utils/trpc";
+import { EventDetailsForm } from "@/components/Dashboard/EventDetailsForm";
+import { Layout } from "@/components/Dashboard/Layout";
+import { trpc } from "@/utils/trpc";
 
 const SpeakerEventDetailsPage = () => {
   const router = useRouter();

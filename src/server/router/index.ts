@@ -2,11 +2,11 @@
 import { createRouter } from "./context";
 import superjson from "superjson";
 import { TRPCError } from "@trpc/server";
+import { getServerSession } from "@/server/auth";
 
 import { exampleRouter } from "./example";
 import { newsletterRouter } from "./newsletter";
 import { eventbriteRouter } from "./eventbrite";
-import { getServerSession } from "../auth";
 import { eventsRouter } from "./events";
 
 export const appRouter = createRouter()

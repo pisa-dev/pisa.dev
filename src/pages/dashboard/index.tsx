@@ -1,6 +1,6 @@
 // import { signIn, signOut, useSession } from "next-auth/react";
 // import Link from "next/link";
-// import { trpc } from "../../utils/trpc";
+// import { trpc } from "@/utils/trpc";
 
 // const SpeakerPage = () => {
 //   const { data: session } = useSession();
@@ -45,13 +45,9 @@
 // export default SpeakerPage;
 
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, MouseEvent } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { trpc } from "../../utils/trpc";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { trpc } from "@/utils/trpc";
 import Link from "next/link";
-import Layout from "../../components/dashboard/layout";
+import { Layout } from "@/components/Dashboard/Layout";
 
 export default function Example() {
   const q = trpc.useQuery(["events.listMine"]);

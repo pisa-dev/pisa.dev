@@ -3,17 +3,16 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { usePlausible } from "next-plausible";
-import Announcement from "../components/announcement";
-import Footer from "../components/footer";
-import Header from "../components/header";
-import HeaderBanner from "../components/headerbanner";
-import Hero from "../components/hero";
-import NewsletterBanner from "../components/newsletter";
-import { Speaker } from "../components/speakerInfo";
-import Sponsors from "../components/sponsors";
-import Team from "../components/team";
-import UpcomingEvents from "../components/upcomingEvents";
-import { Event } from "../components/upcomingEvents";
+import { Announcement } from "@/components/Announcement";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { HeaderBanner } from "@/components/Headerbanner";
+import { Hero } from "@/components/Hero";
+import { NewsletterBanner } from "@/components/Newsletter";
+import { Speaker } from "@/components/SpeakerInfo";
+import { Sponsors } from "@/components/Sponsors";
+import { Team } from "@/components/Team";
+import { UpcomingEvents, Event } from "@/components/UpcomingEvents";
 
 const speaker: Speaker = {
   name: "Alessandro Berti",
