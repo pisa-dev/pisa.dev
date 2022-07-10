@@ -37,7 +37,7 @@ Questo è il primo di molti eventi gratuiti di cui si renderà protagonista Pisa
 
 Pisa.dev nasce dall'esigenza di formare un gruppo di professionisti, studenti ed appassionati del mondo IT sul territorio pisano con il chiaro obiettivo di condividere idee, conoscenze e curiosità.
 
-L'evento sarà ospitato da Geckosoft, uno dei principali partner della community e sponsor delle sue attività, che ringraziamo per il supporto. La sala a nostra disposizione si trova al primo piano del centralissimo Casino dei Nobili, in via Borgo Stretto, 3.
+La sala a nostra disposizione si trova al primo piano del centralissimo Casino dei Nobili, presso gli uffici di Traent e Geckosoft, in via Borgo Stretto, 3.
 
 Terminato l'evento ci sarà un aperitivo, così da discutere gli argomenti trattati (e non), condividere le proprie impressioni e fare conoscenza 🍻🍻🍻
 
