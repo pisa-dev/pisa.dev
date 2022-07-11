@@ -6,6 +6,7 @@ import { Submit } from "./Submit";
 
 export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
   q,
+  details,
   onSubmit,
   onBack,
 }) => {
@@ -22,7 +23,7 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
       onSubmit={onFormSubmit}
       className="flex flex-col flex-grow justify-center items-center gap-10"
     >
-      <Question>{q}</Question>
+      <Question details={details}>{q}</Question>
       <div className="flex gap-4 text-3xl" onMouseLeave={() => setFocused(0)}>
         {[1, 2, 3, 4, 5].map((i) => (
           <button

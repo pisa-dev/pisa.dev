@@ -86,6 +86,7 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ slug }) => {
                 {step.element ? (
                   <step.element
                     q={step.question}
+                    details={step.details}
                     onSubmit={onSubmit}
                     onBack={currentStepIdx > 0 ? goBack : undefined}
                     data={step.data}

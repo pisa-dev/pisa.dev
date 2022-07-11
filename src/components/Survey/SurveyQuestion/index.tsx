@@ -6,6 +6,7 @@ import { SurveyQuestionTextbox } from "./SurveyQuestionTextbox";
 
 export interface SurveyQuestionProps {
   q: string;
+  details?: string | null;
   data: any;
   onSubmit: (stars: string) => void;
   onBack?: () => void;

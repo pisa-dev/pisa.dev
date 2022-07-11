@@ -94,6 +94,8 @@ model EventSurveyQuestion {
     surveyId String
     survey   EventSurvey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
     question String
+    details  String?
+    required Boolean                 @default(false)
     kind     EventSurveyQuestionKind
     data     Json
 
