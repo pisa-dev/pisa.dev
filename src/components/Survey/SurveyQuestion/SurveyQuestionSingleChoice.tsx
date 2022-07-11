@@ -5,6 +5,8 @@ import { Submit } from "./Submit";
 
 export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
   q,
+  details,
+  required,
   onSubmit,
   onBack,
   data,
@@ -31,7 +33,9 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
       onSubmit={onFormSubmit}
       className="flex flex-col flex-grow justify-center items-center gap-10"
     >
-      <Question>{q}</Question>
+      <Question details={details} required={required}>
+        {q}
+      </Question>
       <div className="text-2xl space-y-8">
         {options.map((opt) => (
           <div key={opt} className="flex items-center">
@@ -52,7 +56,7 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
           </div>
         ))}
       </div>
-      <Submit onBack={onBack} />
+      <Submit onBack={onBack} required={required} filled={!!selected} />
     </form>
   );
 };

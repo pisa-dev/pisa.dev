@@ -87,6 +87,7 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ slug }) => {
                   <step.element
                     q={step.question}
                     details={step.details}
+                    required={step.required}
                     onSubmit={onSubmit}
                     onBack={currentStepIdx > 0 ? goBack : undefined}
                     data={step.data}
@@ -110,6 +111,10 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ slug }) => {
           </div>
 
           <div className="prose prose-slate dark:prose-invert prose-sm max-w-prose text-center">
+            <span className="block dark:text-slate-600">
+              <span className="text-red-500 font-black">*</span> = campo
+              obbligatorio
+            </span>
             <span className="dark:text-slate-600">
               Le risposte a questo questionario sono salvate in modo anonimo.
               Rispondendo, ci aiuti a migliorare continuamente i nostri eventi!

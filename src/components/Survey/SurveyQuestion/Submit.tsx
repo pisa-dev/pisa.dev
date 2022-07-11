@@ -3,10 +3,11 @@ import { IoMdSend } from "react-icons/io";
 
 export interface SubmitProps {
   onBack?: () => void;
-  disabled?: boolean;
+  required?: boolean;
+  filled?: boolean;
 }
 
-export const Submit: FC<SubmitProps> = ({ onBack, disabled }) => (
+export const Submit: FC<SubmitProps> = ({ onBack, filled, required }) => (
   <div className="flex gap-4">
     {onBack && (
       <button
@@ -20,10 +21,10 @@ export const Submit: FC<SubmitProps> = ({ onBack, disabled }) => (
     <button
       type="submit"
       className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-30"
-      disabled={disabled}
+      disabled={required && !filled}
     >
       <IoMdSend className="mr-2" />
-      Invia
+      {!required && !filled ? "Salta" : "Invia"}
     </button>
   </div>
 );

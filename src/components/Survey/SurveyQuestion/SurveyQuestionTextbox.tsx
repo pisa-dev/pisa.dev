@@ -5,9 +5,10 @@ import { Submit } from "./Submit";
 
 export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
   q,
+  details,
+  required,
   onSubmit,
   onBack,
-  data,
 }) => {
   const [value, setValue] = useState("");
 
@@ -21,7 +22,9 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
       onSubmit={onFormSubmit}
       className="flex flex-col flex-grow justify-center items-center gap-10"
     >
-      <Question>{q}</Question>
+      <Question details={details} required={required}>
+        {q}
+      </Question>
       <div className="text-2xl space-y-8 w-full">
         <textarea
           name="answer"
@@ -32,7 +35,7 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
           placeholder="Scrivi qui..."
         />
       </div>
-      <Submit onBack={onBack} />
+      <Submit onBack={onBack} required={required} filled={!!value} />
     </form>
   );
 };
