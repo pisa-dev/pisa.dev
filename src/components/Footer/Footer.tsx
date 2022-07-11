@@ -1,5 +1,6 @@
 import { BsGithub, BsLinkedin, BsTelegram } from "react-icons/bs";
 import Link from "next/link";
+import { PrivacyPolicyLink } from "@/components/PrivacyPolicyLink";
 
 const socials = [
   {
@@ -47,8 +48,7 @@ export const Footer = () => {
             <span className="mx-2">|</span>
             <Link href="/code-of-conduct">Codice di condotta</Link>
             <span className="mx-2">|</span>
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <span className="mx-2">|</span>
+            <PrivacyPolicyLink />
           </p>
         </div>
       </div>
