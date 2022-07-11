@@ -20,8 +20,8 @@ const Home: NextPage = () => {
               Un obiettivo cardine di tutte le attività organizzate da Pisa.dev
               è quello di essere inclusivo rispetto alla maggioranza dei
               partecipanti, con il più diverso e variegato background possibile.
-              Ci impegnamo a garantire un ambiente sicuro ed amichevole per
-              tutti, indipendentemnte da genere, orientamento sessuale, etnia,
+              Ci impegniamo a garantire un ambiente sicuro ed amichevole per
+              tutti, indipendentemente da genere, orientamento sessuale, etnia,
               stato socioeconomico e religione (o la sua assenza). Questo codice
               di condotta delinea le nostre aspettative per tutti coloro che
               partecipano alla nostra community, così come le conseguenze in
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
             <h4>Comportamento Atteso</h4>
             <p>
               I seguenti comportamenti sono attesi e richiesti da tutti i membri
-              della communiy:
+              della community:
             </p>
             <ul>
               <li>
