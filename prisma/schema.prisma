@@ -74,3 +74,38 @@ model EventProposal {
     creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: NoAction)
     eventbriteId String?
 }
+
+model EventSurvey {
+    id                  String                @id @default(cuid())
+    eventId             String
+    EventSurveyQuestion EventSurveyQuestion[]
+}
+
+enum EventSurveyQuestionKind {
+    stars
+    textbox
+    singlechoice
+    multiplechoices
+}
+
+model EventSurveyQuestion {
+    id       String                  @id @default(cuid())
+    order    Int                     @default(0)
+    surveyId String
+    survey   EventSurvey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+    question String
+    kind     EventSurveyQuestionKind
+    data     Json
+
+    EventSurveyAnswers EventSurveyAnswers[]
+    @@index([surveyId])
+}
+
+model EventSurveyAnswers {
+    id         String              @id @default(cuid())
+    questionId String
+    question   EventSurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    answer     String
+
+    @@index([questionId])
+}

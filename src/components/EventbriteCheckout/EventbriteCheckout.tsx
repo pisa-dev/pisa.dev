@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { usePlausible } from "next-plausible";
-import useScript from "@/hooks/useScript";
+import { useScript } from "usehooks-ts";
 
 export interface EventbriteCheckoutProps {
   eventId: string;

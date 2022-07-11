@@ -31,6 +31,7 @@
     "react-markdown": "^8.0.3",
     "react-query": "^3.39.1",
     "superjson": "^1.9.1",
+    "usehooks-ts": "^2.6.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {
