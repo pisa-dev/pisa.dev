@@ -1,8 +1,8 @@
 import { FC, FormEvent, useState } from "react";
 import { BsStarFill, BsStar } from "react-icons/bs";
-import { IoMdSend } from "react-icons/io";
 import { SurveyQuestionProps } from ".";
 import { Question } from "./Question";
+import { Submit } from "./Submit";
 
 export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
   q,
@@ -35,25 +35,7 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
           </button>
         ))}
       </div>
-      <div className="flex gap-4">
-        {onBack && (
-          <button
-            type="button"
-            className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={onBack}
-          >
-            Indietro
-          </button>
-        )}
-        <button
-          type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-30"
-          disabled={!selected}
-        >
-          <IoMdSend className="mr-2" />
-          Invia
-        </button>
-      </div>
+      <Submit onBack={onBack} disabled={!selected} />
     </form>
   );
 };
