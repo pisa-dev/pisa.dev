@@ -35,7 +35,7 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
           </button>
         ))}
       </div>
-      <div>
+      <div className="flex gap-4">
         {onBack && (
           <button
             type="button"

@@ -33,7 +33,7 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
         />
       </div>
 
-      <div>
+      <div className="flex gap-4">
         {onBack && (
           <button
             type="button"
