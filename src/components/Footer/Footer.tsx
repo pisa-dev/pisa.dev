@@ -1,5 +1,6 @@
 import { BsGithub, BsLinkedin, BsTelegram } from "react-icons/bs";
 import Link from "next/link";
+import Image from "next/image";
 import { PrivacyPolicyLink } from "@/components/PrivacyPolicyLink";
 
 const socials = [
@@ -29,7 +30,7 @@ export const Footer = () => {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:pt-24 lg:px-8">
+      <div className="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:pt-24 lg:px-8 space-y-4">
         <div className="mt-12 border-t text-gray-400 dark:text-gray-300 border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
           <div className="flex space-x-6 md:order-2">
             {socials.map((item) => (
@@ -50,6 +51,18 @@ export const Footer = () => {
             <span className="mx-2">|</span>
             <PrivacyPolicyLink />
           </p>
+        </div>
+        <div>
+          <Link href="https://vercel.com/?utm_source=pisa-dev&utm_campaign=oss">
+            <a>
+              <Image
+                width="212px"
+                height="44px"
+                src="/powered-by-vercel.svg"
+                alt="powered by Vercel"
+              />
+            </a>
+          </Link>
         </div>
       </div>
     </footer>
