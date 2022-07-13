@@ -78,7 +78,10 @@ model EventProposal {
 model EventSurvey {
     id                  String                @id @default(cuid())
     eventId             String
+    title               String
     EventSurveyQuestion EventSurveyQuestion[]
+
+    @@index([eventId])
 }
 
 enum EventSurveyQuestionKind {
