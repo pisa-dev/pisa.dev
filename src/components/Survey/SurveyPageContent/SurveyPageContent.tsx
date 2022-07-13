@@ -1,7 +1,8 @@
 import { Header } from "@/components/Header";
 import { trpc } from "@/utils/trpc";
 import Head from "next/head";
-import { FC } from "react";
+import { useRouter } from "next/router";
+import { FC, useEffect } from "react";
 import { Survey } from "./Survey";
 import { SurveyPageLoading } from "./SurveyPageLoading";
 
@@ -15,12 +16,19 @@ export interface SurveyPageContentProps {
 }
 
 export const SurveyPageContent: FC<SurveyPageContentProps> = ({ slug }) => {
+  const router = useRouter();
   const q = trpc.useQuery([
     "survey.get-survey",
     {
       eventId: slug,
     },
   ]);
+
+  useEffect(() => {
+    if (!q.data && !q.isLoading && !q.isError) {
+      router.push("/404");
+    }
+  }, [router, q.data, q.isLoading, q.isError]);
 
   return (
     <>
