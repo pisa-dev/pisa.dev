@@ -6,10 +6,10 @@ const SurveyPage: NextPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   if (!slug || typeof slug !== "string") {
-    return <div>No event slug</div>;
+    return <div>No survey slug</div>;
   }
 
-  return <SurveyPageContent slug={slug} />;
+  return <SurveyPageContent id={slug} />;
 };
 
 export default SurveyPage;

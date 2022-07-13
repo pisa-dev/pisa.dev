@@ -4,15 +4,15 @@ import { z } from "zod";
 export const surveyRouter = createRouter()
   .query("get-survey", {
     input: z.object({
-      eventId: z.string(),
+      id: z.string(),
     }),
     async resolve({ ctx, input }) {
-      return await ctx.prisma.eventSurvey.findFirst({
+      return await ctx.prisma.survey.findFirst({
         where: {
-          eventId: input.eventId,
+          id: input.id,
         },
         include: {
-          EventSurveyQuestion: {
+          questions: {
             orderBy: {
               order: "asc",
             },
@@ -31,11 +31,11 @@ export const surveyRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       if (!input.id) {
-        return await ctx.prisma.eventSurveyAnswers.create({
+        return await ctx.prisma.surveyAnswer.create({
           data: input.data,
         });
       } else {
-        return await ctx.prisma.eventSurveyAnswers.update({
+        return await ctx.prisma.surveyAnswer.update({
           data: input.data,
           where: {
             id: input.id,

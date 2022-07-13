@@ -4,10 +4,10 @@ import { useLocalStorage } from "usehooks-ts";
 import { StepsProgress } from "@/components/StepsProgress";
 import { trpc } from "@/utils/trpc";
 import { questionElementByKind } from "../SurveyQuestion";
-import { EventSurvey, EventSurveyQuestion } from "@prisma/client";
+import { Survey as SurveyT, SurveyQuestion } from "@prisma/client";
 
 export interface SurveyProps {
-  survey: EventSurvey & { EventSurveyQuestion: EventSurveyQuestion[] };
+  survey: SurveyT & { questions: SurveyQuestion[] };
 }
 
 export const Survey: FC<SurveyProps> = ({ survey }) => {
@@ -18,7 +18,7 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
   }>(`survey-${survey.id}`, {});
 
   const onSubmit = async (value: string) => {
-    const question = survey.EventSurveyQuestion[currentStepIdx];
+    const question = survey.questions[currentStepIdx];
     if (!question) {
       return;
     }
@@ -33,7 +33,7 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
     setCurrentStepIdx(currentStepIdx + 1);
   };
 
-  const steps = survey.EventSurveyQuestion.map((q) => ({
+  const steps = survey.questions.map((q) => ({
     element: questionElementByKind(q.kind),
     ...q,
   }));

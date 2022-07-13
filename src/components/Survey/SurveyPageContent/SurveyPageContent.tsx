@@ -6,23 +6,13 @@ import { FC, useEffect } from "react";
 import { Survey } from "./Survey";
 import { SurveyPageLoading } from "./SurveyPageLoading";
 
-const event = {
-  title: "Quantum Computing: Lov Grover",
-  date: new Date(2022, 6, 15, 18, 30),
-};
-
 export interface SurveyPageContentProps {
-  slug: string;
+  id: string;
 }
 
-export const SurveyPageContent: FC<SurveyPageContentProps> = ({ slug }) => {
+export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
   const router = useRouter();
-  const q = trpc.useQuery([
-    "survey.get-survey",
-    {
-      eventId: slug,
-    },
-  ]);
+  const q = trpc.useQuery(["survey.get-survey", { id }]);
 
   useEffect(() => {
     if (!q.data && !q.isLoading && !q.isError) {

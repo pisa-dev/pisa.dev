@@ -75,41 +75,38 @@ model EventProposal {
     eventbriteId String?
 }
 
-model EventSurvey {
-    id                  String                @id @default(cuid())
-    eventId             String
-    title               String
-    EventSurveyQuestion EventSurveyQuestion[]
-
-    @@index([eventId])
+model Survey {
+    id        String           @id @default(cuid())
+    title     String
+    questions SurveyQuestion[]
 }
 
-enum EventSurveyQuestionKind {
+enum SurveyQuestionKind {
     stars
     textbox
     singlechoice
     multiplechoices
 }
 
-model EventSurveyQuestion {
-    id       String                  @id @default(cuid())
-    order    Int                     @default(0)
+model SurveyQuestion {
+    id       String             @id @default(cuid())
+    order    Int                @default(0)
     surveyId String
-    survey   EventSurvey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+    survey   Survey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
     question String
     details  String?
-    required Boolean                 @default(false)
-    kind     EventSurveyQuestionKind
+    required Boolean            @default(false)
+    kind     SurveyQuestionKind
     data     Json
+    answers  SurveyAnswer[]
 
-    EventSurveyAnswers EventSurveyAnswers[]
     @@index([surveyId])
 }
 
-model EventSurveyAnswers {
-    id         String              @id @default(cuid())
+model SurveyAnswer {
+    id         String         @id @default(cuid())
     questionId String
-    question   EventSurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
     answer     String
 
     @@index([questionId])
