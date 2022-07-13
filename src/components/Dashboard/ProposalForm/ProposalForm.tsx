@@ -8,12 +8,12 @@ type FormValues = {
   description: string;
 };
 
-export interface EventDetailsFormProps {
+export interface ProposalFormProps {
   eventId?: string;
   defaultValues?: FormValues;
 }
 
-export const EventDetailsForm: FC<EventDetailsFormProps> = ({
+export const ProposalForm: FC<ProposalFormProps> = ({
   eventId,
   defaultValues,
 }) => {
@@ -25,12 +25,12 @@ export const EventDetailsForm: FC<EventDetailsFormProps> = ({
   } = useForm<FormValues>({ defaultValues });
   const router = useRouter();
 
-  const mutation = trpc.useMutation(["events.upsert"]);
+  const mutation = trpc.useMutation(["proposals.upsert"]);
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!eventId) {
       // create new event
       const e = await mutation.mutateAsync({ data });
-      router.push(`/dashboard/events/${e.id}`);
+      router.push(`/dashboard/proposals/${e.id}`);
     } else {
       // update existing event
       await mutation.mutateAsync({ id: eventId, data });

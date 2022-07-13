@@ -1,5 +1,5 @@
 import { FC, Fragment, MouseEvent } from "react";
-import Image from "next/image";
+import Image from "next/future/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -82,8 +82,10 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                     <div>
                       <Menu.Button className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
+                        <Image
+                          className="rounded-full"
+                          width="32px"
+                          height="32px"
                           src={
                             session.user.image ||
                             `https://ui-avatars.com/api/?name=${
@@ -165,8 +167,10 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
               <div className="pt-4 pb-3 border-t border-gray-200">
                 <div className="flex items-center px-4">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
+                    <Image
+                      className="rounded-full"
+                      width="40px"
+                      height="40px"
                       src={
                         session.user.image ||
                         `https://ui-avatars.com/api/?name=${

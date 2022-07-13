@@ -3,7 +3,7 @@ import { getServerSession } from "@/server/auth";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-export const eventsRouter = createRouter()
+export const proposalsRouter = createRouter()
   .query("listMine", {
     async resolve({ ctx }) {
       const session = await getServerSession(ctx);
@@ -50,17 +50,20 @@ export const eventsRouter = createRouter()
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
-      const res = await ctx.prisma.eventProposal.upsert({
-        create: {
-          ...input.data,
-          creatorEmail: session.user.email,
-        },
-        update: input.data,
-        where: {
-          id: input.id,
-        },
-      });
-
-      return res;
+      if (!input.id) {
+        return await ctx.prisma.eventProposal.create({
+          data: {
+            ...input.data,
+            creatorEmail: session.user.email,
+          },
+        });
+      } else {
+        return await ctx.prisma.eventProposal.update({
+          data: input.data,
+          where: {
+            id: input.id,
+          },
+        });
+      }
     },
   });
