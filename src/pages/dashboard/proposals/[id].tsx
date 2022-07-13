@@ -26,6 +26,7 @@ const ProposalPage = () => {
         defaultValues={{
           title: q.data.title,
           description: q.data.description,
+          duration: q.data.duration,
         }}
       />
     </Layout>
