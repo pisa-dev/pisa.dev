@@ -47,15 +47,15 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String          @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?         @unique
     emailVerified DateTime?
-    admin         Boolean   @default(false)
+    admin         Boolean         @default(false)
     image         String?
     accounts      Account[]
     sessions      Session[]
-    events        Event[]
+    proposals     EventProposal[]
 }
 
 model VerificationToken {
@@ -66,11 +66,48 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model Event {
+model EventProposal {
     id           String  @id @default(cuid())
     title        String
     description  String
     creatorEmail String
     creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: NoAction)
     eventbriteId String?
+}
+
+model Survey {
+    id        String           @id @default(cuid())
+    title     String
+    questions SurveyQuestion[]
+}
+
+enum SurveyQuestionKind {
+    stars
+    textbox
+    singlechoice
+    multiplechoices
+}
+
+model SurveyQuestion {
+    id       String             @id @default(cuid())
+    order    Int                @default(0)
+    surveyId String
+    survey   Survey             @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+    question String
+    details  String?
+    required Boolean            @default(false)
+    kind     SurveyQuestionKind
+    data     Json
+    answers  SurveyAnswer[]
+
+    @@index([surveyId])
+}
+
+model SurveyAnswer {
+    id         String         @id @default(cuid())
+    questionId String
+    question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    answer     String
+
+    @@index([questionId])
 }

@@ -11,7 +11,7 @@ export const eventsRouter = createRouter()
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
-      return await ctx.prisma.event.findMany({
+      return await ctx.prisma.eventProposal.findMany({
         where: {
           creatorEmail: session.user.email,
         },
@@ -28,7 +28,7 @@ export const eventsRouter = createRouter()
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
-      return await ctx.prisma.event.findFirst({
+      return await ctx.prisma.eventProposal.findFirst({
         where: {
           id: input.id,
           creatorEmail: session.user.email,
@@ -50,7 +50,7 @@ export const eventsRouter = createRouter()
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
-      const res = await ctx.prisma.event.upsert({
+      const res = await ctx.prisma.eventProposal.upsert({
         create: {
           ...input.data,
           creatorEmail: session.user.email,

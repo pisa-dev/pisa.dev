@@ -1,4 +1,4 @@
-import useScript from "@/hooks/useScript";
+import { useScript } from "usehooks-ts";
 import { usePlausible } from "next-plausible";
 
 export const PrivacyPolicyLink = () => {
