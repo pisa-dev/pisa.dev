@@ -49,7 +49,7 @@ export const ProposalsTable = () => {
                           scope="col"
                           className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide"
                         >
-                          Descrizione
+                          Durata
                         </th>
                         <th
                           scope="col"
@@ -66,7 +66,7 @@ export const ProposalsTable = () => {
                             {proposal.title}
                           </td>
                           <td className="whitespace-nowrap text-ellipsis px-3 py-4 text-sm">
-                            {proposal.description}
+                            {proposal.duration}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <Link href={`/dashboard/proposals/${proposal.id}`}>
