@@ -9,6 +9,7 @@ export interface SurveyQuestionProps {
   details?: string | null;
   required?: boolean;
   data: any;
+  loading?: boolean;
   onSubmit: (stars: string) => void;
   onBack?: () => void;
 }

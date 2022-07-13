@@ -8,6 +8,7 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
   q,
   details,
   required,
+  loading,
   onSubmit,
   onBack,
 }) => {
@@ -39,7 +40,12 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
           </button>
         ))}
       </div>
-      <Submit onBack={onBack} required={required} filled={!!selected} />
+      <Submit
+        onBack={onBack}
+        required={required}
+        filled={!!selected}
+        loading={loading}
+      />
     </form>
   );
 };

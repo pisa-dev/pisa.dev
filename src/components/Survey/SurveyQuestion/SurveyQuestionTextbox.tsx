@@ -7,6 +7,7 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
   q,
   details,
   required,
+  loading,
   onSubmit,
   onBack,
 }) => {
@@ -35,7 +36,12 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
           placeholder="Scrivi qui..."
         />
       </div>
-      <Submit onBack={onBack} required={required} filled={!!value} />
+      <Submit
+        onBack={onBack}
+        required={required}
+        filled={!!value}
+        loading={loading}
+      />
     </form>
   );
 };

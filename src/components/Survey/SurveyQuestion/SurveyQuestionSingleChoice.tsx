@@ -7,6 +7,7 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
   q,
   details,
   required,
+  loading,
   onSubmit,
   onBack,
   data,
@@ -56,7 +57,12 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
           </div>
         ))}
       </div>
-      <Submit onBack={onBack} required={required} filled={!!selected} />
+      <Submit
+        onBack={onBack}
+        required={required}
+        filled={!!selected}
+        loading={loading}
+      />
     </form>
   );
 };
