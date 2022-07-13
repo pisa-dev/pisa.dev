@@ -1,4 +1,4 @@
-import { EventSurveyQuestionKind } from "@prisma/client";
+import { SurveyQuestionKind } from "@prisma/client";
 import { FC } from "react";
 import { SurveyQuestionSingleChoice } from "./SurveyQuestionSingleChoice";
 import { SurveyQuestionStars } from "./SurveyQuestionStars";
@@ -15,7 +15,7 @@ export interface SurveyQuestionProps {
 }
 
 export const questionElementByKind = (
-  k: EventSurveyQuestionKind
+  k: SurveyQuestionKind
 ): FC<SurveyQuestionProps> | null => {
   switch (k) {
     case "stars":
