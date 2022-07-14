@@ -42,6 +42,7 @@ export const proposalsRouter = createRouter()
       data: z.object({
         title: z.string(),
         description: z.string(),
+        duration: z.string(),
       }),
     }),
     async resolve({ ctx, input }) {
