@@ -1,10 +1,10 @@
-import { EventDetailsForm } from "@/components/Dashboard/EventDetailsForm";
+import { ProposalForm } from "@/components/Dashboard/ProposalForm";
 import { Layout } from "@/components/Dashboard/Layout";
 
 const NewEventPage = () => {
   return (
-    <Layout title="Nuovo evento">
-      <EventDetailsForm />
+    <Layout title="Nuova proposta">
+      <ProposalForm />
     </Layout>
   );
 };

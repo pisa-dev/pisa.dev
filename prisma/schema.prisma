@@ -70,6 +70,7 @@ model EventProposal {
     id           String  @id @default(cuid())
     title        String
     description  String
+    duration     String
     creatorEmail String
     creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: NoAction)
     eventbriteId String?
