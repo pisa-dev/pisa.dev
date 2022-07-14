@@ -11,6 +11,11 @@ const sponsors = [
     src: "/superheroesvalley.png",
     alt: "Superheroes Valley",
   },
+  {
+    href: "https://www.schrodinger-hat.it/",
+    src: "/schroedinger-hat.png",
+    alt: "Schroedinger Hat",
+  },
   // {
   //   href: "https://geckosoft.it",
   //   src: "/geckosoft.png",
@@ -25,7 +30,7 @@ export const Sponsors = () => {
         <p className="text-center text-sm font-semibold uppercase text-gray-500 dark:text-slate-500 tracking-wide">
           In collaborazione con
         </p>
-        <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-3 gap-8 md:grid-cols-6 lg:grid-cols-3">
           {sponsors.map(({ href, src, alt }) => (
             <div
               key={href}
