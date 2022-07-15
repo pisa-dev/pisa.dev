@@ -28,6 +28,9 @@ export const SurveyQuestionMultipleChoices: FC<SurveyQuestionProps> = ({
   };
 
   const onAddNewOptions = () => {
+    if (!newOption) {
+      return;
+    }
     setNewOption("");
     setAddedOptions([...addedOptions, newOption]);
     setValue(newOption, true);
