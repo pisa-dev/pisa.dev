@@ -26,7 +26,7 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
       <Question details={details} required={required}>
         {q}
       </Question>
-      <div className="w-full space-y-8 text-2xl">
+      <div className="w-full space-y-8 text-lg md:text-xl lg:text-2xl">
         <textarea
           name="answer"
           rows={6}

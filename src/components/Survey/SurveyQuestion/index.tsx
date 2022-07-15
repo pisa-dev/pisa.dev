@@ -3,6 +3,7 @@ import { FC } from "react";
 import { SurveyQuestionSingleChoice } from "./SurveyQuestionSingleChoice";
 import { SurveyQuestionStars } from "./SurveyQuestionStars";
 import { SurveyQuestionTextbox } from "./SurveyQuestionTextbox";
+import { SurveyQuestionMultipleChoices } from "./SurveyQuestionMultipleChoices";
 
 export interface SurveyQuestionProps {
   q: string;
@@ -24,6 +25,8 @@ export const questionElementByKind = (
       return SurveyQuestionSingleChoice;
     case "textbox":
       return SurveyQuestionTextbox;
+    case "multiplechoices":
+      return SurveyQuestionMultipleChoices;
     default:
       return null;
   }
