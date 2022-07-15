@@ -50,13 +50,13 @@ export const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({
   }, [eventId, status, plausible]);
 
   return (
-    <div className="mt-2 flex-shrink-0 w-full flex rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:w-auto sm:inline-flex">
+    <div className="mt-2 flex w-full flex-shrink-0 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:inline-flex sm:w-auto">
       <noscript>
         <a
           href={`https://www.eventbrite.it/e/${eventId}`}
           rel="noopener noreferrer"
           target="_blank"
-          className="w-full bg-pink-600 px-4 py-2 border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto sm:inline-flex"
+          className="flex w-full items-center justify-center rounded-md border border-transparent bg-pink-600 px-4 py-2 text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
         >
           Riserva il tuo posto
         </a>
@@ -64,7 +64,7 @@ export const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({
       <button
         id="eventbrite-widget-modal-trigger"
         type="button"
-        className="w-full bg-pink-600 px-4 py-2 border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto sm:inline-flex"
+        className="flex w-full items-center justify-center rounded-md border border-transparent bg-pink-600 px-4 py-2 text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 sm:inline-flex sm:w-auto"
       >
         Riserva il tuo posto
       </button>

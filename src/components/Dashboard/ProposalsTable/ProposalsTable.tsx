@@ -14,7 +14,7 @@ export const ProposalsTable = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="px-4 py-8 sm:px-0">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="sm:flex sm:items-center">
@@ -65,7 +65,7 @@ export const ProposalsTable = () => {
                           <td className="whitespace-nowrap px-3 py-4 text-sm">
                             {proposal.title}
                           </td>
-                          <td className="whitespace-nowrap text-ellipsis px-3 py-4 text-sm">
+                          <td className="text-ellipsis whitespace-nowrap px-3 py-4 text-sm">
                             {proposal.duration}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

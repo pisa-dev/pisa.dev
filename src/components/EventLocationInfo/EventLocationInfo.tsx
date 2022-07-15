@@ -11,7 +11,7 @@ export const EventLocationInfo: FC<EventLocationInfoProps> = ({
   date,
   location,
 }) => (
-  <div className="text-gray-500 dark:text-gray-300 flex flex-col gap-4">
+  <div className="flex flex-col gap-4 text-gray-500 dark:text-gray-300">
     <div className="flex items-center gap-4">
       <BsFillCalendarFill className="" />
       <span>

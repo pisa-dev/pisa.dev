@@ -55,14 +55,14 @@ const EventPage = () => {
       <Header />
       <main>
         <div className="px-4 sm:px-6 lg:px-8">
-          <div className="text-lg max-w-prose mx-auto mb-16">
+          <div className="mx-auto mb-16 max-w-prose text-lg">
             <div className="mt-8 w-full items-center justify-between">
-              <div className="flex flex-col col-span-2 gap-6">
+              <div className="col-span-2 flex flex-col gap-6">
                 <AdminOnly>
                   <EventAdminInfo eventId={event.eventbriteId} />
                 </AdminOnly>
                 <SpeakerInfo speaker={event.speaker} />
-                <h1 className="my-3 block text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+                <h1 className="my-3 block text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
                   {event.title}
                 </h1>
 
@@ -73,7 +73,7 @@ const EventPage = () => {
               </div>
             </div>
 
-            <div className="sticky flex flex-col gap-2 py-4 mt-4 items-center w-full bg-white dark:bg-slate-900 dark:text-gray-300 border-slate-200 dark:border-slate-700 dark:bg-opacity-60 bg-opacity-90 backdrop-blur-sm top-0 left-0 border-y">
+            <div className="sticky top-0 left-0 mt-4 flex w-full flex-col items-center gap-2 border-y border-slate-200 bg-white bg-opacity-90 py-4 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900 dark:bg-opacity-60 dark:text-gray-300">
               <EventbriteCheckout eventId={event.eventbriteId} />
               <span className="text-xs">
                 Evento gratuito previa registrazione

@@ -26,8 +26,8 @@ const sponsors = [
 export const Sponsors = () => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-semibold uppercase text-gray-500 dark:text-slate-500 tracking-wide">
+      <div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
+        <p className="text-center text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-500">
           In collaborazione con
         </p>
         <div className="mt-6 grid grid-cols-3 gap-8 md:grid-cols-6 lg:grid-cols-3">
@@ -38,7 +38,7 @@ export const Sponsors = () => {
             >
               <a target="_blank" rel="noreferrer" href={href} key={src}>
                 <Image
-                  className="saturate-0 opacity-80 hover:opacity-100 hover:saturate-100 dark:opacity-90"
+                  className="opacity-80 saturate-0 hover:opacity-100 hover:saturate-100 dark:opacity-90"
                   width="64px"
                   height="64px"
                   src={src}

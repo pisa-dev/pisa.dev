@@ -19,7 +19,7 @@ export const Submit: FC<SubmitProps> = ({
     {onBack && (
       <button
         type="button"
-        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md bg-gray-50 dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="inline-flex items-center rounded-md border border-transparent bg-gray-50 px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-800 dark:text-white"
         onClick={onBack}
       >
         Indietro
@@ -27,11 +27,11 @@ export const Submit: FC<SubmitProps> = ({
     )}
     <button
       type="submit"
-      className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+      className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
       disabled={loading || (required && !filled)}
     >
       {loading ? (
-        <CgSpinner className="animate-spin mr-2" />
+        <CgSpinner className="mr-2 animate-spin" />
       ) : (
         <IoMdSend className="mr-2" />
       )}

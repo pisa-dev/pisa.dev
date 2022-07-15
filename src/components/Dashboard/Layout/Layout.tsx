@@ -35,15 +35,15 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
 
   return (
     <>
-      <div className="min-h-full mb-8">
-        <Disclosure as="nav" className="bg-white dark:bg-slate-900 shadow-sm">
+      <div className="mb-8 min-h-full">
+        <Disclosure as="nav" className="bg-white shadow-sm dark:bg-slate-900">
           {({ open }) => (
             <>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="flex h-16 justify-between">
                   <div className="flex">
-                    <div className="flex-shrink-0 flex items-center">
-                      <div className="block lg:hidden h-8 w-auto">
+                    <div className="flex flex-shrink-0 items-center">
+                      <div className="block h-8 w-auto lg:hidden">
                         <Image
                           width="50px"
                           height="50px"
@@ -51,7 +51,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                           alt="pisa.dev"
                         />
                       </div>
-                      <div className="hidden lg:block h-8 w-auto">
+                      <div className="hidden h-8 w-auto lg:block">
                         <Image
                           width="200px"
                           height="50px"
@@ -68,8 +68,8 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                           className={classNames(
                             item.current
                               ? "border-indigo-500 text-gray-900 dark:text-slate-200"
-                              : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:border-slate-300",
-                            "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                              : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-slate-200",
+                            "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -80,9 +80,9 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
                     {/* Profile dropdown */}
-                    <Menu as="div" className="ml-3 relative">
+                    <Menu as="div" className="relative ml-3">
                       <div>
-                        <Menu.Button className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
                           <Image
                             className="rounded-full"
@@ -107,7 +107,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
@@ -135,7 +135,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                   </div>
                   <div className="-mr-2 flex items-center sm:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:bg-slate-300 dark:text-slate-400 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-slate-400 dark:hover:bg-slate-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
                         <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -151,7 +151,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
               </div>
 
               <Disclosure.Panel className="sm:hidden">
-                <div className="pt-2 pb-3 space-y-1">
+                <div className="space-y-1 pt-2 pb-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
@@ -159,9 +159,9 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-indigo-50 border-indigo-500 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
-                          : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
-                        "block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                          ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
+                          : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
+                        "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
                     >
@@ -169,7 +169,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                     </Disclosure.Button>
                   ))}
                 </div>
-                <div className="pt-4 pb-3 border-t border-gray-200">
+                <div className="border-t border-gray-200 pt-4 pb-3">
                   <div className="flex items-center px-4">
                     <div className="flex-shrink-0">
                       <Image
@@ -206,7 +206,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
                             item.onClick();
                           }
                         }}
-                        className="block px-4 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                        className="block px-4 py-2 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-300"
                       >
                         {item.name}
                       </Disclosure.Button>
@@ -218,7 +218,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
           )}
         </Disclosure>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <header>
             <h1 className="py-10  text-3xl font-bold leading-tight text-gray-900 dark:text-slate-200">
               {title || "Dashboard"}

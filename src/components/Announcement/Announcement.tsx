@@ -9,8 +9,8 @@ export interface AnnouncementProps {
 export const Announcement: FC<AnnouncementProps> = ({ event }) => {
   return (
     <div className="relative bg-indigo-600 dark:bg-indigo-800">
-      <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-        <div className="text-sm sm:text-base sm:text-center sm:px-16">
+      <div className="mx-auto max-w-7xl py-3 px-3 sm:px-6 lg:px-8">
+        <div className="text-sm sm:px-16 sm:text-center sm:text-base">
           <p className="font-medium text-white">
             <span>
               🎉🔥 “{event.title}”,&nbsp;
@@ -20,9 +20,9 @@ export const Announcement: FC<AnnouncementProps> = ({ event }) => {
               })}
               &nbsp;
             </span>
-            <span className="block sm:inline-block ml-2">
+            <span className="ml-2 block sm:inline-block">
               <Link href={event.href}>
-                <a className="text-white font-bold underline">
+                <a className="font-bold text-white underline">
                   Info e registrazione<span aria-hidden="true">&rarr;</span>
                 </a>
               </Link>

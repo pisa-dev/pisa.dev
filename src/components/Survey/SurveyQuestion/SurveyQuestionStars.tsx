@@ -23,7 +23,7 @@ export const SurveyQuestionStars: FC<SurveyQuestionProps> = ({
   return (
     <form
       onSubmit={onFormSubmit}
-      className="flex flex-col flex-grow justify-center items-center gap-10"
+      className="flex flex-grow flex-col items-center justify-center gap-10"
     >
       <Question details={details} required={required}>
         {q}
