@@ -65,10 +65,10 @@ const people = [
 export const Team = () => {
   return (
     <div className="bg-gradient-to-br from-indigo-500 to-pink-600 dark:from-indigo-900 dark:to-pink-900">
-      <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
         <div className="space-y-12">
           <div className="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Il team di pisa.dev
             </h2>
             <p className="text-xl text-gray-300">
@@ -78,12 +78,12 @@ export const Team = () => {
           </div>
           <ul
             role="list"
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 space-y-0 lg:gap-8"
+            className="grid grid-cols-2 gap-2 space-y-0 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4 lg:gap-8"
           >
             {people.map((person) => (
               <li
                 key={person.name}
-                className="py-6 px-2 bg-opacity-10 bg-white text-center rounded-lg"
+                className="rounded-lg bg-white bg-opacity-10 py-6 px-2 text-center"
               >
                 <div className="space-y-6">
                   <Image
@@ -95,7 +95,7 @@ export const Team = () => {
                     alt=""
                   />
                   <div className="space-y-2">
-                    <div className="font-medium text-lg leading-6 space-y-1">
+                    <div className="space-y-1 text-lg font-medium leading-6">
                       <h3 className="text-white">{person.name}</h3>
                     </div>
 

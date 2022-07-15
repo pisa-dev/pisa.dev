@@ -13,13 +13,13 @@ export const EventContent: FC<EventContentProps> = ({
   return (
     <>
       {abstract && (
-        <div className="flex flex-col col-span-2 gap-6">
-          <p className="mt-8 text-xl prose dark:prose-invert leading-8">
+        <div className="col-span-2 flex flex-col gap-6">
+          <p className="prose mt-8 text-xl leading-8 dark:prose-invert">
             {abstract}
           </p>
         </div>
       )}
-      <div className="mt-6 dark:prose-invert prose prose-indigo prose-lg  mx-auto">
+      <div className="prose prose-lg prose-indigo mx-auto mt-6  dark:prose-invert">
         {description && <ReactMarkdown>{description}</ReactMarkdown>}
       </div>
     </>

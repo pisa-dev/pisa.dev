@@ -29,8 +29,8 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
   ];
 
   return (
-    <div className="dark:text-slate-300 dark:bg-slate-700 px-4 py-6 rounded-lg">
-      <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-slate-300">
+    <div className="rounded-lg px-4 py-6 dark:bg-slate-700 dark:text-slate-300">
+      <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-slate-300">
         Admin panel
       </h3>
       <div className="flex flex-col gap-8">
@@ -38,9 +38,9 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
           {stats.map((item) => (
             <div
               key={item.name}
-              className="px-4 py-5 bg-white dark:bg-slate-800 shadow rounded-lg overflow-hidden sm:p-6"
+              className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow dark:bg-slate-800 sm:p-6"
             >
-              <dt className="text-sm font-medium text-gray-500 dark:text-slate-400 truncate">
+              <dt className="truncate text-sm font-medium text-gray-500 dark:text-slate-400">
                 {item.name}
               </dt>
               <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-slate-300">

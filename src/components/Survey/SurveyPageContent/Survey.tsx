@@ -42,8 +42,8 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-4 w-full items-center md:items-stretch justify-between">
-        <span className="font-semibold text-slate-600 tracking-tighter">
+      <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row md:items-stretch">
+        <span className="font-semibold tracking-tighter text-slate-600">
           {survey.title}
         </span>
         {currentStepIdx < steps.length && (
@@ -51,7 +51,7 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
         )}
       </div>
 
-      <div className="flex flex-col max-w-prose text-center">
+      <div className="flex max-w-prose flex-col text-center">
         {steps.map((step, i) => (
           <div
             key={step.id}

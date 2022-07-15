@@ -26,18 +26,18 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
         <title>{q.data?.title || "Survey"} - pisa.dev</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="flex flex-grow flex-col w-full max-w-7xl mx-auto py-8 px-4 justify-between items-center gap-8">
+        <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col items-center justify-between gap-8 py-8 px-4">
           {q.data ? (
             <Survey survey={q.data} />
           ) : q.isLoading ? (
             <SurveyPageLoading />
           ) : null}
 
-          <div className="prose prose-slate dark:prose-invert prose-sm max-w-prose text-center">
+          <div className="prose prose-sm prose-slate max-w-prose text-center dark:prose-invert">
             <span className="block dark:text-slate-600">
-              <span className="text-red-500 font-black">*</span> = campo
+              <span className="font-black text-red-500">*</span> = campo
               obbligatorio
             </span>
             <span className="dark:text-slate-600">

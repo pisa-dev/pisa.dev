@@ -44,11 +44,11 @@ export const Header = () => {
     <Disclosure as="nav">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 py-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
+          <div className="mx-auto max-w-7xl px-2 py-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:bg-slate-300 dark:text-slate-400 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-200 dark:focus:ring-slate-800">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-800 dark:focus:ring-slate-800">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -57,8 +57,8 @@ export const Header = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="w-full flex-1 flex items-center justify-center lg:items-stretch lg:justify-between">
-                <div className="flex-shrink-0 flex items-center">
+              <div className="flex w-full flex-1 items-center justify-center lg:items-stretch lg:justify-between">
+                <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <a>
                       <Image
@@ -72,7 +72,7 @@ export const Header = () => {
                     </a>
                   </Link>
                 </div>
-                <div className="hidden lg:flex items-center sm:ml-6">
+                <div className="hidden items-center sm:ml-6 lg:flex">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <Link
@@ -84,9 +84,9 @@ export const Header = () => {
                         <a
                           className={classNames(
                             item.current
-                              ? "bg-slate-700 text-white dark:text-slate-300 dark:bg-black dark:bg-opacity-40"
+                              ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
                               : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
-                            "px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+                            "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -102,7 +102,7 @@ export const Header = () => {
           </div>
 
           <Disclosure.Panel className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
                 <Disclosure.Button
                   as={Link}
@@ -113,9 +113,9 @@ export const Header = () => {
                   <span
                     className={classNames(
                       item.current
-                        ? "bg-slate-700 text-white dark:text-slate-300 dark:bg-black dark:bg-opacity-40"
+                        ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
                         : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
-                      "cursor-pointer px-3 py-2 rounded-md text-base font-medium flex items-center gap-2"
+                      "flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-base font-medium"
                     )}
                   >
                     {item.icon && <item.icon />}

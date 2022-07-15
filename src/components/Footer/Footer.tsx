@@ -30,8 +30,8 @@ export const Footer = () => {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:pt-24 lg:px-8 space-y-4">
-        <div className="mt-12 border-t text-gray-400 dark:text-gray-300 border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
+      <div className="mx-auto max-w-7xl space-y-4 px-4 pt-16 pb-8 sm:px-6 lg:px-8 lg:pt-24">
+        <div className="mt-12 border-t border-gray-200 pt-8 text-gray-400 dark:text-gray-300 md:flex md:items-center md:justify-between lg:mt-16">
           <div className="flex space-x-6 md:order-2">
             {socials.map((item) => (
               <a
@@ -44,7 +44,7 @@ export const Footer = () => {
               </a>
             ))}
           </div>
-          <p className="mt-8 text-base md:mt-0 md:order-1">
+          <p className="mt-8 text-base md:order-1 md:mt-0">
             &copy; 2022 pisa.dev - Tutti i diritti riservati.
             <span className="mx-2">|</span>
             <Link href="/code-of-conduct">Codice di condotta</Link>

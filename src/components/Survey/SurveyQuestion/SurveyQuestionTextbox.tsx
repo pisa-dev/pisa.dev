@@ -21,18 +21,18 @@ export const SurveyQuestionTextbox: FC<SurveyQuestionProps> = ({
   return (
     <form
       onSubmit={onFormSubmit}
-      className="flex flex-col flex-grow justify-center items-center gap-10"
+      className="flex flex-grow flex-col items-center justify-center gap-10"
     >
       <Question details={details} required={required}>
         {q}
       </Question>
-      <div className="text-2xl space-y-8 w-full">
+      <div className="w-full space-y-8 text-2xl">
         <textarea
           name="answer"
           rows={6}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-300 dark:bg-slate-800 dark:border-slate-600"
+          className="w-full min-w-0 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
           placeholder="Scrivi qui..."
         />
       </div>

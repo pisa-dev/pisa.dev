@@ -12,7 +12,7 @@ export const CentralContent: FC<CentralContentProps & PropsWithChildren> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center prose prose-indigo dark:prose-invert prose-lg mx-auto max-w-prose px-4 ${className}`}
+      className={`prose prose-lg prose-indigo mx-auto flex max-w-prose flex-col items-center px-4 dark:prose-invert ${className}`}
     >
       <h1>{title}</h1>
       <div className="mx-auto text-justify leading-relaxed ">{children}</div>

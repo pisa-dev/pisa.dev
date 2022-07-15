@@ -32,19 +32,19 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
   return (
     <form
       onSubmit={onFormSubmit}
-      className="flex flex-col flex-grow justify-center items-center gap-10"
+      className="flex flex-grow flex-col items-center justify-center gap-10"
     >
       <Question details={details} required={required}>
         {q}
       </Question>
-      <div className="text-2xl space-y-8">
+      <div className="space-y-8 text-2xl">
         {options.map((opt) => (
           <div key={opt} className="flex items-center">
             <input
               id={opt}
               name="answer"
               type="radio"
-              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
               checked={selected === opt}
               onChange={onChange}
             />
