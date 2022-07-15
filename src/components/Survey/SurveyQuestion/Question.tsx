@@ -12,7 +12,7 @@ export const Question: FC<QuestionProps> = ({
   required,
 }) => (
   <div className="flex flex-col gap-3">
-    <h1 className="text-4xl font-extrabold dark:text-slate-200">
+    <h1 className="text-2xl font-extrabold dark:text-slate-200 md:text-4xl">
       {children}
       {required && <span className="text-red-600">*</span>}
     </h1>

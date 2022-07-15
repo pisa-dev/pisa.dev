@@ -37,7 +37,7 @@ export const SurveyQuestionSingleChoice: FC<SurveyQuestionProps> = ({
       <Question details={details} required={required}>
         {q}
       </Question>
-      <div className="space-y-8 text-2xl">
+      <div className="space-y-8 text-lg md:text-xl lg:text-2xl">
         {options.map((opt) => (
           <div key={opt} className="flex items-center">
             <input
