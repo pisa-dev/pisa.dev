@@ -5,6 +5,7 @@ import { StepsProgress } from "@/components/StepsProgress";
 import { trpc } from "@/utils/trpc";
 import { questionElementByKind } from "../SurveyQuestion";
 import { Survey as SurveyT, SurveyQuestion } from "@prisma/client";
+import Confetti from "react-confetti";
 
 export interface SurveyProps {
   survey: SurveyT & { questions: SurveyQuestion[] };
@@ -75,6 +76,8 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
 
         {currentStepIdx >= steps.length && (
           <div className="flex flex-col gap-4">
+            <Confetti />
+
             <h1 className="text-3xl">
               Risposte registrate, grazie per aver partecipato!
             </h1>
