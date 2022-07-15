@@ -57,6 +57,7 @@ export const surveyRouter = createRouter()
       data: z.object({
         questionId: z.string(),
         answer: z.string(),
+        correlationId: z.string(),
       }),
     }),
     async resolve({ ctx, input }) {
@@ -65,12 +66,21 @@ export const surveyRouter = createRouter()
           data: input.data,
         });
       } else {
-        return await ctx.prisma.surveyAnswer.update({
-          data: input.data,
-          where: {
-            id: input.id,
-          },
-        });
+        try {
+          return await ctx.prisma.surveyAnswer.update({
+            data: {
+              answer: input.data.answer,
+            },
+            where: {
+              id: input.id,
+            },
+          });
+        } catch (err) {
+          // row might not exist anymore, create a new one
+          return await ctx.prisma.surveyAnswer.create({
+            data: input.data,
+          });
+        }
       }
     },
   });
