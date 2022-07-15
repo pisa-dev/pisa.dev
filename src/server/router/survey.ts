@@ -1,5 +1,7 @@
 import { createRouter } from "./context";
 import { z } from "zod";
+import { getServerSession } from "../auth";
+import { TRPCError } from "@trpc/server";
 
 export const surveyRouter = createRouter()
   .query("get-survey", {
@@ -13,6 +15,34 @@ export const surveyRouter = createRouter()
         },
         include: {
           questions: {
+            orderBy: {
+              order: "asc",
+            },
+          },
+        },
+      });
+    },
+  })
+  .query("get-survey-results", {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      // check permission
+      const session = await getServerSession(ctx);
+      if (!session?.user.admin) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
+      return await ctx.prisma.survey.findFirst({
+        where: {
+          id: input.id,
+        },
+        include: {
+          questions: {
+            include: {
+              answers: true,
+            },
             orderBy: {
               order: "asc",
             },
