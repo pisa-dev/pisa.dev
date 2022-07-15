@@ -105,10 +105,11 @@ model SurveyQuestion {
 }
 
 model SurveyAnswer {
-    id         String         @id @default(cuid())
-    questionId String
-    question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    answer     String
+    id            String         @id @default(cuid())
+    correlationId String
+    questionId    String
+    question      SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+    answer        String
 
     @@index([questionId])
 }

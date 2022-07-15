@@ -6,6 +6,7 @@ import { trpc } from "@/utils/trpc";
 import { questionElementByKind } from "../SurveyQuestion";
 import { Survey as SurveyT, SurveyQuestion } from "@prisma/client";
 import Confetti from "react-confetti";
+import { useSurveyCorrelationId } from "@/hooks/useSurveyCorrelationId";
 
 export interface SurveyProps {
   survey: SurveyT & { questions: SurveyQuestion[] };
@@ -14,6 +15,7 @@ export interface SurveyProps {
 export const Survey: FC<SurveyProps> = ({ survey }) => {
   const [currentStepIdx, setCurrentStepIdx] = useState(0);
   const addAnswerMut = trpc.useMutation("survey.add-answer");
+  const correlationId = useSurveyCorrelationId();
   const [answerStore, setAnswersStore] = useLocalStorage<{
     [key: string]: string;
   }>(`survey-${survey.id}`, {});
@@ -28,6 +30,7 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
       data: {
         questionId: question.id,
         answer: value,
+        correlationId,
       },
     });
     setAnswersStore({ ...answerStore, [question.id]: res.id });
