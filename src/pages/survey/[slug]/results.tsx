@@ -38,7 +38,7 @@ const SurveyResultsPage: NextPage = () => {
 
         <h3>Panoramica</h3>
         <div className="space-y-6">
-          <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow dark:divide-slate-700 dark:bg-slate-800 md:grid-cols-3 md:divide-y-0 md:divide-x">
+          <dl className="mt-5 flex flex-col divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow dark:divide-slate-700 dark:bg-slate-800">
             {q.data.questions.map((question) => (
               <Link
                 key={question.id}
