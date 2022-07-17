@@ -41,7 +41,13 @@ export const surveyRouter = createRouter()
         include: {
           questions: {
             include: {
-              answers: true,
+              answers: {
+                where: {
+                  answer: {
+                    not: "",
+                  },
+                },
+              },
             },
             orderBy: {
               order: "asc",

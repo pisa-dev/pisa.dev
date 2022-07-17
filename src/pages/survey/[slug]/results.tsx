@@ -1,6 +1,9 @@
+import { Footer } from "@/components/Footer";
 import { trpc } from "@/utils/trpc";
+import { SurveyAnswer, SurveyQuestionKind } from "@prisma/client";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { BsStarFill } from "react-icons/bs";
 
 const SurveyResultsPage: NextPage = () => {
   const router = useRouter();
@@ -24,33 +27,91 @@ const SurveyResultsPage: NextPage = () => {
   }
 
   return (
-    <div className="prose prose-slate mx-auto max-w-prose p-4 dark:prose-invert">
-      <h1>
-        Risultati di {'"'}
-        {q.data.title}
-        {'"'}
-      </h1>
+    <>
+      <main className="prose prose-slate mx-auto max-w-prose p-4 dark:prose-invert">
+        <h1>
+          Risultati di {'"'}
+          {q.data.title}
+          {'"'}
+        </h1>
 
-      <h3>Risposte</h3>
-      <div className="space-y-6">
-        {q.data.questions.map((question) => (
-          <div key={question.id}>
-            <details>
-              <summary>
-                <strong>{question.question}</strong> ({question.answers.length}{" "}
-                risposte)
-              </summary>
-              <ol>
-                {question.answers.map((answer) => (
-                  <li key={answer.id}>{answer.answer}</li>
-                ))}
-              </ol>
-            </details>
-          </div>
-        ))}
-      </div>
-    </div>
+        <h3>Panoramica</h3>
+        <div className="space-y-6">
+          <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow dark:divide-slate-700 dark:bg-slate-800 md:grid-cols-3 md:divide-y-0 md:divide-x">
+            {q.data.questions.map((question) => (
+              <div key={question.id} className="px-4 py-5 sm:p-6">
+                <dt className="text-base font-normal dark:text-slate-100">
+                  {question.question}
+                  {question.required && (
+                    <span className="font-bold text-red-500">*</span>
+                  )}
+                </dt>
+                <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                  <div className="flex items-baseline text-2xl font-semibold text-indigo-600 dark:text-indigo-400">
+                    {viz(question.kind, question.answers)}
+                    <span className="ml-2 text-sm font-medium text-gray-500 dark:text-slate-300">
+                      {question.answers.length} risposte
+                    </span>
+                  </div>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
+};
+
+const viz = (kind: SurveyQuestionKind, answers: SurveyAnswer[]) => {
+  switch (kind) {
+    case "stars":
+      return (
+        <span className="flex flex-row items-center gap-1">
+          {average(answers)} <BsStarFill className="h-4 w-4" />
+        </span>
+      );
+    case "singlechoice":
+      const m = topAnswer(answers);
+      return (
+        <span>
+          {m?.answer} ({m?.percentage}%)
+        </span>
+      );
+    default:
+      return "Apri dettaglio";
+  }
+};
+
+const average = (answers: SurveyAnswer[]): string =>
+  (
+    answers.map((a) => parseInt(a.answer, 10)).reduce((a, b) => a + b, 0) /
+    answers.length
+  ).toFixed(2);
+
+const topAnswer = (
+  answers: SurveyAnswer[]
+): { answer: string; percentage: string } | null => {
+  if (!answers || !answers.length || !answers[0]) {
+    return null;
+  }
+
+  const counts = new Map<string, number>();
+  answers.forEach((a) => counts.set(a.answer, (counts.get(a.answer) || 0) + 1));
+  const max = { answer: answers[0].answer, count: 0 };
+
+  for (const [k, v] of counts.entries()) {
+    if (v > max.count) {
+      max.answer = k;
+      max.count = v;
+    }
+  }
+
+  return {
+    answer: max.answer,
+    percentage: ((max.count / answers.length) * 100).toFixed(0),
+  };
 };
 
 export default SurveyResultsPage;
