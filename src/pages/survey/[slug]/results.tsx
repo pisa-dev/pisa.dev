@@ -2,6 +2,7 @@ import { Footer } from "@/components/Footer";
 import { trpc } from "@/utils/trpc";
 import { SurveyAnswer, SurveyQuestionKind } from "@prisma/client";
 import { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsStarFill } from "react-icons/bs";
 
@@ -39,22 +40,27 @@ const SurveyResultsPage: NextPage = () => {
         <div className="space-y-6">
           <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow dark:divide-slate-700 dark:bg-slate-800 md:grid-cols-3 md:divide-y-0 md:divide-x">
             {q.data.questions.map((question) => (
-              <div key={question.id} className="px-4 py-5 sm:p-6">
-                <dt className="text-base font-normal dark:text-slate-100">
-                  {question.question}
-                  {question.required && (
-                    <span className="font-bold text-red-500">*</span>
-                  )}
-                </dt>
-                <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                  <div className="flex items-baseline text-2xl font-semibold text-indigo-600 dark:text-indigo-400">
-                    {viz(question.kind, question.answers)}
-                    <span className="ml-2 text-sm font-medium text-gray-500 dark:text-slate-300">
-                      {question.answers.length} risposte
-                    </span>
-                  </div>
-                </dd>
-              </div>
+              <Link
+                key={question.id}
+                href={`/survey/${q.data?.id}/by-question/${question.id}`}
+              >
+                <div className="cursor-pointer px-4 py-5 sm:p-6">
+                  <dt className="text-base font-normal dark:text-slate-100">
+                    {question.question}
+                    {question.required && (
+                      <span className="font-bold text-red-500">*</span>
+                    )}
+                  </dt>
+                  <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                    <div className="flex items-baseline text-2xl font-semibold text-indigo-600 dark:text-indigo-400">
+                      {viz(question.kind, question.answers)}
+                      <span className="ml-2 text-sm font-medium text-gray-500 dark:text-slate-300">
+                        {question.answers.length} risposte
+                      </span>
+                    </div>
+                  </dd>
+                </div>
+              </Link>
             ))}
           </dl>
         </div>

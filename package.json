@@ -21,6 +21,7 @@
     "@trpc/next": "^9.25.3",
     "@trpc/react": "^9.25.3",
     "@trpc/server": "^9.25.3",
+    "ecoji-js": "^1.1.2",
     "next": "^12.2.0",
     "next-auth": "^4.9.0",
     "next-plausible": "^3.2.0",
@@ -33,6 +34,7 @@
     "react-query": "^3.39.1",
     "superjson": "^1.9.1",
     "usehooks-ts": "^2.6.0",
+    "victory": "^36.5.3",
     "zod": "^3.17.3"
   },
   "devDependencies": {
