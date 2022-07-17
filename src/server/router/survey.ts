@@ -41,12 +41,70 @@ export const surveyRouter = createRouter()
         include: {
           questions: {
             include: {
-              answers: true,
+              answers: {
+                where: {
+                  answer: {
+                    not: "",
+                  },
+                },
+              },
             },
             orderBy: {
               order: "asc",
             },
           },
+        },
+      });
+    },
+  })
+  .query("get-question-by-id", {
+    input: z.object({
+      questionId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      // check permission
+      const session = await getServerSession(ctx);
+      if (!session?.user.admin) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
+      return await ctx.prisma.surveyQuestion.findFirst({
+        where: {
+          id: input.questionId,
+        },
+        include: {
+          answers: {
+            where: {
+              answer: {
+                not: "",
+              },
+            },
+          },
+        },
+      });
+    },
+  })
+  .query("get-answers-by-correlation-id", {
+    input: z.object({
+      surveyId: z.string(),
+      correlationId: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      // check permission
+      const session = await getServerSession(ctx);
+      if (!session?.user.admin) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
+      return await ctx.prisma.surveyAnswer.findMany({
+        where: {
+          correlationId: input.correlationId,
+          question: {
+            surveyId: input.surveyId,
+          },
+        },
+        include: {
+          question: true,
         },
       });
     },
