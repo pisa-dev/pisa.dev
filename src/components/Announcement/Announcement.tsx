@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Event } from "@/components/UpcomingEvents";
+import { Event } from "@/components/EventsList";
 
 export interface AnnouncementProps {
   event: Event;
