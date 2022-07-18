@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { Event } from "@/components/UpcomingEvents";
+import { Event } from "@/components/EventsList";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
 
 export interface EventCardProps {

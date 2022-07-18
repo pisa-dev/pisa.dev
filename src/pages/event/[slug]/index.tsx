@@ -74,10 +74,16 @@ const EventPage = () => {
             </div>
 
             <div className="sticky top-0 left-0 mt-4 flex w-full flex-col items-center gap-2 border-y border-slate-200 bg-white bg-opacity-90 py-4 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900 dark:bg-opacity-60 dark:text-gray-300">
-              <EventbriteCheckout eventId={event.eventbriteId} />
-              <span className="text-xs">
-                Evento gratuito previa registrazione
-              </span>
+              {event.date > new Date() ? (
+                <>
+                  <EventbriteCheckout eventId={event.eventbriteId} />
+                  <span className="text-xs">
+                    Evento gratuito previa registrazione
+                  </span>
+                </>
+              ) : (
+                <span className="text-xs">Iscrizioni terminate!</span>
+              )}
             </div>
 
             <EventContent

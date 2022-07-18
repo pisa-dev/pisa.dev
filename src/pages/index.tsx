@@ -12,7 +12,7 @@ import { NewsletterBanner } from "@/components/Newsletter";
 import { Speaker } from "@/components/SpeakerInfo";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
-import { UpcomingEvents, Event } from "@/components/UpcomingEvents";
+import { EventsList, Event } from "@/components/EventsList";
 
 const speaker: Speaker = {
   name: "Alessandro Berti",
@@ -40,6 +40,8 @@ const Home: NextPage = () => {
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
 
+  const past = events.filter((event) => event.date < new Date());
+  const upcoming = events.filter((event) => event.date > new Date());
   const showEmailVerifiedBanner = !!router.query.email_verified;
 
   return (
@@ -54,7 +56,9 @@ const Home: NextPage = () => {
           text="Il tuo indirizzo email è stato verificato con successo!"
         />
       )}
-      {events.length && events[0] && <Announcement event={events[0]} />}
+      {upcoming.length > 0 && upcoming[0] && (
+        <Announcement event={upcoming[0]} />
+      )}
       <Header />
       <main>
         <Hero
@@ -66,7 +70,22 @@ const Home: NextPage = () => {
             });
           }}
         />
-        <UpcomingEvents events={events} />
+
+        {upcoming.length > 0 && (
+          <EventsList
+            title="I prossimi eventi"
+            description="Siamo continuamente alla ricerca di speaker e nuove idee. Contattaci e proponi un talk!"
+            events={upcoming}
+          />
+        )}
+        {past.length > 0 && (
+          <EventsList
+            title="Eventi passati"
+            description="Troppo tardi! Questi sono gli eventi che abbiamo già avuto, iscriviti alla newsletter per non perderne altri!"
+            events={past}
+          />
+        )}
+
         <Team />
         <div ref={newsletterRef}>
           <NewsletterBanner />
