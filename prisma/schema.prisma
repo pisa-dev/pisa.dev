@@ -131,6 +131,7 @@ model Event {
     eventbriteId String
     abstract     String    @db.Text
     description  String    @db.Text
+    imageUrl     String?
     speakers     Speaker[]
 
     @@index([slug])
