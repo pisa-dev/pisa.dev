@@ -2,7 +2,6 @@
 import { createRouter } from "./context";
 import superjson from "superjson";
 import { TRPCError } from "@trpc/server";
-import { getServerSession } from "@/server/auth";
 
 import { exampleRouter } from "./example";
 import { newsletterRouter } from "./newsletter";
@@ -17,8 +16,7 @@ export const appRouter = createRouter()
     "admin.",
     createRouter()
       .middleware(async ({ ctx, next }) => {
-        const session = await getServerSession(ctx);
-        if (!session?.user.admin) {
+        if (!ctx.session?.user.admin) {
           throw new TRPCError({ code: "UNAUTHORIZED" });
         }
         return next();

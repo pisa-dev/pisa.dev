@@ -1,6 +1,5 @@
 import { createRouter } from "./context";
 import { z } from "zod";
-import { getServerSession } from "../auth";
 import { TRPCError } from "@trpc/server";
 
 export const surveyRouter = createRouter()
@@ -29,8 +28,7 @@ export const surveyRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       // check permission
-      const session = await getServerSession(ctx);
-      if (!session?.user.admin) {
+      if (!ctx.session?.user.admin) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
@@ -63,8 +61,7 @@ export const surveyRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       // check permission
-      const session = await getServerSession(ctx);
-      if (!session?.user.admin) {
+      if (!ctx.session?.user.admin) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
@@ -91,8 +88,7 @@ export const surveyRouter = createRouter()
     }),
     async resolve({ ctx, input }) {
       // check permission
-      const session = await getServerSession(ctx);
-      if (!session?.user.admin) {
+      if (!ctx.session?.user.admin) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
