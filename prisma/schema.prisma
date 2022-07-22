@@ -113,3 +113,25 @@ model SurveyAnswer {
 
     @@index([questionId])
 }
+
+model Speaker {
+    id       String  @id @default(cuid())
+    name     String
+    title    String
+    imageUrl String
+    events   Event[]
+}
+
+model Event {
+    id           String    @id @default(cuid())
+    slug         String
+    title        String
+    location     String
+    date         DateTime
+    eventbriteId String
+    abstract     String    @db.Text
+    description  String    @db.Text
+    speakers     Speaker[]
+
+    @@index([slug])
+}

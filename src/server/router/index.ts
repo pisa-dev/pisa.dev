@@ -6,6 +6,7 @@ import { TRPCError } from "@trpc/server";
 import { exampleRouter } from "./example";
 import { newsletterRouter } from "./newsletter";
 import { eventbriteRouter } from "./eventbrite";
+import { eventsRouter } from "./events";
 import { proposalsRouter } from "./proposals";
 import { surveyRouter } from "./survey";
 
@@ -23,6 +24,7 @@ export const appRouter = createRouter()
       })
       .merge("eventbrite.", eventbriteRouter)
   )
+  .merge("events.", eventsRouter)
   .merge("proposals.", proposalsRouter)
   .merge("survey.", surveyRouter)
   .merge("example.", exampleRouter);
