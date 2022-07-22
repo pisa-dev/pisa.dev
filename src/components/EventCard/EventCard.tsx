@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { Event } from "@/components/EventsList";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
+import { EventWithSpeaker } from "@/server/router/events";
 
 export interface EventCardProps {
-  event: Event;
+  event: EventWithSpeaker;
 }
 
 export const EventCard: FC<EventCardProps> = ({ event }) => (
@@ -17,16 +17,18 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
       new Date() > event.date ? "opacity-80 grayscale" : ""
     }`}
   >
-    <div className="flex-shrink-0">
-      <Image
-        width="1000px"
-        height="500px"
-        objectFit="cover"
-        className="w-full"
-        src={event.imageUrl}
-        alt=""
-      />
-    </div>
+    {event.imageUrl && (
+      <div className="flex-shrink-0">
+        <Image
+          width="1000px"
+          height="500px"
+          objectFit="cover"
+          className="w-full"
+          src={event.imageUrl}
+          alt=""
+        />
+      </div>
+    )}
     <div className="flex flex-1 flex-col justify-between p-6">
       <div className="flex-1 gap-4 text-sm font-medium text-gray-500 dark:text-slate-400">
         <div className="flex items-center gap-4">
@@ -40,21 +42,23 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
         </div>
         <div className="flex items-center gap-4">
           <FaMapMarkerAlt />
-          <p>{event.venue}</p>
+          <p>{event.location}</p>
         </div>
-        <Link href={event.href}>
+        <Link href={`/event/${event.slug}`}>
           <a className="mt-4 block">
             <p className="text-xl font-semibold text-gray-900 dark:text-slate-300">
               {event.title}
             </p>
             <p className="mt-3 text-base text-gray-500 dark:text-slate-400">
-              {event.description}
+              {event.abstract}
             </p>
           </a>
         </Link>
       </div>
-      <div className="mt-6 flex items-center">
-        <SpeakerInfo speaker={event.speaker} />
+      <div className="align-center mt-6 flex flex-col gap-4">
+        {event.speakers.map((speaker) => (
+          <SpeakerInfo key={speaker.id} speaker={speaker} />
+        ))}
       </div>
     </div>
   </div>

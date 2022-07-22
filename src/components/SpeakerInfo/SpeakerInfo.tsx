@@ -1,14 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-
-export interface Speaker {
-  name: string;
-  title?: string;
-  imageUrl: string;
-  twitterUrl?: string;
-  linkedinUrl?: string;
-  githubUrl?: string;
-}
+import { Speaker } from "@prisma/client";
 
 export interface SpeakerInfoProps {
   speaker: Speaker;

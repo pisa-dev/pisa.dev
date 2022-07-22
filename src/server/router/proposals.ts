@@ -1,19 +1,17 @@
 import { createRouter } from "./context";
-import { getServerSession } from "@/server/auth";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const proposalsRouter = createRouter()
   .query("listMine", {
     async resolve({ ctx }) {
-      const session = await getServerSession(ctx);
-      if (!session || !session.user || !session.user.email) {
+      if (!ctx.session || !ctx.session.user || !ctx.session.user.email) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
       return await ctx.prisma.eventProposal.findMany({
         where: {
-          creatorEmail: session.user.email,
+          creatorEmail: ctx.session.user.email,
         },
       });
     },
@@ -23,15 +21,14 @@ export const proposalsRouter = createRouter()
       id: z.string(),
     }),
     async resolve({ ctx, input }) {
-      const session = await getServerSession(ctx);
-      if (!session || !session.user || !session.user.email) {
+      if (!ctx.session || !ctx.session.user || !ctx.session.user.email) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
       return await ctx.prisma.eventProposal.findFirst({
         where: {
           id: input.id,
-          creatorEmail: session.user.email,
+          creatorEmail: ctx.session.user.email,
         },
       });
     },
@@ -46,8 +43,7 @@ export const proposalsRouter = createRouter()
       }),
     }),
     async resolve({ ctx, input }) {
-      const session = await getServerSession(ctx);
-      if (!session?.user.email) {
+      if (!ctx.session?.user.email) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
 
@@ -55,7 +51,7 @@ export const proposalsRouter = createRouter()
         return await ctx.prisma.eventProposal.create({
           data: {
             ...input.data,
-            creatorEmail: session.user.email,
+            creatorEmail: ctx.session.user.email,
           },
         });
       } else {

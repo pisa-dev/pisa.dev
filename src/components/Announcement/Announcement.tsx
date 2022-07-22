@@ -1,6 +1,6 @@
+import { Event } from "@prisma/client";
 import Link from "next/link";
 import { FC } from "react";
-import { Event } from "@/components/EventsList";
 
 export interface AnnouncementProps {
   event: Event;
@@ -21,7 +21,7 @@ export const Announcement: FC<AnnouncementProps> = ({ event }) => {
               &nbsp;
             </span>
             <span className="ml-2 block sm:inline-block">
-              <Link href={event.href}>
+              <Link href={`/events/${event.slug}`}>
                 <a className="font-bold text-white underline">
                   Info e registrazione<span aria-hidden="true">&rarr;</span>
                 </a>
