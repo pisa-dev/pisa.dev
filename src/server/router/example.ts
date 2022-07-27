@@ -1,6 +1,5 @@
 import { createRouter } from "./context";
 import { z } from "zod";
-import { getSession } from "next-auth/react";
 import { TRPCError } from "@trpc/server";
 
 export const exampleRouter = createRouter()
@@ -18,8 +17,7 @@ export const exampleRouter = createRouter()
   })
   .query("getAll", {
     async resolve({ ctx }) {
-      const session = await getSession({ req: ctx.req });
-      if (!session) {
+      if (!ctx.session) {
         throw new TRPCError({ code: "UNAUTHORIZED" });
       }
       return await ctx.prisma.example.findMany();

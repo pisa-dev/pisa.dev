@@ -1,21 +1,11 @@
 import { FC } from "react";
 import { EventCard } from "@/components/EventCard";
-import { Speaker } from "@/components/SpeakerInfo";
-
-export interface Event {
-  title: string;
-  href: string;
-  description: string;
-  date: Date;
-  venue: string;
-  imageUrl: string;
-  speaker: Speaker;
-}
+import { EventWithSpeaker } from "@/server/router/events";
 
 export interface UpcomingEventsProps {
   title: string;
   description: string;
-  events: Event[];
+  events: EventWithSpeaker[];
 }
 
 export const EventsList: FC<UpcomingEventsProps> = ({
@@ -42,7 +32,7 @@ export const EventsList: FC<UpcomingEventsProps> = ({
           // filler for when we have less than 2 events
           />
           {events.map((event) => (
-            <EventCard key={event.href} event={event} />
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
       </div>

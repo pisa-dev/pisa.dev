@@ -7,45 +7,30 @@ import { EventLocationInfo } from "@/components/EventLocationInfo";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
+import { createSSGHelpers } from "@trpc/react/ssg";
+import { trpc } from "@/utils/trpc";
+import { appRouter } from "@/server/router";
+import { createContextInner } from "@/server/router/context";
+import superjson from "superjson";
 
-const event = {
-  speaker: {
-    name: "Alessandro Berti",
-    title: "PhD Student in Quantum Computing @ UniPi",
-    imageUrl: "/alessandro.webp",
-  },
-  title: "Quantum Computing: Lov Grover",
-  location: "Borgo Stretto 3, Pisa",
-  date: new Date(2022, 6, 15, 18, 30),
-  eventbriteId: "380159706917",
-  abstract: `Quanto costa cercare classicamente un elemento in un array non ordinato? Nel peggiore dei casi, dovrai guardare tutti gli elementi del tuo array, uno ad uno. Questo però non è vero con la computazione quantistica!`,
-  description: `
-In questo talk sarà presentato uno degli algoritmi quantistici più dirompenti di tutto il mondo quantum, l’algoritmo di Grover!
+const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  slug,
+}) => {
+  const q = trpc.useQuery(["events.get-by-slug", { slug: slug }], {
+    staleTime: Infinity,
+  });
+  if (!q.data) {
+    return <div>loading</div>;
+  }
 
-#### Che cosa fa questo algoritmo?
+  const event = q.data;
 
-Beh! Permette di avere uno speedup polinomiale rispetto alla ricerca effettuata dai computer classici.
-
-#### Ovvero?
-Astraendo significa che, riesce a trovare l’elemento che stavi cercando senza dover guardare tutti gli elementi del tuo array non ordinato.
-
-#### Come è possibile questa magia?
-Beh, non ti rimane che venire al talk!
-
-### Informazioni utili
-Questo è il primo di molti eventi gratuiti di cui si renderà protagonista Pisa.dev: la nuova fantastica community degli sviluppatori pisani! 🎉🎉
-
-Pisa.dev nasce dall'esigenza di formare un gruppo di professionisti, studenti ed appassionati del mondo IT sul territorio pisano con il chiaro obiettivo di condividere idee, conoscenze e curiosità.
-
-La sala a nostra disposizione si trova al primo piano del centralissimo Casino dei Nobili, presso gli uffici di Traent e Geckosoft, in via Borgo Stretto, 3.
-
-Terminato l'evento ci sarà un aperitivo, così da discutere gli argomenti trattati (e non), condividere le proprie impressioni e fare conoscenza 🍻🍻🍻
-
-Ti abbiamo incuriosito? Ottimo, vieni a trovarci venerdì 15 alle ore 18:30!
-  `,
-};
-
-const EventPage = () => {
   return (
     <>
       <Head>
@@ -61,7 +46,9 @@ const EventPage = () => {
                 <AdminOnly>
                   <EventAdminInfo eventId={event.eventbriteId} />
                 </AdminOnly>
-                <SpeakerInfo speaker={event.speaker} />
+                {event.speakers.map((speaker) => (
+                  <SpeakerInfo key={speaker.id} speaker={speaker} />
+                ))}
                 <h1 className="my-3 block text-3xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
                   {event.title}
                 </h1>
@@ -96,6 +83,44 @@ const EventPage = () => {
       <Footer />
     </>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = createSSGHelpers({
+    router: appRouter,
+    ctx: await createContextInner({}),
+    transformer: superjson,
+  });
+  const slug = context.params?.slug as string;
+  if (!slug) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const event = await ssg.fetchQuery("events.get-by-slug", {
+    slug,
+  });
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Make sure to return { props: { trpcState: ssg.dehydrate() } }
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      slug,
+    },
+  };
 };
 
 export default EventPage;
