@@ -1,14 +1,10 @@
 import { Footer } from "@/components/Footer";
 import { trpc } from "@/utils/trpc";
-import {
-  SurveyQuestionKind,
-  SurveyAnswer,
-  SurveyQuestion,
-} from "@prisma/client";
+import { SurveyAnswer, SurveyQuestion } from "@prisma/client";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { VictoryAxis, VictoryBar, VictoryChart } from "victory";
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from "victory";
 
 const SurveyQuestionResultsPage: NextPage = () => {
   const router = useRouter();
@@ -31,13 +27,15 @@ const SurveyQuestionResultsPage: NextPage = () => {
   return (
     <>
       <main className="prose prose-slate mx-auto max-w-prose p-4 dark:prose-invert">
-        <h1>
-          {q.data.question}
-          {q.data.required && <span className="font-bold text-red-500">*</span>}
-        </h1>
         <Link href={`/survey/${q.data.surveyId}/results`}>
           Torna ai risultati del sondaggio
         </Link>
+
+        <h1 className="mt-2">
+          {q.data.question}
+          {q.data.required && <span className="font-bold text-red-500">*</span>}
+        </h1>
+        <h3>{q.data.answers.length} risposte</h3>
 
         {chart(q.data, q.data.answers)}
 
@@ -155,6 +153,45 @@ const chart = (q: SurveyQuestion, answers: SurveyAnswer[]) => {
             }}
           />
           <VictoryBar data={data} style={{ data: { fill: "#4f46e5" } }} />
+        </VictoryChart>
+      );
+    }
+
+    case "multiplechoices": {
+      const map = new Map();
+      answers
+        .flatMap((a) => a.answer.split(","))
+        .forEach((a) => map.set(a, (map.get(a) || 0) + 1));
+      const data = [...map.entries()].map(([x, v]) => ({ x, y: v || 0 }));
+      return (
+        <VictoryChart
+          domainPadding={20}
+          minDomain={0}
+          height={50 * data.length}
+        >
+          <VictoryAxis
+            dependentAxis
+            style={{
+              axis: { stroke: "#64748b" },
+              tickLabels: { fill: "#64748b" },
+            }}
+          />
+          <VictoryBar
+            horizontal
+            barWidth={30}
+            sortKey="y"
+            data={data}
+            style={{ data: { fill: "#4f46e5" } }}
+            labels={({ datum }) => datum.x}
+            labelComponent={
+              <VictoryLabel
+                x={50}
+                style={{
+                  fill: "white",
+                }}
+              />
+            }
+          />
         </VictoryChart>
       );
     }
