@@ -44,6 +44,7 @@ const sendTelegramMessage = async (offer: JobOffer) => {
       body: JSON.stringify({
         chat_id: process.env.TELEGRAM_JOBS_CHAT_ID,
         text: renderText(offer),
+        parse_mode: "markdown",
         reply_markup: {
           inline_keyboard: [
             [
