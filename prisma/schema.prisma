@@ -136,3 +136,22 @@ model Event {
 
     @@index([slug])
 }
+
+model JobOffer {
+    id          String     @id @default(cuid())
+    companyName String
+    offerURL    String
+    title       String
+    salaryRange String
+    remote      RemoteKind
+    description String
+
+    telegramMessageID     BigInt?
+    telegramMessageChatID String?
+}
+
+enum RemoteKind {
+    no
+    partial
+    full
+}
