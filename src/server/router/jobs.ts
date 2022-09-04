@@ -82,6 +82,14 @@ interface TelegramMessage {
 const renderText = (o: JobOffer): string => {
   return `**${o.title}**, ${o.companyName}
 **RAL**: ${o.salaryRange}
+**Remoto**: ${renderRemoteEnum(o.remote)}
 
 ${o.description}`;
 };
+
+const renderRemoteEnum = (r: RemoteKind): string =>
+  ({
+    [RemoteKind.full]: "Sì, full time",
+    [RemoteKind.partial]: "Parziale / ibrido",
+    [RemoteKind.no]: "No",
+  }[r]);
