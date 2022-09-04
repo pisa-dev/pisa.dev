@@ -144,7 +144,7 @@ model JobOffer {
     title       String
     salaryRange String
     remote      RemoteKind
-    description String
+    description String     @db.Text
 
     telegramMessageID     BigInt?
     telegramMessageChatID String?
