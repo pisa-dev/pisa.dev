@@ -9,6 +9,7 @@ import { eventbriteRouter } from "./eventbrite";
 import { eventsRouter } from "./events";
 import { proposalsRouter } from "./proposals";
 import { surveyRouter } from "./survey";
+import { jobsRouter } from "./jobs";
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -27,6 +28,7 @@ export const appRouter = createRouter()
   .merge("events.", eventsRouter)
   .merge("proposals.", proposalsRouter)
   .merge("survey.", surveyRouter)
+  .merge("jobs.", jobsRouter)
   .merge("example.", exampleRouter);
 
 // export type definition of API
