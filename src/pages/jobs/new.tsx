@@ -6,7 +6,6 @@ import { Tab } from "@headlessui/react";
 import Head from "next/head";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ReactMarkdown from "react-markdown";
 
 function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
@@ -15,10 +14,12 @@ function classNames(...classes: string[]): string {
 type FormValues = {
   title: string;
   description: string;
+  location: string;
   salaryRange: string;
   remote: "no" | "partial" | "full";
   companyName: string;
   offerURL: string;
+  tags: string;
 };
 
 const JobOffersNewPage = () => {
@@ -30,11 +31,14 @@ const JobOffersNewPage = () => {
   } = useForm<FormValues>();
   const mutation = trpc.useMutation(["jobs.insert"]);
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    await mutation.mutateAsync({ data });
+    await mutation.mutateAsync({
+      data,
+      tags: data.tags.split(",").map((t) => t.trim()),
+    });
   };
 
   const values = watch();
-  const disabled = mutation.isLoading || mutation.isSuccess;
+  const disabled = false; //mutation.isLoading || mutation.isSuccess;
 
   return (
     <>
@@ -108,6 +112,32 @@ const JobOffersNewPage = () => {
                     </div>
 
                     {errors.companyName?.type === "required" && (
+                      <span className="text-sm text-red-700">
+                        Questo campo è obbligatorio.
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 dark:sm:border-slate-700">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-gray-700 dark:text-slate-300 sm:mt-px sm:pt-2"
+                  >
+                    Location (opzionale)
+                  </label>
+                  <div className="mt-1 sm:col-span-2 sm:mt-0">
+                    <div className="flex max-w-lg flex-col gap-4 rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
+                        disabled={disabled}
+                        placeholder="Pisa"
+                        {...register("location")}
+                      />
+                    </div>
+
+                    {errors.location?.type === "required" && (
                       <span className="text-sm text-red-700">
                         Questo campo è obbligatorio.
                       </span>
@@ -198,10 +228,36 @@ const JobOffersNewPage = () => {
 
                 <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 dark:sm:border-slate-700">
                   <label
+                    htmlFor="tags"
+                    className="block text-sm font-medium text-gray-700 dark:text-slate-300 sm:mt-px sm:pt-2"
+                  >
+                    Tag (separati da virgole)
+                  </label>
+                  <div className="mt-1 sm:col-span-2 sm:mt-0">
+                    <div className="flex max-w-lg flex-col gap-4 rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
+                        disabled={disabled}
+                        placeholder="Rust, Go, Postgres"
+                        {...register("tags")}
+                      />
+
+                      {errors.tags?.type === "required" && (
+                        <span className="text-sm text-red-700">
+                          Questo campo è obbligatorio.
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 dark:sm:border-slate-700">
+                  <label
                     htmlFor="description"
                     className="block text-sm font-medium text-gray-700 dark:text-slate-300 sm:mt-px sm:pt-2"
                   >
-                    Descrizione (markdown abilitato)
+                    Descrizione
                   </label>
                   <div className="mt-1 flex flex-col gap-4 sm:col-span-2 sm:mt-0">
                     <div>
@@ -258,9 +314,7 @@ const JobOffersNewPage = () => {
                                 <div className="border-b dark:border-slate-700">
                                   <div className="prose prose-sm prose-slate mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 dark:prose-invert">
                                     {values.description ? (
-                                      <ReactMarkdown>
-                                        {values.description}
-                                      </ReactMarkdown>
+                                      <p>{values.description}</p>
                                     ) : (
                                       <p>L{"'"}anteprima comparirà qui.</p>
                                     )}

@@ -145,9 +145,21 @@ model JobOffer {
     salaryRange String
     remote      RemoteKind
     description String     @db.Text
+    location    String?    @db.Text
 
     telegramMessageID     BigInt?
     telegramMessageChatID String?
+
+    tags JobOfferTags[]
+}
+
+model JobOfferTags {
+    id        String     @id @default(cuid())
+    tag       String
+    tagPretty String
+    offers    JobOffer[]
+
+    @@unique([tag])
 }
 
 enum RemoteKind {
