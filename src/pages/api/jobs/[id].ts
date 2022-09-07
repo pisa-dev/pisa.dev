@@ -29,10 +29,7 @@ const outboundJobOffer = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   if (offer.offerURL.includes("@") && !offer.offerURL.startsWith("http")) {
-    res.redirect(
-      307,
-      `https://pisa.dev/jobs/mailto?address=${offer.offerURL}}`
-    );
+    res.redirect(307, `https://pisa.dev/jobs/mailto?address=${offer.offerURL}`);
   } else {
     res.redirect(307, offer.offerURL);
   }
