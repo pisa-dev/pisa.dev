@@ -28,7 +28,7 @@ const JobsMailtoPage = () => {
           <div className="mt-8 flex justify-center">
             <div className="ml-3 inline-flex">
               <a
-                href={`mailto://${address}`}
+                href={`mailto:${address}`}
                 className="align-center inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 text-base font-semibold text-white hover:bg-blue-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70 disabled:opacity-40 sm:p-4"
                 type="submit"
               >
