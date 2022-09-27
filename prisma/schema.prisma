@@ -133,6 +133,7 @@ model Event {
     description  String    @db.Text
     imageUrl     String?
     speakers     Speaker[]
+    unlisted     Boolean   @default(false)
 
     @@index([slug])
 }

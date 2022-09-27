@@ -27,9 +27,9 @@ export const EventLocationInfo: FC<EventLocationInfoProps> = ({
       <a
         rel="noreferrer"
         target="_blank"
-        href="https://www.google.com/maps/search/?api=1&query=borgo stretto 3, pisa"
+        href={`https://www.google.com/maps/search/?api=1&query=${location}`}
       >
-        <span>Borgo Stretto 3, Pisa</span>
+        <span>{location}</span>
       </a>
     </div>
   </div>
