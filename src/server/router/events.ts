@@ -27,6 +27,7 @@ export const eventsRouter = createRouter()
           speakers: true,
         },
         where: {
+          unlisted: false,
           date: {
             gte: new Date(),
           },
@@ -41,6 +42,7 @@ export const eventsRouter = createRouter()
           speakers: true,
         },
         where: {
+          unlisted: false,
           date: {
             lte: new Date(),
           },
