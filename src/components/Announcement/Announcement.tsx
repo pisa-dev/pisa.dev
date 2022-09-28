@@ -21,7 +21,7 @@ export const Announcement: FC<AnnouncementProps> = ({ event }) => {
               &nbsp;
             </span>
             <span className="ml-2 block sm:inline-block">
-              <Link href={`/events/${event.slug}`}>
+              <Link href={`/event/${event.slug}`}>
                 <a className="font-bold text-white underline">
                   Info e registrazione<span aria-hidden="true">&rarr;</span>
                 </a>
