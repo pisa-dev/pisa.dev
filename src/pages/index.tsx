@@ -22,9 +22,17 @@ const Home: NextPage = () => {
   const router = useRouter();
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
-  const q = trpc.useQuery(["events.get-all"], {
-    staleTime: Infinity,
-  });
+  const q = trpc.useQuery(
+    [
+      "events.get-all",
+      {
+        unlisted: false,
+      },
+    ],
+    {
+      staleTime: Infinity,
+    }
+  );
 
   if (!q.data) {
     return <div>loading</div>;
