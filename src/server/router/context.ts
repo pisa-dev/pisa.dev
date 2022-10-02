@@ -3,9 +3,14 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import { prisma } from "@/server/db/client";
 import { Session, unstable_getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { NextApiRequest, NextApiResponse } from "next";
 
 interface CreateContextOptions {
   session?: Session | null;
+  next?: {
+    req: NextApiRequest;
+    res: NextApiResponse;
+  };
 }
 
 /**
@@ -15,6 +20,7 @@ interface CreateContextOptions {
 export async function createContextInner(_opts: CreateContextOptions) {
   return {
     session: _opts.session,
+    next: _opts.next,
     prisma,
   };
 }
@@ -36,6 +42,10 @@ export async function createContext(
   );
   return await createContextInner({
     session,
+    next: {
+      req: opts.req,
+      res: opts.res,
+    },
   });
 }
 

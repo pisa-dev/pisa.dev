@@ -10,6 +10,7 @@ import { eventsRouter } from "./events";
 import { proposalsRouter } from "./proposals";
 import { surveyRouter } from "./survey";
 import { jobsRouter } from "./jobs";
+import { adminEventsRouter } from "./admin_events";
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -24,6 +25,7 @@ export const appRouter = createRouter()
         return next();
       })
       .merge("eventbrite.", eventbriteRouter)
+      .merge("events.", adminEventsRouter)
   )
   .merge("events.", eventsRouter)
   .merge("proposals.", proposalsRouter)

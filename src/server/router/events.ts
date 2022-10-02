@@ -21,13 +21,16 @@ export const eventsRouter = createRouter()
     },
   })
   .query("get-all", {
-    async resolve({ ctx }) {
+    input: z.object({
+      unlisted: z.boolean(),
+    }).optional(),
+    async resolve({ ctx, input }) {
       const upcoming: EventWithSpeaker[] = await ctx.prisma.event.findMany({
         include: {
           speakers: true,
         },
         where: {
-          unlisted: false,
+          ...(input !== undefined ? { unlisted: input.unlisted } : {}),
           date: {
             gte: new Date(),
           },
@@ -42,7 +45,7 @@ export const eventsRouter = createRouter()
           speakers: true,
         },
         where: {
-          unlisted: false,
+          ...(input !== undefined ? { unlisted: input.unlisted } : {}),
           date: {
             lte: new Date(),
           },
