@@ -1,9 +1,10 @@
 [![pisa.dev](https://raw.githubusercontent.com/pisa-dev/pisa.dev/15fc6c81018738f48dd2fa4300e4c4f0c43d7dc8/public/logo.svg)](https://pisa.dev/)
 
 <div align="center">
-  <h1>pisa.dev</h1>
   <a href="https://github.com/pisa-dev/pisa.dev/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
 </div>
+
+---
 
 ## Getting started
 
