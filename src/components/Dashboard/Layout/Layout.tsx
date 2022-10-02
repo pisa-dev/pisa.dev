@@ -4,8 +4,23 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Footer } from "@/components/Footer";
+import Link from "next/link";
 
-const navigation = [{ name: "Dashboard", href: "/dashboard", current: true }];
+type NavigationDestName = "Dashboard" | "Eventi";
+interface NavigationDest {
+  name: NavigationDestName;
+  href: string;
+  adminOnly: boolean;
+}
+
+const navigation: NavigationDest[] = [
+  { name: "Dashboard", href: "/dashboard", adminOnly: false },
+  {
+    name: "Eventi",
+    href: "/dashboard/events",
+    adminOnly: true,
+  },
+];
 const userNavigation = [
   { name: "Your Profile", href: "/dashboard/profile" },
   { name: "Sign out", href: "#", onClick: () => signOut() },
@@ -13,6 +28,7 @@ const userNavigation = [
 
 export interface LayoutProps {
   children: React.ReactNode;
+  name?: NavigationDestName;
   title?: string;
 }
 
@@ -20,7 +36,9 @@ function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Layout: FC<LayoutProps> = ({ children, title }) => {
+export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
+  name = name || "Dashboard";
+
   const { data: session, status } = useSession();
 
   if (status == "unauthenticated") {
@@ -42,40 +60,49 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 justify-between">
                   <div className="flex">
-                    <div className="flex flex-shrink-0 items-center">
-                      <div className="block h-8 w-auto lg:hidden">
-                        <Image
-                          width="50px"
-                          height="50px"
-                          src="/logo2.svg"
-                          alt="pisa.dev"
-                        />
-                      </div>
-                      <div className="hidden h-8 w-auto lg:block">
-                        <Image
-                          width="200px"
-                          height="50px"
-                          src="/logo.svg"
-                          alt="pisa.dev"
-                        />
-                      </div>
-                    </div>
+                    <Link href="/">
+                      <a className="flex">
+                        <div className="flex flex-shrink-0 items-center">
+                          <div className="block h-8 w-auto lg:hidden">
+                            <Image
+                              width="50px"
+                              height="50px"
+                              src="/logo2.svg"
+                              alt="pisa.dev"
+                            />
+                          </div>
+                          <div className="hidden h-auto w-auto lg:block">
+                            <Image
+                              width="200px"
+                              height="50px"
+                              src="/logo.svg"
+                              alt="pisa.dev"
+                            />
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
                     <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "border-indigo-500 text-gray-900 dark:text-slate-200"
-                              : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-slate-200",
-                            "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
+                      {navigation.map(
+                        (item) =>
+                          (!item.adminOnly || session.user.admin === true) && (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              className={classNames(
+                                item.name === name
+                                  ? "border-indigo-500 text-gray-900 dark:text-slate-200"
+                                  : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-slate-200",
+                                "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
+                              )}
+                              aria-current={
+                                item.name === name ? "page" : undefined
+                              }
+                            >
+                              {item.name}
+                            </a>
+                          )
+                      )}
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -152,22 +179,25 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
 
               <Disclosure.Panel className="sm:hidden">
                 <div className="space-y-1 pt-2 pb-3">
-                  {navigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
-                          : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
-                        "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
-                      )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
+                  {navigation.map(
+                    (item) =>
+                      (!item.adminOnly || session.user.admin === true) && (
+                        <Disclosure.Button
+                          key={item.name}
+                          as="a"
+                          href={item.href}
+                          className={classNames(
+                            item.name === name
+                              ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
+                              : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
+                            "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
+                          )}
+                          aria-current={item.name === name ? "page" : undefined}
+                        >
+                          {item.name}
+                        </Disclosure.Button>
+                      )
+                  )}
                 </div>
                 <div className="border-t border-gray-200 pt-4 pb-3">
                   <div className="flex items-center px-4">
