@@ -3,8 +3,6 @@
 <div align="center">
   <h1>pisa.dev</h1>
   <a href="https://github.com/pisa-dev/pisa.dev/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
-  <br />
-  <br />
 </div>
 
 ## Getting started
@@ -43,17 +41,11 @@ npm run dev
 ```
 - Navigate to `http://localhost:3000` 
 
-<br />
-
----
-
 ## Contributing
 
 To contribute follow the [guidelines](https://github.com/pisa-dev/pisa.dev/blob/main/CONTRIBUTING.md) and don't hesitate to ask for help or guidance.
 
 ---
-
-<br />
 
 This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
 
