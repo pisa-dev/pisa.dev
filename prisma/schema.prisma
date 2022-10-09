@@ -109,7 +109,7 @@ model SurveyAnswer {
     correlationId String
     questionId    String
     question      SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
-    answer        String
+    answer        String         @db.Text
 
     @@index([questionId])
 }
