@@ -18,21 +18,18 @@ import { createSSGHelpers } from "@trpc/react/ssg";
 import superjson from "superjson";
 import { trpc } from "@/utils/trpc";
 
+const getHomepageEventsQ: ["events.get-all", { unlisted: false }] = [
+  "events.get-all",
+  { unlisted: false },
+];
+
 const Home: NextPage = () => {
   const router = useRouter();
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
-  const q = trpc.useQuery(
-    [
-      "events.get-all",
-      {
-        unlisted: false,
-      },
-    ],
-    {
-      staleTime: Infinity,
-    }
-  );
+  const q = trpc.useQuery(getHomepageEventsQ, {
+    staleTime: Infinity,
+  });
 
   if (!q.data) {
     return <div>loading</div>;
@@ -101,7 +98,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     transformer: superjson,
   });
 
-  await ssg.fetchQuery("events.get-all");
+  await ssg.fetchQuery(...getHomepageEventsQ);
 
   // Make sure to return { props: { trpcState: ssg.dehydrate() } }
   return {
