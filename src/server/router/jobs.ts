@@ -130,15 +130,32 @@ const renderText = (o: JobOfferWithTags): string => {
 };
 
 const renderRemoteEnum = (r: RemoteKind): string =>
-  ({
-    [RemoteKind.full]: "Sì, full time",
-    [RemoteKind.partial]: "Parziale / ibrido",
-    [RemoteKind.no]: "No",
-  }[r]);
+({
+  [RemoteKind.full]: "Sì, full time",
+  [RemoteKind.partial]: "Parziale / ibrido",
+  [RemoteKind.no]: "No",
+}[r]);
 
 const renderJobOfferTags = (tags: JobOfferTags[]): string =>
-  tags.map((t) => "#" + t.tagPretty).join(" ");
+  tags.map((t) => telegramEscapeTag(t.tagPretty)).join(" ");
 
-const normalizeTag = (t: string): string => t.trim().toLowerCase();
+
+const telegramEscapeTag = (tag: string): string => {
+  tag = tag.trim()
+
+  const checkSharp = /(c|f)#/gi
+  for (let i = tag.search(checkSharp); i !== -1; i = tag.search(checkSharp))
+    tag = tag.slice(0, i + 1) + 'Sharp' + tag.slice(i + 2)
+
+  tag = tag.replaceAll(/[\/\ @#]/g, '_')
+
+  return '#' + (tag[0] == '_' ? tag.slice(1) : tag)
+}
+
+const normalizeTag = (t: string): string => {
+  t = t.trim().toLowerCase()
+  while (t[0] === '#') t = t.slice(1)
+  return t.trim()
+};
 
 const normalizeTagPretty = (t: string): string => t.trim();
