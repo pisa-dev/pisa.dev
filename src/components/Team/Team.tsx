@@ -70,7 +70,7 @@ const people = [
   },
   {
     name: "Davide Rossi",
-    imageUrl: "/davide_rossi.jpeg",
+    imageUrl: "/davide_rossi.jpg",
     // website: "https://www.pisa.dev",
     // twitterUrl: "https://twitter.com/pitasiantonio",
     linkedinUrl: "https://www.linkedin.com/in/davide-rossi-030a73212",
