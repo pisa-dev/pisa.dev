@@ -60,6 +60,22 @@ const people = [
     imageUrl: "/marco.jpeg",
     linkedinUrl: "https://www.linkedin.com/in/marcozeo/",
   },
+  {
+    name: "Daniele Greco",
+    imageUrl: "/daniele.jpeg",
+    // website: "https://www.pisa.dev",
+    // twitterUrl: "https://twitter.com/pitasiantonio",
+    // linkedinUrl: "https://linkedin.com/in/pitasi",
+    // githubUrl: "https://github.com/pitasi",
+  },
+  {
+    name: "Davide Rossi",
+    imageUrl: "/davide_rossi.jpg",
+    // website: "https://www.pisa.dev",
+    // twitterUrl: "https://twitter.com/pitasiantonio",
+    linkedinUrl: "https://www.linkedin.com/in/davide-rossi-030a73212",
+    githubUrl: "https://github.com/daviderossi11",
+  }
 ];
 
 export const Team = () => {
