@@ -2,6 +2,7 @@ import { Footer } from "@/components/Footer";
 import { trpc } from "@/utils/trpc";
 import { SurveyAnswer, SurveyQuestionKind } from "@prisma/client";
 import { NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsStarFill } from "react-icons/bs";
@@ -29,6 +30,9 @@ const SurveyResultsPage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Risultati di {q.data.title} - pisa.dev</title>
+      </Head>
       <main className="prose prose-slate mx-auto max-w-prose p-4 dark:prose-invert">
         <h1>
           Risultati di {'"'}
