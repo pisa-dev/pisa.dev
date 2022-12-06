@@ -28,9 +28,7 @@ export const EventsList: FC<UpcomingEventsProps> = ({
           </p>
         </div>
         <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-          <div
-          // filler for when we have less than 2 events
-          />
+          {events.length < 2 && <div />}
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
