@@ -11,6 +11,7 @@ import { proposalsRouter } from "./proposals";
 import { surveyRouter } from "./survey";
 import { jobsRouter } from "./jobs";
 import { adminEventsRouter } from "./admin_events";
+import { speakerRouter } from "./speaker";
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -30,6 +31,7 @@ export const appRouter = createRouter()
   .merge("events.", eventsRouter)
   .merge("proposals.", proposalsRouter)
   .merge("survey.", surveyRouter)
+  .merge("speaker.", speakerRouter)
   .merge("jobs.", jobsRouter)
   .merge("example.", exampleRouter);
 

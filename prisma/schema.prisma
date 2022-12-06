@@ -116,10 +116,14 @@ model SurveyAnswer {
 
 model Speaker {
     id       String  @id @default(cuid())
+    slug     String
     name     String
     title    String
-    imageUrl String
+    // TODO: This should instead store the image URLs
+    imageUrl String? @db.LongText
     events   Event[]
+
+    @@index([slug])
 }
 
 model Event {

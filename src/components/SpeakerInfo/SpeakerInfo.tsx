@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Speaker } from "@prisma/client";
+import anonAvatar from "./anon-avatar.svg";
 
 export interface SpeakerInfoProps {
   speaker: Speaker;
@@ -13,7 +14,7 @@ export const SpeakerInfo: FC<SpeakerInfoProps> = ({ speaker }) => (
       width="36px"
       objectFit="cover"
       className="inline-block rounded-full"
-      src={speaker.imageUrl}
+      src={speaker.imageUrl ?? anonAvatar}
       alt=""
     />
     <div className="ml-3">
