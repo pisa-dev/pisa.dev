@@ -13,21 +13,6 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
     },
   ]);
 
-  const stats = [
-    {
-      name: "Biglietti venduti",
-      stat: q.data?.capacity.sold,
-    },
-    {
-      name: "Biglietti in attesa",
-      stat: q.data?.capacity.pending,
-    },
-    {
-      name: "Capacità totale",
-      stat: q.data?.capacity.total,
-    },
-  ];
-
   return (
     <div className="rounded-lg px-4 py-6 dark:bg-slate-700 dark:text-slate-300">
       <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-slate-300">
@@ -35,19 +20,34 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
       </h3>
       <div className="flex flex-col gap-8">
         <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {stats.map((item) => (
-            <div
-              key={item.name}
-              className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow dark:bg-slate-800 sm:p-6"
-            >
-              <dt className="truncate text-sm font-medium text-gray-500 dark:text-slate-400">
-                {item.name}
-              </dt>
-              <dd className="mt-1 text-3xl font-semibold text-gray-900 dark:text-slate-300">
-                {item.stat}
-              </dd>
+          {q.data ? (
+            <div>
+              {q.data.ticketClasses.ticket_classes.map((item) => (
+                <div key={item.display_name} className="px-2 py-3 sm:p-4">
+                  <dt className="text-base font-bold">
+                    🎟️&nbsp;&nbsp;{item.display_name}
+                  </dt>
+                  <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                    <div className="flex items-baseline text-2xl font-semibold text-white">
+                      {item.quantity_sold}
+                      <span className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+                        su {item.quantity_total}
+                      </span>
+                    </div>
+
+                    <div className="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 md:mt-2 lg:mt-0">
+                      {Math.floor(
+                        (item.quantity_sold / item.quantity_total) * 100
+                      )}
+                      %
+                    </div>
+                  </dd>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div>Loading Eventbrite data...</div>
+          )}
         </dl>
         <a
           target="_blank"
