@@ -69,10 +69,11 @@ export const ProposalsTable = () => {
                             {proposal.duration}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <Link href={`/dashboard/proposals/${proposal.id}`}>
-                              <a className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
-                                Modifica
-                              </a>
+                            <Link
+                              href={`/dashboard/proposals/${proposal.id}`}
+                              className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                            >
+                              Modifica
                             </Link>
                           </td>
                         </tr>

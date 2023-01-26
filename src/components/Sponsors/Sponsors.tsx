@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const sponsors = [
   {
@@ -36,15 +37,15 @@ export const Sponsors = () => {
               key={href}
               className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1"
             >
-              <a target="_blank" rel="noreferrer" href={href} key={src}>
+              <Link target="_blank" rel="noreferrer" href={href} key={src}>
                 <Image
                   className="opacity-80 saturate-0 hover:opacity-100 hover:saturate-100 dark:opacity-90"
-                  width="64px"
-                  height="64px"
+                  width="64"
+                  height="64"
                   src={src}
                   alt={alt}
                 />
-              </a>
+              </Link>
             </div>
           ))}
         </div>

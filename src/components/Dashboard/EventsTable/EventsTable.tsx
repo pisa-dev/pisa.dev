@@ -75,15 +75,17 @@ export const EventsTable = () => {
                             {e.location}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <Link href={`/event/${e.slug}`}>
-                              <a className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-4">
-                                Guarda
-                              </a>
+                            <Link
+                              href={`/event/${e.slug}`}
+                              className="mr-4 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                            >
+                              Guarda
                             </Link>
-                            <Link href={`/dashboard/events/${e.slug}/edit`}>
-                              <a className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
-                                Modifica
-                              </a>
+                            <Link
+                              href={`/dashboard/events/${e.slug}/edit`}
+                              className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                            >
+                              Modifica
                             </Link>
                           </td>
                         </tr>

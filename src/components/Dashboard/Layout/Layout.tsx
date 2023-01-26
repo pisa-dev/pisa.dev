@@ -1,5 +1,5 @@
 import { FC, Fragment, MouseEvent } from "react";
-import Image from "next/future/image";
+import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -60,27 +60,25 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 justify-between">
                   <div className="flex">
-                    <Link href="/">
-                      <a className="flex">
-                        <div className="flex flex-shrink-0 items-center">
-                          <div className="block h-8 w-auto lg:hidden">
-                            <Image
-                              width="50px"
-                              height="50px"
-                              src="/logo2.svg"
-                              alt="pisa.dev"
-                            />
-                          </div>
-                          <div className="hidden h-auto w-auto lg:block">
-                            <Image
-                              width="200px"
-                              height="50px"
-                              src="/logo.svg"
-                              alt="pisa.dev"
-                            />
-                          </div>
+                    <Link href="/" className="flex">
+                      <div className="flex flex-shrink-0 items-center">
+                        <div className="block h-8 w-auto lg:hidden">
+                          <Image
+                            width="50"
+                            height="50"
+                            src="/logo2.svg"
+                            alt="pisa.dev"
+                          />
                         </div>
-                      </a>
+                        <div className="hidden h-auto w-auto lg:block">
+                          <Image
+                            width="200"
+                            height="50"
+                            src="/logo.svg"
+                            alt="pisa.dev"
+                          />
+                        </div>
+                      </div>
                     </Link>
                     <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                       {navigation.map(
@@ -113,8 +111,8 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
                           <span className="sr-only">Open user menu</span>
                           <Image
                             className="rounded-full"
-                            width="32px"
-                            height="32px"
+                            width="32"
+                            height="32"
                             src={
                               session.user.image ||
                               `https://ui-avatars.com/api/?name=${
@@ -204,8 +202,8 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
                     <div className="flex-shrink-0">
                       <Image
                         className="rounded-full"
-                        width="40px"
-                        height="40px"
+                        width="40"
+                        height="40"
                         src={
                           session.user.image ||
                           `https://ui-avatars.com/api/?name=${

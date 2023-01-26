@@ -81,10 +81,9 @@ const SurveyQuestionResultsPage: NextPage = () => {
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                           <Link
                             href={`/survey/${surveySlug}/by-question/${answer.questionId}`}
+                            className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-500"
                           >
-                            <a className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-500">
-                              Altre risposte
-                            </a>
+                            Altre risposte
                           </Link>
                         </td>
                       </tr>

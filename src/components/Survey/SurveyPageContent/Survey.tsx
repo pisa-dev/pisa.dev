@@ -84,8 +84,8 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
             <h1 className="text-3xl">
               Risposte registrate, grazie per aver partecipato!
             </h1>
-            <Link href="/">
-              <a className="underline">Torna alla homepage</a>
+            <Link href="/" className="underline">
+              Torna alla homepage{" "}
             </Link>
           </div>
         )}

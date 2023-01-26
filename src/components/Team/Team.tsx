@@ -75,7 +75,7 @@ const people = [
     // twitterUrl: "https://twitter.com/pitasiantonio",
     linkedinUrl: "https://www.linkedin.com/in/davide-rossi-030a73212",
     githubUrl: "https://github.com/daviderossi11",
-  }
+  },
 ];
 
 export const Team = () => {
@@ -104,8 +104,8 @@ export const Team = () => {
                 <div className="space-y-6">
                   <Image
                     objectFit="cover"
-                    height="100px"
-                    width="100px"
+                    height="100"
+                    width="100"
                     className="mx-auto rounded-full"
                     src={person.imageUrl}
                     alt=""

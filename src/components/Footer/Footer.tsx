@@ -54,14 +54,12 @@ export const Footer = () => {
         </div>
         <div>
           <Link href="https://vercel.com/?utm_source=pisa-dev&utm_campaign=oss">
-            <a>
-              <Image
-                width="212px"
-                height="44px"
-                src="/powered-by-vercel.svg"
-                alt="powered by Vercel"
-              />
-            </a>
+            <Image
+              width="212"
+              height="44"
+              src="/powered-by-vercel.svg"
+              alt="powered by Vercel"
+            />
           </Link>
         </div>
       </div>

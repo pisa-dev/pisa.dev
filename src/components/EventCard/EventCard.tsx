@@ -20,8 +20,8 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
     {event.imageUrl && (
       <div className="flex-shrink-0">
         <Image
-          width="1000px"
-          height="500px"
+          width="1000"
+          height="500"
           objectFit="cover"
           className="w-full"
           src={event.imageUrl}
@@ -44,15 +44,13 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
           <FaMapMarkerAlt />
           <p>{event.location}</p>
         </div>
-        <Link href={`/event/${event.slug}`}>
-          <a className="mt-4 block">
-            <p className="text-xl font-semibold text-gray-900 dark:text-slate-300">
-              {event.title}
-            </p>
-            <p className="mt-3 text-base text-gray-500 dark:text-slate-400">
-              {event.abstract}
-            </p>
-          </a>
+        <Link href={`/event/${event.slug}`} className="mt-4 block">
+          <p className="text-xl font-semibold text-gray-900 dark:text-slate-300">
+            {event.title}
+          </p>
+          <p className="mt-3 text-base text-gray-500 dark:text-slate-400">
+            {event.abstract}
+          </p>
         </Link>
       </div>
       <div className="align-center mt-6 flex flex-col gap-4">
