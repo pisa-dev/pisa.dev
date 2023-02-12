@@ -102,14 +102,15 @@ export const Team = () => {
                 className="rounded-lg bg-white bg-opacity-10 py-6 px-2 text-center"
               >
                 <div className="space-y-6">
-                  <Image
-                    objectFit="cover"
-                    height="100"
-                    width="100"
-                    className="mx-auto rounded-full"
-                    src={person.imageUrl}
-                    alt=""
-                  />
+                  <div className="relative w-[100px] h-[100px] mx-auto">
+                    <Image
+                      fill
+                      sizes="100px"
+                      className="rounded-full object-cover"
+                      src={person.imageUrl}
+                      alt=""
+                    />
+                  </div>
                   <div className="space-y-2">
                     <div className="space-y-1 text-lg font-medium leading-6">
                       <h3 className="text-white">{person.name}</h3>
