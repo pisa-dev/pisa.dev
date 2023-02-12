@@ -54,8 +54,12 @@ const JobOffersNewPage = () => {
         </h1>
         <p className="max-w-2xl text-sm text-gray-500 dark:text-slate-400">
           Le informazioni inserite verranno salvate e inoltrate al nostro{" "}
-          <Link target="_blank" href="https://t.me/pisajobs">
-            <a className="underline">canale Telegram dedicato</a>
+          <Link
+            target="_blank"
+            href="https://t.me/pisajobs"
+            className="underline"
+          >
+            canale Telegram dedicato
           </Link>
           .
         </p>

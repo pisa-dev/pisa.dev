@@ -14,9 +14,9 @@ export const Hero: FC<HeroProps> = ({ cta }) => {
           <div className="absolute inset-0">
             <Image
               priority
-              layout="fill"
-              objectFit="cover"
+              fill
               src="/hero.jpeg"
+              className="object-cover"
               alt="Conference crowd"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-800 mix-blend-multiply" />

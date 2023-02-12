@@ -9,8 +9,8 @@ export interface SpeakerInfoProps {
 export const SpeakerInfo: FC<SpeakerInfoProps> = ({ speaker }) => (
   <div className="flex items-center">
     <Image
-      height="36px"
-      width="36px"
+      height="36"
+      width="36"
       objectFit="cover"
       className="inline-block rounded-full"
       src={speaker.imageUrl}

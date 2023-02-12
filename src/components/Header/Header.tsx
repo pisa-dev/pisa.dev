@@ -60,16 +60,14 @@ export const Header = () => {
               <div className="flex w-full flex-1 items-center justify-center lg:items-stretch lg:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
-                    <a>
-                      <Image
-                        height="60px"
-                        width="200px"
-                        src="/logo.svg"
-                        alt="pisa.dev"
-                        title="Home"
-                        className="dark:drop-shadow-xl"
-                      />
-                    </a>
+                    <Image
+                      height="60"
+                      width="200"
+                      src="/logo.svg"
+                      alt="pisa.dev"
+                      title="Home"
+                      className="dark:drop-shadow-xl"
+                    />
                   </Link>
                 </div>
                 <div className="hidden items-center sm:ml-6 lg:flex">
@@ -80,19 +78,16 @@ export const Header = () => {
                         href={item.href}
                         target={item.external ? "_blank" : undefined}
                         rel="noopener noreferrer"
+                        className={classNames(
+                          item.current
+                            ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
+                            : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
+                          "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
+                        )}
+                        aria-current={item.current ? "page" : undefined}
                       >
-                        <a
-                          className={classNames(
-                            item.current
-                              ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
-                              : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
-                            "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.icon && <item.icon />}
-                          {item.name}
-                        </a>
+                        {item.icon && <item.icon />}
+                        {item.name}
                       </Link>
                     ))}
                   </div>

@@ -8,8 +8,9 @@ import "@fontsource/inter/variable.css";
 import "@/styles/globals.css";
 import Head from "next/head";
 import PlausibleProvider from "next-plausible";
+import { Session } from "next-auth";
 
-const MyApp: AppType = ({
+const MyApp: AppType<{ session: Session }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
@@ -62,7 +63,7 @@ const getBaseUrl = () => {
 };
 
 export default withTRPC<AppRouter>({
-  config({ ctx }) {
+  config() {
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
