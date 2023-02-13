@@ -18,12 +18,10 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
     }`}
   >
     {event.imageUrl && (
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 relative h-[250px]">
         <Image
-          width="1000"
-          height="500"
-          objectFit="cover"
-          className="w-full"
+          fill
+          className="object-cover"
           src={event.imageUrl}
           alt=""
         />
