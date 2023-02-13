@@ -1,6 +1,18 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { s3Upload } from "../s3";
+import { randomUUID } from "crypto";
+
+const imageUpload = async (img: string, key = randomUUID()) => {
+  try {
+    const blob = Buffer.from(img, 'base64url');
+
+    return await s3Upload(key, blob)
+  } catch (e) {
+    throw e;
+  }
+}
 
 const AdminEventPayload = z.object({
   slug: z.string(),
@@ -26,9 +38,15 @@ export const adminEventsRouter = createRouter()
         throw new TRPCError({ code: "NOT_FOUND" });
       }
 
+      const { imageUrl: rawImageUrl, ...request } = input.data;
+      const imageUrl = rawImageUrl && await imageUpload(rawImageUrl);
+
       await ctx.prisma.event.update({
         where: { id: input.id },
-        data: input.data,
+        data: {
+          ...request,
+          imageUrl,
+        },
       });
 
       if (ctx.next) {
@@ -36,20 +54,18 @@ export const adminEventsRouter = createRouter()
         await ctx.next.res.revalidate(`/event/${e.slug}`);
         await ctx.next.res.revalidate(`/`);
       }
-
-      // return await ctx.prisma.event.update({
-      // 	where: {
-      // 		id: input.id,
-      // 	},
-      // 	data: { },
-      // });
     },
   })
   .mutation("create", {
     input: z.object({ data: AdminEventPayload }),
     async resolve({ ctx, input }) {
+      const { imageUrl: rawImageUrl, ...request } = input.data;
+      const imageUrl = rawImageUrl && await imageUpload(rawImageUrl);
       const e = await ctx.prisma.event.create({
-        data: input.data,
+        data: {
+          ...request,
+          imageUrl,
+        }
       });
 
       if (ctx.next) {

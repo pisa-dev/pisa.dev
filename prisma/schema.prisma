@@ -131,8 +131,7 @@ model Event {
     eventbriteId String
     abstract     String    @db.Text
     description  String    @db.Text
-    // TODO: This should instead store the image URLs
-    imageUrl     String?   @db.LongText
+    imageUrl     String?   @db.Text
     speakers     Speaker[]
     unlisted     Boolean   @default(false)
 

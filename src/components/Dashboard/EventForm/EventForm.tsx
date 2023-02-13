@@ -2,7 +2,8 @@ import { Input } from "@/components/Form";
 import { Button } from "@/components/Form/Button";
 import { Textarea } from "@/components/Form/Textarea";
 import { EventWithSpeaker } from "@/server/router/events";
-import dayjs, { Dayjs } from "dayjs";
+import { trpc } from "@/utils/trpc";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
@@ -16,7 +17,7 @@ export interface EventFormProps {
 
 /* TODO: The upload mechanism should stay in a single component.
  * Note: This function should be local.
- */ 
+ */
 export const fileToBase64 = (
   file: File
 ): Promise<string | ArrayBuffer | null> =>
@@ -33,6 +34,19 @@ export const fileToBase64 = (
  * TODO: Remove this for a custom and more flexible widget
  */
 const dateFormatter = (d: Date) => dayjs(d).format("YYYY-MM-DDTHH:mm");
+
+const imageUpload = async (b: Blob) => {
+  const data = new FormData();
+  data.append('key', 'test');
+  data.append('body', b);
+
+  const res = await fetch("/api/upload", {
+    method: "POST",
+    body: data,
+  });
+
+  return res.text();
+};
 
 export const EventForm: FC<EventFormProps> = ({
   inputValues,
@@ -219,7 +233,8 @@ export const EventForm: FC<EventFormProps> = ({
                           if (!file) {
                             field.onChange(v);
                           } else {
-                            field.onChange(await fileToBase64(file));
+                            const s = await imageUpload(file);
+                            field.onChange(s);
                           }
                         }}
                       />
