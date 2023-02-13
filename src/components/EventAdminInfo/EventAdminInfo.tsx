@@ -28,7 +28,7 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
                     🎟️&nbsp;&nbsp;{item.display_name}
                   </dt>
                   <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                    <div className="flex items-baseline text-2xl font-semibold text-white">
+                    <div className="flex items-baseline text-2xl font-semibold dark:text-white">
                       {item.quantity_sold}
                       <span className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-300">
                         su {item.quantity_total}
