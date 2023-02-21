@@ -8,9 +8,9 @@ const sponsors = [
     alt: "Pointer Podcast",
   },
   {
-    href: "https://www.superheroesvalley.fun/",
-    src: "/superheroesvalley.png",
-    alt: "Superheroes Valley",
+    href: "https://superherovalley.fun/",
+    src: "/superherovalley.png",
+    alt: "Superhero Valley",
   },
   {
     href: "https://www.schrodinger-hat.it/",
