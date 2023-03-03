@@ -34,7 +34,7 @@ export const Avatar: FC<AvatarProps> = ({
         <div className="aspect-square overflow-hidden rounded-full">
           <img className="object-cover" src={src} />
         </div>
-        <div className="absolute bottom-0 flex w-full justify-evenly rounded-2xl bg-white py-1 px-3">
+        <div className="absolute bottom-0 flex w-full justify-evenly rounded-2xl bg-white py-2 px-1">
           <SocialLink href={website}>
             <AiFillHome />
           </SocialLink>
@@ -50,10 +50,10 @@ export const Avatar: FC<AvatarProps> = ({
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        <Text bright size="large" weight="semibold">
+        <Text bright size="medium" weight="semibold">
           {name}
         </Text>
-        <Text size="medium">{title}</Text>
+        <Text size="small">{title}</Text>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export const Section: FC<SectionProps> = ({
 }) => {
   return (
     <section
-      className={`flex flex-col px-6 py-12 ${
+      className={`mx-auto flex max-w-md flex-col px-6 py-12 ${
         center ? "text-center" : ""
       } ${getBackground(background)}`}
     >

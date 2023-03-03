@@ -1,5 +1,6 @@
 import { Text } from "../Text";
 import { Accordion } from "../Accordion";
+import { Section } from "../Section";
 
 const faqs = [
   {
@@ -36,11 +37,11 @@ export const FAQSection = () => {
   });
 
   return (
-    <div className="mb-10 px-6">
+    <Section>
       <Text as="h2" size="larger" weight="bold" bright>
         Frequently asked questions
       </Text>
       <Accordion elements={elements} />
-    </div>
+    </Section>
   );
 };

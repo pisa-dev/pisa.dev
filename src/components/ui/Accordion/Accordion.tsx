@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Disclosure } from "@headlessui/react";
 import { Text } from "../Text";
-import { AiFillCaretRight, AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretRight } from "react-icons/ai";
 
 interface AccordionProps {
   elements: {
@@ -25,7 +25,11 @@ export const Accordion: FC<AccordionProps> = ({ elements }) => {
                     className="ml-6 flex h-7 items-center"
                     weight="semibold"
                   >
-                    {open ? <AiFillCaretDown /> : <AiFillCaretRight />}
+                    <AiFillCaretRight
+                      className={`${
+                        open ? "rotate-90" : ""
+                      } transition-transform ease-in-out`}
+                    />
                   </Text>
                 </Disclosure.Button>
               </dt>

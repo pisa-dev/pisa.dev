@@ -48,7 +48,7 @@ interface StatisticsProps {}
 
 export const Statistics: FC<StatisticsProps> = ({}) => {
   return (
-    <div className="mt-20 grid w-full grid-cols-2 grid-rows-2 gap-8">
+    <div className="mt-20 grid w-full grid-cols-2 grid-rows-2 gap-4">
       <Panel icon={<IconTicket />} color="pink" />
       <Panel icon={<IconMicrophone />} color="orange" />
       <Panel icon={<IconGroup />} color="purple" />
