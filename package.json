@@ -22,6 +22,7 @@
     "@trpc/next": "^9.25.3",
     "@trpc/react": "^9.25.3",
     "@trpc/server": "^9.25.3",
+    "classnames": "^2.3.2",
     "dayjs": "^1.11.5",
     "next": "^13.1.5",
     "next-auth": "^4.10.3",
