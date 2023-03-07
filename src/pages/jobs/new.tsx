@@ -316,7 +316,7 @@ const JobOffersNewPage = () => {
                               </Tab.Panel>
                               <Tab.Panel className="-m-0.5 rounded-lg p-0.5">
                                 <div className="border-b dark:border-slate-700">
-                                  <div className="prose prose-sm prose-slate mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 dark:prose-invert">
+                                  <div className="prose prose-sm prose-slate whitespace-pre-line mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 dark:prose-invert">
                                     {values.description ? (
                                       <p>{values.description}</p>
                                     ) : (
