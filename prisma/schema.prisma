@@ -148,6 +148,7 @@ model JobOffer {
     remote      RemoteKind
     description String     @db.Text
     location    String?    @db.Text
+    createdAt   DateTime   @unique @default(now())
 
     telegramMessageID     BigInt?
     telegramMessageChatID String?
