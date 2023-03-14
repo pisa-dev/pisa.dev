@@ -3,72 +3,105 @@ import { z } from "zod";
 import { JobOffer, JobOfferTags, RemoteKind } from "@prisma/client";
 import fetch from "node-fetch";
 
-type JobOfferWithTags = JobOffer & {
+export type JobOfferWithTags = JobOffer & {
   tags: JobOfferTags[];
 };
 
-export const jobsRouter = createRouter().mutation("insert", {
-  input: z.object({
-    data: z.object({
-      title: z.string(),
-      description: z.string(),
-      location: z.string().optional(),
-      salaryRange: z.string(),
-      companyName: z.string(),
-      offerURL: z.string(),
-      remote: z.nativeEnum(RemoteKind),
+export const jobsRouter = createRouter()
+  .query("get-page", {
+    input: z.object({
+      limit: z.number().min(1).max(100).nullish(),
+      cursor: z.date().nullish()
     }),
-    tags: z.array(z.string()),
-  }),
-  async resolve({ ctx, input }) {
-    const tags = input.tags
-      .map((t) => t.trim())
-      .filter((t) => t && t.length > 0);
+    async resolve({ ctx, input }) {
+      const limit = input.limit ?? 20;
+      const { cursor } = input;
 
-    // create new tags
-    await ctx.prisma.jobOfferTags.createMany({
-      data: tags.map((t) => ({
-        tag: normalizeTag(t),
-        tagPretty: normalizeTagPretty(t),
-      })),
-      skipDuplicates: true,
-    });
-
-    // fetch from db tags (both old and just created)
-    const normalizedTags = tags.map((t) => normalizeTag(t));
-    const dbTags = await ctx.prisma.jobOfferTags.findMany({
-      select: { id: true },
-      where: {
-        tag: { in: normalizedTags },
-      },
-    });
-
-    const offer = await ctx.prisma.jobOffer.create({
-      data: {
-        ...input.data,
-        tags: {
-          connect: dbTags,
+      const items = await ctx.prisma.jobOffer.findMany({
+        include: {
+          tags: true,
         },
-      },
-      include: { tags: true },
-    });
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: limit + 1,
+        cursor: cursor ? { createdAt: cursor } : undefined,
+      });
 
-    const telegramMsg = await sendTelegramMessage(offer);
+      let nextCursor: typeof cursor | undefined = undefined;
+      if (items.length > limit) {
+        const nextItem = items.pop()
+        nextCursor = nextItem!.createdAt;
+      }
+      return {
+        items,
+        nextCursor,
+      };
 
-    const offerWithTelegram = await ctx.prisma.jobOffer.update({
-      data: {
-        telegramMessageID: telegramMsg.message_id,
-        telegramMessageChatID: telegramMsg.chat.username,
-      },
-      where: { id: offer.id },
-      include: {
-        tags: true,
-      },
-    });
+    }
+  })
+  .mutation("insert", {
+    input: z.object({
+      data: z.object({
+        title: z.string(),
+        description: z.string(),
+        location: z.string().optional(),
+        salaryRange: z.string(),
+        companyName: z.string(),
+        offerURL: z.string(),
+        remote: z.nativeEnum(RemoteKind),
+      }),
+      tags: z.array(z.string()),
+    }),
+    async resolve({ ctx, input }) {
+      const tags = input.tags
+        .map((t) => t.trim())
+        .filter((t) => t && t.length > 0);
 
-    return offerWithTelegram;
-  },
-});
+      // create new tags
+      await ctx.prisma.jobOfferTags.createMany({
+        data: tags.map((t) => ({
+          tag: normalizeTag(t),
+          tagPretty: normalizeTagPretty(t),
+        })),
+        skipDuplicates: true,
+      });
+
+      // fetch from db tags (both old and just created)
+      const normalizedTags = tags.map((t) => normalizeTag(t));
+      const dbTags = await ctx.prisma.jobOfferTags.findMany({
+        select: { id: true },
+        where: {
+          tag: { in: normalizedTags },
+        },
+      });
+
+      const offer = await ctx.prisma.jobOffer.create({
+        data: {
+          ...input.data,
+          tags: {
+            connect: dbTags,
+          },
+        },
+        include: { tags: true },
+      });
+
+      const telegramMsg = await sendTelegramMessage(offer);
+
+      const offerWithTelegram = await ctx.prisma.jobOffer.update({
+        data: {
+          telegramMessageID: telegramMsg.message_id,
+          telegramMessageChatID: telegramMsg.chat.username,
+        },
+        where: { id: offer.id },
+        include: {
+          tags: true,
+        },
+      });
+
+      return offerWithTelegram;
+    },
+  });
 
 const sendTelegramMessage = async (offer: JobOfferWithTags) => {
   const res = await fetch(

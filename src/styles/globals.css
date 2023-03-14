@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-pink-500 to-purple-600 dark:from-pink-400 dark:to-purple-500;
+  }
+}
