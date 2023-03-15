@@ -1,11 +1,11 @@
 import { FC, FormEvent, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { usePlausible } from "next-plausible";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 
 export const NewsletterBanner: FC = () => {
   const [email, setEmail] = useState("");
-  const newsletterMutation = trpc.useMutation("newsletter.subscribe");
+  const newsletterMutation = api.newsletter.subscribe.useMutation();
   const plausible = usePlausible();
 
   const onFormSubmit = (e: FormEvent) => {

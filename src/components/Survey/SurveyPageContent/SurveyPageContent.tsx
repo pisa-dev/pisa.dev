@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
@@ -12,7 +12,7 @@ export interface SurveyPageContentProps {
 
 export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
   const router = useRouter();
-  const q = trpc.useQuery(["survey.get-survey", { id }]);
+  const q = api.survey.getSurvey.useQuery({ id });
 
   useEffect(() => {
     if (!q.data && !q.isLoading && !q.isError) {

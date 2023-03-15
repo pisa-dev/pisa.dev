@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { StepsProgress } from "@/components/StepsProgress";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import { questionElementByKind } from "../SurveyQuestion";
 import { Survey as SurveyT, SurveyQuestion } from "@prisma/client";
 import Confetti from "react-confetti";
@@ -14,7 +14,7 @@ export interface SurveyProps {
 
 export const Survey: FC<SurveyProps> = ({ survey }) => {
   const [currentStepIdx, setCurrentStepIdx] = useState(0);
-  const addAnswerMut = trpc.useMutation("survey.add-answer");
+  const addAnswerMut = api.survey.addAnswer.useMutation();
   const correlationId = useSurveyCorrelationId();
   const [answerStore, setAnswersStore] = useLocalStorage<{
     [key: string]: string;

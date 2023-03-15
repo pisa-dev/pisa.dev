@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
 import requestIp from "request-ip";
-import { prisma } from "@/server/db/client";
+import { prisma } from "~/server/db";
 
 const outboundJobOffer = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = req.query.id as string;

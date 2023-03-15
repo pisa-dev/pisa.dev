@@ -1,5 +1,5 @@
 import { Footer } from "@/components/Footer";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import { SurveyAnswer, SurveyQuestionKind } from "@prisma/client";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -14,7 +14,7 @@ const SurveyResultsPage: NextPage = () => {
     return <div>No survey slug</div>;
   }
 
-  const q = trpc.useQuery(["survey.get-survey-results", { id: slug }]);
+  const q = api.survey.getSurveyResults.useQuery({ id: slug });
   if (q.isLoading) {
     return <div>Loading...</div>;
   }

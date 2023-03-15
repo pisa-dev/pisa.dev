@@ -1,5 +1,5 @@
 import { Footer } from "@/components/Footer";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import { SurveyAnswer, SurveyQuestion } from "@prisma/client";
 import { NextPage } from "next";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from "victory";
 const SurveyQuestionResultsPage: NextPage = () => {
   const router = useRouter();
   const questionId = router.query.questionId as string;
-  const q = trpc.useQuery(["survey.get-question-by-id", { questionId }]);
+  const q = api.survey.getQuestionById.useQuery({ questionId });
 
   if (q.isLoading) {
     return <div>Loading...</div>;

@@ -13,18 +13,21 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from "next";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { trpc } from "@/utils/trpc";
-import { appRouter } from "@/server/router";
-import { createContextInner } from "@/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { createInnerTRPCContext } from "~/server/api/trpc";
+import { api } from "@/utils/api";
+import { appRouter } from "@/server/api/root";
 import superjson from "superjson";
 
 const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   slug,
 }) => {
-  const q = trpc.useQuery(["events.get-by-slug", { slug: slug }], {
-    staleTime: Infinity,
-  });
+  const q = api.events.getBySlug.useQuery(
+    { slug: slug },
+    {
+      staleTime: Infinity,
+    }
+  );
   if (!q.data) {
     return <div>loading</div>;
   }
@@ -93,9 +96,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const ssg = createSSGHelpers({
+  const ssg = createProxySSGHelpers({
     router: appRouter,
-    ctx: await createContextInner({}),
+    ctx: createInnerTRPCContext({
+      session: null,
+    }),
     transformer: superjson,
   });
   const slug = context.params?.slug as string;
@@ -105,9 +110,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 
-  const event = await ssg.fetchQuery("events.get-by-slug", {
-    slug,
-  });
+  const event = await ssg.events.getBySlug.fetch({ slug });
   if (!event) {
     return {
       notFound: true,
