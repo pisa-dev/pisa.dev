@@ -11,12 +11,14 @@ interface EventTable {
 }
 
 interface Database {
-  events: EventTable;
+  Event: EventTable;
 }
 
 const db = new Kysely<Database>({
   dialect: new PlanetScaleDialect({
-    url: env.DATABASE_URL,
+    host: env.PSCALE_HOST,
+    username: env.PSCALE_USERNAME,
+    password: env.PSCALE_PASSWORD,
   }),
 });
 
@@ -38,18 +40,16 @@ const getSlug = (req: NextApiRequest) => {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const slug = getSlug(req);
   if (!slug) {
-    res.status(404).send("Not found");
-    return;
+    return new Response("No slug", { status: 400 });
   }
 
   const event = await db
-    .selectFrom("events")
+    .selectFrom("Event")
     .select(["title"])
     .where("slug", "=", slug)
     .executeTakeFirst();
   if (!event) {
-    res.status(404).send("Not found");
-    return;
+    return new Response("Not found", { status: 404 });
   }
 
   return new ImageResponse(
@@ -65,7 +65,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           backgroundColor: "white",
         }}
       >
-        {/* <span>{event.title}</span> */}
+        <span>{event.title}</span>
       </div>
     ),
     {

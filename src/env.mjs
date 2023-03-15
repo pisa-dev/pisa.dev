@@ -27,6 +27,9 @@ const server = z.object({
   TELEGRAM_JOBS_CHAT_ID: z.string().optional(),
   LISTMONK_USERNAME: z.string().optional(),
   LISTMONK_PASSWORD: z.string().optional(),
+  PSCALE_HOST: z.string().optional(),
+  PSCALE_USERNAME: z.string().optional(),
+  PSCALE_PASSWORD: z.string().optional(),
 });
 
 /**
@@ -58,6 +61,9 @@ const processEnv = {
   TELEGRAM_JOBS_CHAT_ID: process.env.TELEGRAM_JOBS_CHAT_ID,
   LISTMONK_USERNAME: process.env.LISTMONK_USERNAME,
   LISTMONK_PASSWORD: process.env.LISTMONK_PASSWORD,
+  PSCALE_HOST: process.env.PSCALE_HOST,
+  PSCALE_USERNAME: process.env.PSCALE_USERNAME,
+  PSCALE_PASSWORD: process.env.PSCALE_PASSWORD,
 };
 
 // Don't touch the part below
