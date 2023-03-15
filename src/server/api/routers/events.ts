@@ -1,15 +1,17 @@
-import { createRouter } from "./context";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { Event, Speaker } from "@prisma/client";
 
 export type EventWithSpeaker = Event & { speakers: Speaker[] };
 
-export const eventsRouter = createRouter()
-  .query("get-by-slug", {
-    input: z.object({
-      slug: z.string(),
-    }),
-    async resolve({ ctx, input }) {
+export const eventsRouter = createTRPCRouter({
+  getBySlug: publicProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       return await ctx.prisma.event.findFirst({
         where: {
           slug: input.slug,
@@ -18,13 +20,16 @@ export const eventsRouter = createRouter()
           speakers: true,
         },
       });
-    },
-  })
-  .query("get-all", {
-    input: z.object({
-      unlisted: z.boolean(),
-    }).optional(),
-    async resolve({ ctx, input }) {
+    }),
+  getAll: publicProcedure
+    .input(
+      z
+        .object({
+          unlisted: z.boolean(),
+        })
+        .optional()
+    )
+    .query(async ({ ctx, input }) => {
       const upcoming: EventWithSpeaker[] = await ctx.prisma.event.findMany({
         include: {
           speakers: true,
@@ -59,5 +64,5 @@ export const eventsRouter = createRouter()
         upcoming,
         past,
       };
-    },
-  });
+    }),
+});

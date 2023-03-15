@@ -1,19 +1,22 @@
-import { createRouter } from "./context";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { JobOffer, JobOfferTags, RemoteKind } from "@prisma/client";
 import fetch from "node-fetch";
+import { env } from "~/env.mjs";
 
 export type JobOfferWithTags = JobOffer & {
   tags: JobOfferTags[];
 };
 
-export const jobsRouter = createRouter()
-  .query("get-page", {
-    input: z.object({
-      limit: z.number().min(1).max(100).nullish(),
-      cursor: z.date().nullish()
-    }),
-    async resolve({ ctx, input }) {
+export const jobsRouter = createTRPCRouter({
+  getPage: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).nullish(),
+        cursor: z.date().nullish(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       const limit = input.limit ?? 20;
       const { cursor } = input;
 
@@ -22,7 +25,7 @@ export const jobsRouter = createRouter()
           tags: true,
         },
         orderBy: {
-          createdAt: 'desc',
+          createdAt: "desc",
         },
         take: limit + 1,
         cursor: cursor ? { createdAt: cursor } : undefined,
@@ -30,30 +33,31 @@ export const jobsRouter = createRouter()
 
       let nextCursor: typeof cursor | undefined = undefined;
       if (items.length > limit) {
-        const nextItem = items.pop()
+        const nextItem = items.pop();
         nextCursor = nextItem!.createdAt;
       }
       return {
         items,
         nextCursor,
       };
-
-    }
-  })
-  .mutation("insert", {
-    input: z.object({
-      data: z.object({
-        title: z.string(),
-        description: z.string(),
-        location: z.string().optional(),
-        salaryRange: z.string(),
-        companyName: z.string(),
-        offerURL: z.string(),
-        remote: z.nativeEnum(RemoteKind),
-      }),
-      tags: z.array(z.string()),
     }),
-    async resolve({ ctx, input }) {
+
+  insert: publicProcedure
+    .input(
+      z.object({
+        data: z.object({
+          title: z.string(),
+          description: z.string(),
+          location: z.string().optional(),
+          salaryRange: z.string(),
+          companyName: z.string(),
+          offerURL: z.string(),
+          remote: z.nativeEnum(RemoteKind),
+        }),
+        tags: z.array(z.string()),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       const tags = input.tags
         .map((t) => t.trim())
         .filter((t) => t && t.length > 0);
@@ -100,19 +104,19 @@ export const jobsRouter = createRouter()
       });
 
       return offerWithTelegram;
-    },
-  });
+    }),
+});
 
 const sendTelegramMessage = async (offer: JobOfferWithTags) => {
   const res = await fetch(
-    `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`,
+    `https://api.telegram.org/bot${env.TELEGRAM_TOKEN}/sendMessage`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        chat_id: process.env.TELEGRAM_JOBS_CHAT_ID,
+        chat_id: env.TELEGRAM_JOBS_CHAT_ID,
         text: renderText(offer).slice(0, 4096),
         reply_markup: {
           inline_keyboard: [
@@ -163,32 +167,31 @@ const renderText = (o: JobOfferWithTags): string => {
 };
 
 const renderRemoteEnum = (r: RemoteKind): string =>
-({
-  [RemoteKind.full]: "Sì, full time",
-  [RemoteKind.partial]: "Parziale / ibrido",
-  [RemoteKind.no]: "No",
-}[r]);
+  ({
+    [RemoteKind.full]: "Sì, full time",
+    [RemoteKind.partial]: "Parziale / ibrido",
+    [RemoteKind.no]: "No",
+  }[r]);
 
 const renderJobOfferTags = (tags: JobOfferTags[]): string =>
   tags.map((t) => telegramEscapeTag(t.tagPretty)).join(" ");
 
-
 const telegramEscapeTag = (tag: string): string => {
-  tag = tag.trim()
+  tag = tag.trim();
 
-  const checkSharp = /(c|f)#/gi
+  const checkSharp = /(c|f)#/gi;
   for (let i = tag.search(checkSharp); i !== -1; i = tag.search(checkSharp))
-    tag = tag.slice(0, i + 1) + 'Sharp' + tag.slice(i + 2)
+    tag = tag.slice(0, i + 1) + "Sharp" + tag.slice(i + 2);
 
-  tag = tag.replaceAll(/[\/\ @#]/g, '_')
+  tag = tag.replaceAll(/[\/\ @#]/g, "_");
 
-  return '#' + (tag[0] == '_' ? tag.slice(1) : tag)
-}
+  return "#" + (tag[0] == "_" ? tag.slice(1) : tag);
+};
 
 const normalizeTag = (t: string): string => {
-  t = t.trim().toLowerCase()
-  while (t[0] === '#') t = t.slice(1)
-  return t.trim()
+  t = t.trim().toLowerCase();
+  while (t[0] === "#") t = t.slice(1);
+  return t.trim();
 };
 
 const normalizeTagPretty = (t: string): string => t.trim();
