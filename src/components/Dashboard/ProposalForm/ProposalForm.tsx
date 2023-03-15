@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import ReactMarkdown from "react-markdown";
 
 type FormValues = {
@@ -27,7 +27,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
   } = useForm<FormValues>({ defaultValues });
   const router = useRouter();
 
-  const mutation = trpc.useMutation(["proposals.upsert"]);
+  const mutation = api.proposals.upsert.useMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!eventId) {
       // create new event

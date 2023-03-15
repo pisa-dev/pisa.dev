@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { env } from "~/env.mjs";
 
 export async function registerUser(email: string) {
   // List of ids to subscribe new users to.
@@ -8,8 +9,8 @@ export async function registerUser(email: string) {
 
   const url = "https://mailinglist.pisa.dev/api/subscribers";
 
-  const username = process.env.LISTMONK_USERNAME;
-  const password = process.env.LISTMONK_PASSWORD;
+  const username = env.LISTMONK_USERNAME;
+  const password = env.LISTMONK_PASSWORD;
 
   if (!username || !password) {
     throw new Error("missing listmonk credentials");

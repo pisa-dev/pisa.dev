@@ -1,5 +1,5 @@
 import { Footer } from "@/components/Footer";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import { SurveyQuestionKind, SurveyAnswer } from "@prisma/client";
 import { NextPage } from "next";
 import Link from "next/link";
@@ -10,10 +10,10 @@ const SurveyQuestionResultsPage: NextPage = () => {
   const router = useRouter();
   const correlationId = router.query.correlationId as string;
   const surveySlug = router.query.slug as string;
-  const q = trpc.useQuery([
-    "survey.get-answers-by-correlation-id",
-    { correlationId, surveyId: surveySlug },
-  ]);
+  const q = api.survey.getAnswersByCorrelationId.useQuery({
+    correlationId,
+    surveyId: surveySlug,
+  });
 
   if (q.isLoading) {
     return <div>Loading...</div>;

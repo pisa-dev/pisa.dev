@@ -1,13 +1,15 @@
-import { createRouter } from "./context";
+import { adminProcedure, createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
-export const surveyRouter = createRouter()
-  .query("get-survey", {
-    input: z.object({
-      id: z.string(),
-    }),
-    async resolve({ ctx, input }) {
+export const surveyRouter = createTRPCRouter({
+  getSurvey: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       return await ctx.prisma.survey.findFirst({
         where: {
           id: input.id,
@@ -20,18 +22,15 @@ export const surveyRouter = createRouter()
           },
         },
       });
-    },
-  })
-  .query("get-survey-results", {
-    input: z.object({
-      id: z.string(),
     }),
-    async resolve({ ctx, input }) {
-      // check permission
-      if (!ctx.session?.user.admin) {
-        throw new TRPCError({ code: "UNAUTHORIZED" });
-      }
 
+  getSurveyResults: adminProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       return await ctx.prisma.survey.findFirst({
         where: {
           id: input.id,
@@ -53,18 +52,15 @@ export const surveyRouter = createRouter()
           },
         },
       });
-    },
-  })
-  .query("get-question-by-id", {
-    input: z.object({
-      questionId: z.string(),
     }),
-    async resolve({ ctx, input }) {
-      // check permission
-      if (!ctx.session?.user.admin) {
-        throw new TRPCError({ code: "UNAUTHORIZED" });
-      }
 
+  getQuestionById: adminProcedure
+    .input(
+      z.object({
+        questionId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       return await ctx.prisma.surveyQuestion.findFirst({
         where: {
           id: input.questionId,
@@ -79,19 +75,16 @@ export const surveyRouter = createRouter()
           },
         },
       });
-    },
-  })
-  .query("get-answers-by-correlation-id", {
-    input: z.object({
-      surveyId: z.string(),
-      correlationId: z.string(),
     }),
-    async resolve({ ctx, input }) {
-      // check permission
-      if (!ctx.session?.user.admin) {
-        throw new TRPCError({ code: "UNAUTHORIZED" });
-      }
 
+  getAnswersByCorrelationId: adminProcedure
+    .input(
+      z.object({
+        surveyId: z.string(),
+        correlationId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
       return await ctx.prisma.surveyAnswer.findMany({
         where: {
           correlationId: input.correlationId,
@@ -103,18 +96,20 @@ export const surveyRouter = createRouter()
           question: true,
         },
       });
-    },
-  })
-  .mutation("add-answer", {
-    input: z.object({
-      id: z.string().optional(),
-      data: z.object({
-        questionId: z.string(),
-        answer: z.string(),
-        correlationId: z.string(),
-      }),
     }),
-    async resolve({ ctx, input }) {
+
+  addAnswer: publicProcedure
+    .input(
+      z.object({
+        id: z.string().optional(),
+        data: z.object({
+          questionId: z.string(),
+          answer: z.string(),
+          correlationId: z.string(),
+        }),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       if (!input.id) {
         return await ctx.prisma.surveyAnswer.create({
           data: input.data,
@@ -136,5 +131,5 @@ export const surveyRouter = createRouter()
           });
         }
       }
-    },
-  });
+    }),
+});

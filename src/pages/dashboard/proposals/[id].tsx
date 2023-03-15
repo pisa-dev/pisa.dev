@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ProposalForm } from "@/components/Dashboard/ProposalForm";
 import { Layout } from "@/components/Dashboard/Layout";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 
 const ProposalPage = () => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const ProposalPage = () => {
     return <div>Invalid event id</div>;
   }
 
-  const q = trpc.useQuery(["proposals.getById", { id: router.query.id }]);
+  const q = api.proposals.getById.useQuery({ id: router.query.id });
 
   if (q.isLoading) {
     return <p>Loading...</p>;

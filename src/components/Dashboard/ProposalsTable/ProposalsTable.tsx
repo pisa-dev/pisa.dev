@@ -1,9 +1,9 @@
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import Link from "next/link";
 import { ProposalsTableEmpty } from "./ProposalsTableEmpty";
 
 export const ProposalsTable = () => {
-  const q = trpc.useQuery(["proposals.listMine"]);
+  const q = api.proposals.listMine.useQuery();
 
   if (!q.data) {
     return <p>Loading...</p>;

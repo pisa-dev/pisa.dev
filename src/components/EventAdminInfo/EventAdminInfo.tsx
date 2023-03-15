@@ -1,17 +1,14 @@
 import { FC } from "react";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 
 export interface EventAdminInfoProps {
   eventId: string;
 }
 
 export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
-  const q = trpc.useQuery([
-    "admin.eventbrite.info",
-    {
-      id: eventId,
-    },
-  ]);
+  const q = api.admin.eventbrite.info.useQuery({
+    id: eventId,
+  });
 
   return (
     <div className="rounded-lg px-4 py-6 dark:bg-slate-700 dark:text-slate-300">

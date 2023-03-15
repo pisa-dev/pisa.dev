@@ -1,17 +1,20 @@
 import { EventForm } from "@/components/Dashboard/EventForm/EventForm";
 import { Layout } from "@/components/Dashboard/Layout";
-import { EventWithSpeaker } from "@/server/router/events";
-import { trpc } from "@/utils/trpc";
+import { EventWithSpeaker } from "~/server/api/routers/events";
+import { api } from "@/utils/api";
 import { useRouter } from "next/router";
 import { SubmitHandler } from "react-hook-form";
 
 export const EditEventPage = () => {
   const router = useRouter();
   const slug = router.query.slug as string;
-  const mutation = trpc.useMutation(["admin.events.update"]);
-  const query = trpc.useQuery(["events.get-by-slug", { slug }], {
-    cacheTime: 0,
-  });
+  const mutation = api.admin.events.update.useMutation();
+  const query = api.events.getBySlug.useQuery(
+    { slug },
+    {
+      cacheTime: 0,
+    }
+  );
 
   if (query.isLoading) {
     return <p>Loading...</p>;

@@ -12,24 +12,24 @@ import { NewsletterBanner } from "@/components/Newsletter";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
 import { EventsList } from "@/components/EventsList";
-import { appRouter } from "@/server/router";
-import { createContextInner } from "@/server/router/context";
-import { createSSGHelpers } from "@trpc/react/ssg";
 import superjson from "superjson";
-import { trpc } from "@/utils/trpc";
-
-const getHomepageEventsQ: ["events.get-all", { unlisted: false }] = [
-  "events.get-all",
-  { unlisted: false },
-];
+import { api } from "@/utils/api";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { createInnerTRPCContext } from "~/server/api/trpc";
+import { appRouter } from "~/server/api/root";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
-  const q = trpc.useQuery(getHomepageEventsQ, {
-    staleTime: Infinity,
-  });
+  const q = api.events.getAll.useQuery(
+    {
+      unlisted: false,
+    },
+    {
+      staleTime: Infinity,
+    }
+  );
 
   if (!q.data) {
     return <div>loading</div>;
@@ -92,13 +92,13 @@ const Home: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const ssg = createSSGHelpers({
+  const ssg = createProxySSGHelpers({
     router: appRouter,
-    ctx: await createContextInner({}),
+    ctx: createInnerTRPCContext({ session: null }),
     transformer: superjson,
   });
 
-  await ssg.fetchQuery(...getHomepageEventsQ);
+  await ssg.events.getAll.prefetch({ unlisted: false });
 
   // Make sure to return { props: { trpcState: ssg.dehydrate() } }
   return {

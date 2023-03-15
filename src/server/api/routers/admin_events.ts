@@ -1,4 +1,4 @@
-import { createRouter } from "./context";
+import { createTRPCRouter, adminProcedure } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
@@ -14,13 +14,15 @@ const AdminEventPayload = z.object({
   unlisted: z.boolean(),
 });
 
-export const adminEventsRouter = createRouter()
-  .mutation("update", {
-    input: z.object({
-      id: z.string(),
-      data: AdminEventPayload.partial(),
-    }),
-    async resolve({ ctx, input }) {
+export const adminEventsRouter = createTRPCRouter({
+  update: adminProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        data: AdminEventPayload.partial(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
       const e = await ctx.prisma.event.findFirst({ where: { id: input.id } });
       if (!e) {
         throw new TRPCError({ code: "NOT_FOUND" });
@@ -32,7 +34,7 @@ export const adminEventsRouter = createRouter()
       });
 
       if (ctx.next) {
-       // ISR revalidation
+        // ISR revalidation
         await ctx.next.res.revalidate(`/event/${e.slug}`);
         await ctx.next.res.revalidate(`/`);
       }
@@ -43,21 +45,21 @@ export const adminEventsRouter = createRouter()
       // 	},
       // 	data: { },
       // });
-    },
-  })
-  .mutation("create", {
-    input: z.object({ data: AdminEventPayload }),
-    async resolve({ ctx, input }) {
+    }),
+
+  create: adminProcedure
+    .input(z.object({ data: AdminEventPayload }))
+    .mutation(async ({ ctx, input }) => {
       const e = await ctx.prisma.event.create({
         data: input.data,
       });
 
       if (ctx.next) {
-       // ISR revalidation
+        // ISR revalidation
         await ctx.next.res.revalidate(`/event/${e.slug}`);
         await ctx.next.res.revalidate(`/`);
       }
 
       return e;
-    },
-  });
+    }),
+});

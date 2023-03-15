@@ -1,8 +1,8 @@
 import { Input } from "@/components/Form";
 import { Button } from "@/components/Form/Button";
 import { Textarea } from "@/components/Form/Textarea";
-import { EventWithSpeaker } from "@/server/router/events";
-import dayjs, { Dayjs } from "dayjs";
+import { EventWithSpeaker } from "~/server/api/routers/events";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
@@ -16,7 +16,7 @@ export interface EventFormProps {
 
 /* TODO: The upload mechanism should stay in a single component.
  * Note: This function should be local.
- */ 
+ */
 export const fileToBase64 = (
   file: File
 ): Promise<string | ArrayBuffer | null> =>

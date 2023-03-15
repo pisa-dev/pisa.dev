@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
-import { EventWithSpeaker } from "@/server/router/events";
+import { EventWithSpeaker } from "~/server/api/routers/events";
 
 export interface EventCardProps {
   event: EventWithSpeaker;
@@ -18,13 +18,8 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
     }`}
   >
     {event.imageUrl && (
-      <div className="flex-shrink-0 relative h-[250px]">
-        <Image
-          fill
-          className="object-cover"
-          src={event.imageUrl}
-          alt=""
-        />
+      <div className="relative h-[250px] flex-shrink-0">
+        <Image fill className="object-cover" src={event.imageUrl} alt="" />
       </div>
     )}
     <div className="flex flex-1 flex-col justify-between p-6">

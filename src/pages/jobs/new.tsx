@@ -1,7 +1,7 @@
 import { Alert } from "@/components/Alert/Alert";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import { Tab } from "@headlessui/react";
 import Head from "next/head";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const JobOffersNewPage = () => {
     formState: { errors },
     watch,
   } = useForm<FormValues>();
-  const mutation = trpc.useMutation(["jobs.insert"]);
+  const mutation = api.jobs.insert.useMutation();
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     await mutation.mutateAsync({
       data,
@@ -316,7 +316,7 @@ const JobOffersNewPage = () => {
                               </Tab.Panel>
                               <Tab.Panel className="-m-0.5 rounded-lg p-0.5">
                                 <div className="border-b dark:border-slate-700">
-                                  <div className="prose prose-sm prose-slate whitespace-pre-line mx-px mt-px px-3 pt-2 pb-12 text-sm leading-5 dark:prose-invert">
+                                  <div className="prose prose-sm prose-slate mx-px mt-px whitespace-pre-line px-3 pt-2 pb-12 text-sm leading-5 dark:prose-invert">
                                     {values.description ? (
                                       <p>{values.description}</p>
                                     ) : (

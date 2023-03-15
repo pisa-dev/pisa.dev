@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { EventCard } from "@/components/EventCard";
-import { EventWithSpeaker } from "@/server/router/events";
+import { EventWithSpeaker } from "~/server/api/routers/events";
 
 export interface UpcomingEventsProps {
   title: string;

@@ -1,9 +1,9 @@
-import { trpc } from "@/utils/trpc";
+import { api } from "@/utils/api";
 import Link from "next/link";
 import { EventsTableEmpty } from "./EventsTableEmpty";
 
 export const EventsTable = () => {
-  const q = trpc.useQuery(["events.get-all"]);
+  const q = api.events.getAll.useQuery();
 
   if (!q.data) {
     return <p>Loading...</p>;
