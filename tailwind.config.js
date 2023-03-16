@@ -2,6 +2,16 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        xorange: {
+          lighter: "#fff5cc",
+          light: "#ffd633",
+          dark: "#3b351c",
+        },
+        xpurple: {
+          dark: "#1C0221",
+        },
+      },
       fontFamily: {
         sans: ["InterVariable", "sans-serif"],
       },

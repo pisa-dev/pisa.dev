@@ -17,7 +17,7 @@ const UiPage: NextPage = () => {
 
 function Announcement() {
   return (
-    <div className="w-full bg-indigo-50 px-6 py-7 text-sm font-semibold text-indigo-900 sm:text-center sm:text-base">
+    <div className="w-full bg-xorange-lighter px-6 py-7 text-sm font-semibold text-xorange-dark sm:text-center sm:text-base">
       <span>
         <i>The newest cool event</i> on March 27th.
       </span>{" "}
@@ -203,7 +203,7 @@ function Hero() {
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl text-center lg:shrink-0 xl:max-w-2xl">
                   <h1
-                    className={`${bevan.className} text-6xl font-black tracking-tight text-gray-900 sm:text-8xl`}
+                    className={`${bevan.className} text-6xl font-black tracking-tight text-xorange-dark sm:text-8xl`}
                   >
                     We’re changing the way people connect.
                   </h1>
@@ -214,13 +214,13 @@ function Hero() {
                   <div className="mt-10 flex w-full flex-col items-center gap-6">
                     <a
                       href="#"
-                      className="flex h-14 w-full items-center justify-center rounded-full bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="flex h-14 w-full items-center justify-center rounded-full bg-xorange-light px-3.5 py-2.5 font-semibold text-xorange-dark shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Get started
                     </a>
                     <a
                       href="#"
-                      className="flex h-14 w-full items-center justify-center rounded-full border-2 border-solid border-zinc-700 text-sm font-semibold leading-6 text-gray-900"
+                      className="flex h-14 w-full items-center justify-center rounded-full border-2 border-solid border-zinc-700  font-semibold leading-6 text-xorange-dark"
                     >
                       Live demo <span aria-hidden="true">→</span>
                     </a>
@@ -336,10 +336,10 @@ const features = [
 
 function Features() {
   return (
-    <div className="bg-gray-900 py-24 sm:py-32">
+    <div className="bg-xpurple-dark py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400">
+          <h2 className="text-base font-semibold leading-7 text-xorange-light">
             Everything you need
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -372,7 +372,7 @@ function Features() {
             <div key={feature.name} className="relative pl-9">
               <dt className="inline font-semibold text-white">
                 <feature.icon
-                  className="absolute top-1 left-1 h-5 w-5 text-indigo-500"
+                  className="absolute top-1 left-1 h-5 w-5 text-xorange-light"
                   aria-hidden="true"
                 />
                 {feature.name}
@@ -397,7 +397,9 @@ function Stats() {
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2
+            className={`${bevan.className} text-5xl font-bold tracking-tight text-xpurple-dark sm:text-7xl`}
+          >
             We approach the workplace as something that adds to our lives and
             adds value to world.
           </h2>
@@ -435,15 +437,15 @@ function Stats() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col-reverse justify-between gap-y-8 gap-x-16 rounded-2xl bg-indigo-600 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
-            <p className="flex-none text-3xl font-bold tracking-tight text-white">
+          <div className="flex flex-col-reverse justify-between gap-y-8 gap-x-16 rounded-2xl bg-xorange-light p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
+            <p className="flex-none text-3xl font-bold tracking-tight text-xpurple-dark">
               401,093
             </p>
             <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
-              <p className="text-lg font-semibold tracking-tight text-white">
+              <p className="text-lg font-semibold tracking-tight text-xpurple-dark">
                 Transactions this year
               </p>
-              <p className="mt-2 text-base leading-7 text-indigo-200">
+              <p className="mt-2 text-base leading-7 text-xorange-dark">
                 Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu
                 duis porta aliquam ornare.
               </p>
@@ -501,9 +503,9 @@ function PastEvents() {
           />
         </div>
         <div className="mt-16 flex justify-center">
-          <p className="relative rounded-full bg-gray-50 px-4 py-1.5 text-sm leading-6 text-gray-600 ring-1 ring-inset ring-gray-900/5">
+          <p className="relative rounded-full bg-gray-50 px-10 py-3 text-sm leading-6 text-gray-600 ring-1 ring-inset ring-xorange-dark/50">
             <span className="hidden md:inline"></span>
-            <a href="#" className="font-semibold text-indigo-600">
+            <a href="#" className="font-semibold text-xorange-dark">
               <span className="absolute inset-0" aria-hidden="true" /> See all
               our past events <span aria-hidden="true">&rarr;</span>
             </a>
@@ -516,8 +518,8 @@ function PastEvents() {
 
 function NextEvent() {
   return (
-    <div className="relative bg-black">
-      <div className="relative h-80 overflow-hidden bg-indigo-600 md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
+    <div className="bg-mypurple relative">
+      <div className="relative h-80 overflow-hidden bg-xorange-dark md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
         <img
           className="h-full w-full object-cover"
           src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&blend=6366F1&sat=-100&blend-mode=multiply"
@@ -548,9 +550,9 @@ function NextEvent() {
           </defs>
         </svg>
       </div>
-      <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:py-40 lg:px-8">
+      <div className="relative mx-auto max-w-7xl bg-xpurple-dark py-24 sm:py-32 lg:py-40 lg:px-8">
         <div className="pr-6 pl-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-1/2 lg:pl-24 lg:pr-0 xl:pl-32">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400">
+          <h2 className="text-base font-semibold leading-7 text-xorange-light">
             Upcoming next
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -578,9 +580,9 @@ function NextEvent() {
 
 function Newsletter() {
   return (
-    <div className="bg-indigo-700 py-16 sm:py-24 lg:py-32">
+    <div className="bg-xorange-light py-16 text-xpurple-dark sm:py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
-        <div className="max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl lg:col-span-7">
+        <div className="max-w-xl text-3xl font-bold tracking-tight sm:text-4xl lg:col-span-7">
           <h2 className="inline sm:block lg:inline xl:block">
             Want product news and updates?
           </h2>{" "}
@@ -599,22 +601,19 @@ function Newsletter() {
               type="email"
               autoComplete="email"
               required
-              className="min-w-0 flex-auto rounded-md border-0 bg-white/10 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-white/75 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
+              className="min-w-0 flex-auto rounded-md border-0 bg-white/50 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-xpurple-dark/75 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
               placeholder="Enter your email"
             />
             <button
               type="submit"
-              className="flex-none rounded-md bg-white py-2.5 px-3.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="flex-none rounded-md bg-white py-2.5 px-3.5 text-sm font-semibold text-xorange-dark shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Subscribe
             </button>
           </div>
-          <p className="mt-4 text-sm leading-6 text-gray-300">
+          <p className="mt-4 text-sm leading-6">
             We care about your data. Read our{" "}
-            <a
-              href="#"
-              className="font-semibold text-white hover:text-indigo-50"
-            >
+            <a href="#" className="font-semibold hover:text-indigo-50">
               privacy&nbsp;policy
             </a>
             .
@@ -717,7 +716,7 @@ const footernavigation = {
 
 function Footer() {
   return (
-    <footer className="bg-gray-900" aria-labelledby="footer-heading">
+    <footer className="bg-xpurple-dark" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
