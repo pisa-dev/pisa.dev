@@ -39,6 +39,7 @@ const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head>
         <title>{event.title} - pisa.dev</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content={`/api/img/events/${slug}`} />
       </Head>
       <Header />
       <main>
