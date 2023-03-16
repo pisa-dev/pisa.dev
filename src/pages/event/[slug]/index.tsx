@@ -15,7 +15,7 @@ import {
 } from "next";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { createInnerTRPCContext } from "~/server/api/trpc";
-import { api, getBaseUrl } from "@/utils/api";
+import { api } from "@/utils/api";
 import { appRouter } from "@/server/api/root";
 import superjson from "superjson";
 
@@ -39,10 +39,7 @@ const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head>
         <title>{event.title} - pisa.dev</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:image"
-          content={`${getBaseUrl()}/api/img/events/${slug}`}
-        />
+        <meta property="og:image" content={`/api/img/events/${slug}`} />
       </Head>
       <Header />
       <main>
