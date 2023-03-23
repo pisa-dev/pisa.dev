@@ -124,7 +124,7 @@ model Speaker {
 
 model Event {
     id           String    @id @default(cuid())
-    slug         String
+    slug         String    @unique
     title        String
     location     String
     date         DateTime
