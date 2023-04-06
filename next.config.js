@@ -11,6 +11,15 @@ const nextConfig = {
       { protocol: "https", hostname: "data.pisa.dev" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/me",
+        destination: "/me/dashboard",
+        permanent: true,
+      }
+    ];
+  },
 };
 
 module.exports = withPlausibleProxy({

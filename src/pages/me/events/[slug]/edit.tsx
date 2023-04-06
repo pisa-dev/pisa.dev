@@ -30,7 +30,7 @@ export const EditEventPage = () => {
     data: EventWithSpeaker;
   }> = async ({ id, data }) => {
     await mutation.mutateAsync({ id, data });
-    router.push(`/dashboard/events`);
+    router.push(`/me/events`);
   };
 
   return (

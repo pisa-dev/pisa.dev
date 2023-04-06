@@ -2,29 +2,13 @@ import { FC, Fragment, MouseEvent } from "react";
 import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
+import classNames from "classnames";
+import { navigation, userNavigation } from "./routes";
 
-type NavigationDestName = "Dashboard" | "Eventi";
-interface NavigationDest {
-  name: NavigationDestName;
-  href: string;
-  adminOnly: boolean;
-}
-
-const navigation: NavigationDest[] = [
-  { name: "Dashboard", href: "/dashboard", adminOnly: false },
-  {
-    name: "Eventi",
-    href: "/dashboard/events",
-    adminOnly: true,
-  },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "/dashboard/profile" },
-  { name: "Sign out", href: "#", onClick: () => signOut() },
-];
+type NavigationDestName = keyof typeof navigation;
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -32,13 +16,7 @@ export interface LayoutProps {
   title?: string;
 }
 
-function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ");
-}
-
-export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
-  name = name || "Dashboard";
-
+export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' }) => {
   const { data: session, status } = useSession();
 
   if (status == "unauthenticated") {
@@ -81,23 +59,23 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
                       </div>
                     </Link>
                     <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                      {navigation.map(
-                        (item) =>
+                      {Object.entries(navigation).map(
+                        ([itemName, item]) =>
                           (!item.adminOnly || session.user.admin === true) && (
                             <a
-                              key={item.name}
+                              key={itemName}
                               href={item.href}
                               className={classNames(
-                                item.name === name
+                                itemName === name
                                   ? "border-indigo-500 text-gray-900 dark:text-slate-200"
                                   : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-slate-200",
                                 "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
                               )}
                               aria-current={
-                                item.name === name ? "page" : undefined
+                                name === itemName ? "page" : undefined
                               }
                             >
-                              {item.name}
+                              {itemName}
                             </a>
                           )
                       )}
@@ -115,8 +93,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
                             height="32"
                             src={
                               session.user.image ||
-                              `https://ui-avatars.com/api/?name=${
-                                session.user.name || session.user.email
+                              `https://ui-avatars.com/api/?name=${session.user.name || session.user.email
                               }`
                             }
                             alt=""
@@ -177,22 +154,22 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
 
               <Disclosure.Panel className="sm:hidden">
                 <div className="space-y-1 pt-2 pb-3">
-                  {navigation.map(
-                    (item) =>
+                  {Object.entries(navigation).map(
+                    ([itemName, item]) =>
                       (!item.adminOnly || session.user.admin === true) && (
                         <Disclosure.Button
-                          key={item.name}
+                          key={itemName}
                           as="a"
                           href={item.href}
                           className={classNames(
-                            item.name === name
+                            itemName === name
                               ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
                               : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
                             "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
                           )}
-                          aria-current={item.name === name ? "page" : undefined}
+                          aria-current={itemName === name ? "page" : undefined}
                         >
-                          {item.name}
+                          {itemName}
                         </Disclosure.Button>
                       )
                   )}
@@ -206,8 +183,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name }) => {
                         height="40"
                         src={
                           session.user.image ||
-                          `https://ui-avatars.com/api/?name=${
-                            session.user.name || session.user.email
+                          `https://ui-avatars.com/api/?name=${session.user.name || session.user.email
                           }`
                         }
                         alt=""

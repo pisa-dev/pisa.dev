@@ -30,7 +30,7 @@ export const EventsTable = () => {
               </p>
             </div>
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-              <Link href="/dashboard/events/new">
+              <Link href="/me/events/new">
                 <button className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                   Nuovo evento
                 </button>
@@ -82,7 +82,7 @@ export const EventsTable = () => {
                               Guarda
                             </Link>
                             <Link
-                              href={`/dashboard/events/${e.slug}/edit`}
+                              href={`/me/events/${e.slug}/edit`}
                               className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                             >
                               Modifica

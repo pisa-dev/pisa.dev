@@ -11,7 +11,7 @@ export const NewEventPage = () => {
 
   const onSubmit: SubmitHandler<EventWithSpeaker> = async (data) => {
     await mutation.mutateAsync({ data });
-    await router.push("/dashboard/events");
+    await router.push("/me/events");
   };
 
   return (
