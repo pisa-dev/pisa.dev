@@ -36,7 +36,6 @@ export const adminEventsRouter = createTRPCRouter({
       if (ctx.next) {
         // ISR revalidation
         await ctx.next.res.revalidate(`/event/${e.slug}`);
-        await ctx.next.res.revalidate(`/`);
       }
 
       // return await ctx.prisma.event.update({
@@ -57,7 +56,6 @@ export const adminEventsRouter = createTRPCRouter({
       if (ctx.next) {
         // ISR revalidation
         await ctx.next.res.revalidate(`/event/${e.slug}`);
-        await ctx.next.res.revalidate(`/`);
       }
 
       return e;
