@@ -14,6 +14,15 @@ export interface EventFormProps {
   handler: SubmitHandler<EventWithSpeaker>;
 }
 
+const isValidURL = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 /* TODO: The upload mechanism should stay in a single component.
  * Note: This function should be local.
  */
@@ -51,7 +60,6 @@ export const EventForm: FC<EventFormProps> = ({
     defaultValues: inputValues,
     mode: "all",
   });
-  const inputRef = useRef<HTMLInputElement>(null);
   const values = watch();
 
   return (
@@ -74,7 +82,7 @@ export const EventForm: FC<EventFormProps> = ({
           >
             Slug
           </label>
-          <Input type="text" {...register("slug", { required: true })} />
+          <Input type="text" {...register("slug", { required: true, disabled: !!inputValues?.slug })} />
           {inputValues?.slug && (
             <small className="mt-2 text-red-400">
               Attenzione! Modificare lo slug invaliderà tutti i link condivisi!
@@ -193,42 +201,12 @@ export const EventForm: FC<EventFormProps> = ({
             Scegli la cover da usare per la card dell&apos;evento
           </small>
           <div className="mt-4 flex flex-col items-center justify-center">
-            {!values.imageUrl && (
-              <Controller
-                name="imageUrl"
-                rules={{ required: true }}
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <>
-                      <Button
-                        onClick={(e) =>
-                          inputRef.current?.click() && e.stopPropagation()
-                        }
-                      >
-                        Cerca
-                      </Button>
-                      <Input
-                        ref={inputRef}
-                        type="file"
-                        multiple={false}
-                        accept="image/*"
-                        className="pointer-events-none hidden rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm"
-                        onChange={async (v) => {
-                          const file = v.currentTarget.files?.item(0);
-                          if (!file) {
-                            field.onChange(v);
-                          } else {
-                            field.onChange(await fileToBase64(file));
-                          }
-                        }}
-                      />
-                    </>
-                  );
-                }}
-              />
-            )}
-            {values.imageUrl && (
+            <Input
+              type="URL"
+              className="mb-2"
+              {...register("imageUrl", { required: true })}
+            />
+            {values.imageUrl && isValidURL(values.imageUrl) && (
               <>
                 <Image
                   objectFit="contain"
@@ -239,7 +217,7 @@ export const EventForm: FC<EventFormProps> = ({
                 />
                 <Button
                   className="block w-full bg-red-400 hover:bg-red-600"
-                  onClick={async () => setValue("imageUrl", null)}
+                  onClick={() => setValue("imageUrl", null, { shouldValidate: true })}
                 >
                   remove
                 </Button>
