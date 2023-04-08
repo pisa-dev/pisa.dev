@@ -1,4 +1,4 @@
-import { Layout } from "@/components/Dashboard/Layout";
+import { Layout } from "@/components/Me/Layout";
 import { NextPage } from "next";
 import { api } from "~/utils/api";
 import Link from "next/link";

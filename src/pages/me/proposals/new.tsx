@@ -1,5 +1,5 @@
-import { ProposalForm } from "@/components/Dashboard/ProposalForm";
-import { Layout } from "@/components/Dashboard/Layout";
+import { ProposalForm } from "@/components/Me/ProposalForm";
+import { Layout } from "@/components/Me/Layout";
 
 const NewEventPage = () => {
   return (

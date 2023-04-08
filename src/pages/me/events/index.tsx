@@ -1,4 +1,4 @@
-import { Layout } from "@/components/Dashboard/Layout";
+import { Layout } from "@/components/Me/Layout";
 import Link from "next/link";
 import { api } from "~/utils/api";
 import { FC } from "react";
