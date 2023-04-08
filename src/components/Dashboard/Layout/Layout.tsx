@@ -62,7 +62,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                       {Object.entries(navigation).map(
                         ([itemName, item]) =>
                           (!item.adminOnly || session.user.admin === true) && (
-                            <a
+                            <Link
                               key={itemName}
                               href={item.href}
                               className={classNames(
@@ -76,7 +76,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                               }
                             >
                               {itemName}
-                            </a>
+                            </Link>
                           )
                       )}
                     </div>
@@ -113,7 +113,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
+                                <Link
                                   href={item.href}
                                   onClick={(e) => {
                                     if (item.onClick) {
@@ -127,7 +127,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           ))}
