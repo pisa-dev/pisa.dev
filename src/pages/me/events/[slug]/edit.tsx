@@ -1,5 +1,5 @@
-import { EventForm } from "@/components/Dashboard/EventForm/EventForm";
-import { Layout } from "@/components/Dashboard/Layout";
+import { EventForm } from "@/components/Me/EventForm/EventForm";
+import { Layout } from "@/components/Me/Layout";
 import { EventWithSpeaker } from "~/server/api/routers/events";
 import { api } from "@/utils/api";
 import { useRouter } from "next/router";
@@ -30,7 +30,7 @@ export const EditEventPage = () => {
     data: EventWithSpeaker;
   }> = async ({ id, data }) => {
     await mutation.mutateAsync({ id, data });
-    router.push(`/dashboard/events`);
+    router.push(`/me/events`);
   };
 
   return (

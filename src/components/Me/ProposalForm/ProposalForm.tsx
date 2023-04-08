@@ -32,7 +32,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
     if (!eventId) {
       // create new event
       const e = await mutation.mutateAsync({ data });
-      router.push(`/dashboard/proposals/${e.id}`);
+      router.push(`/me/proposals/${e.id}`);
     } else {
       // update existing event
       await mutation.mutateAsync({ id: eventId, data });
