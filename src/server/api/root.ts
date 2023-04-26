@@ -1,11 +1,11 @@
 import { newsletterRouter } from "~/server/api/routers/newsletter";
-import { eventbriteRouter } from "~/server/api/routers/eventbrite";
+import { eventbriteRouter } from "~/server/api/routers/admin/eventbrite";
 import { eventsRouter } from "~/server/api/routers/events";
 import { proposalsRouter } from "~/server/api/routers/proposals";
 import { surveyRouter } from "~/server/api/routers/survey";
 import { jobsRouter } from "~/server/api/routers/jobs";
-import { adminEventsRouter } from "~/server/api/routers/admin_events";
-import { adminProcedure, createTRPCRouter } from "~/server/api/trpc";
+import { adminEventsRouter } from "~/server/api/routers/admin/events";
+import { createTRPCRouter } from "~/server/api/trpc";
 
 export const appRouter = createTRPCRouter({
   newsletter: newsletterRouter,

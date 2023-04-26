@@ -48,7 +48,7 @@ const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <div className="mt-8 w-full items-center justify-between">
               <div className="col-span-2 flex flex-col gap-6">
                 <AdminOnly>
-                  <EventAdminInfo eventId={event.eventbriteId} />
+                  <EventAdminInfo eventId={event.eventbriteId} slug={event.slug} />
                 </AdminOnly>
                 {event.speakers.map((speaker) => (
                   <SpeakerInfo key={speaker.id} speaker={speaker} />

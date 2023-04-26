@@ -38,8 +38,8 @@ export const EventsPage = () => {
   }
 
   const events = [
-    ...q.data.past.map((e) => ({ ...e, type: "past" })),
     ...q.data.upcoming.map((e) => ({ ...e, type: "upcoming" })),
+    ...q.data.past.map((e) => ({ ...e, type: "past" })),
   ];
 
   const content =

@@ -137,7 +137,7 @@ export const EventForm: FC<EventFormProps> = ({
             />
           )}
           {descrMode === "preview" && (
-            <ReactMarkdown className="prose block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm">
+            <ReactMarkdown className="prose max-w-none block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm dark:prose-invert">
               {values.description || ""}
             </ReactMarkdown>
           )}

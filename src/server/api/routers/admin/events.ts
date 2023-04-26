@@ -1,4 +1,4 @@
-import { createTRPCRouter, adminProcedure } from "../trpc";
+import { createTRPCRouter, adminProcedure } from "../../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
