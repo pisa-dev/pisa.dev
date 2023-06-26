@@ -39,6 +39,13 @@ const people = [
     linkedinUrl: "https://www.linkedin.com/in/davide-rossi-030a73212",
     githubUrl: "https://github.com/daviderossi11",
   },
+  {
+    name: "Ettore Puccetti",
+    imageUrl: "/ettore.jpg",
+    linkedinUrl: "https://www.linkedin.com/in/ettorepuccetti",
+    githubUrl: "https://github.com/ettorepuccetti",
+    twitterUrl: "https://twitter.com/EttorePuccio",
+  },
 ];
 
 export const Team = () => {
