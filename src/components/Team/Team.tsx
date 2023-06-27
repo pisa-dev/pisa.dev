@@ -46,6 +46,12 @@ const people = [
     githubUrl: "https://github.com/ettorepuccetti",
     twitterUrl: "https://twitter.com/EttorePuccio",
   },
+  {
+    name: "Francesca Paluello",
+    imageUrl: "/francesca.jpeg",
+    linkedinUrl: "https://www.linkedin.com/in/francesca-paluello-457616254/",
+    githubUrl: "https://github.com/francypalu",
+  },
 ];
 
 export const Team = () => {
