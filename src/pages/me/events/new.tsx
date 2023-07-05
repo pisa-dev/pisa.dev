@@ -1,5 +1,5 @@
-import { EventForm } from "@/components/Dashboard/EventForm/EventForm";
-import { Layout } from "@/components/Dashboard/Layout";
+import { EventForm } from "@/components/Me/EventForm/EventForm";
+import { Layout } from "@/components/Me/Layout";
 import { EventWithSpeaker } from "~/server/api/routers/events";
 import { api } from "@/utils/api";
 import { useRouter } from "next/router";
@@ -11,7 +11,7 @@ export const NewEventPage = () => {
 
   const onSubmit: SubmitHandler<EventWithSpeaker> = async (data) => {
     await mutation.mutateAsync({ data });
-    await router.push("/dashboard/events");
+    await router.push("/me/events");
   };
 
   return (
