@@ -74,19 +74,22 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
                   limit={open ? undefined : 3}
                 />
               </div>
+              <div className="h-min space-y-1.5">
               {jobOffer.location && (
                     <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
                       📍 {jobOffer.location}
                     </div>
                   )}
-                  <div className="truncate whitespace-pre rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
+                  <div className="truncate whitespace-pre rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700 ">
                     {jobOffer.remote === RemoteKind.full && `🌎 Remoto`}
                     {jobOffer.remote === RemoteKind.no && `🖥️  In sede`}
                     {jobOffer.remote === RemoteKind.partial && `💻  Ibrido`}
                   </div>
-                  <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
+                  <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700 ">
                     💰 {jobOffer.salaryRange}
                   </div>
+             
+              </div>
               <ChevronDownIcon
                 className={classNames(
                   "w-5 flex-shrink-0 transition-transform",
