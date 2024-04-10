@@ -1,51 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Kysely } from "kysely";
-import { PlanetScaleDialect } from "kysely-planetscale";
-import { env } from "~/env.mjs";
-
-interface SpeakerTable {
-  id: string;
-  name: string;
-  title: string;
-  imageUrl: string;
-}
-
-interface EventTable {
-  id: string;
-  slug: string;
-  title: string;
-  location: string;
-  date: Date;
-  eventbriteId: string;
-  abstract: string;
-  description: string;
-  imageUrl: string | null;
-  unlisted: boolean;
-}
-
-interface EventToSpeakerTable {
-  A: string;
-  B: string;
-}
-
-interface Database {
-  Event: EventTable;
-  Speaker: SpeakerTable;
-  _EventToSpeaker: EventToSpeakerTable;
-}
-
-const db = new Kysely<Database>({
-  dialect: new PlanetScaleDialect({
-    host: env.PSCALE_HOST,
-    username: env.PSCALE_USERNAME,
-    password: env.PSCALE_PASSWORD,
-  }),
-});
-
-export const config = {
-  runtime: "edge",
-};
+import { prisma } from "~/server/db";
 
 const getSlug = (req: NextApiRequest) => {
   // usually req.params.slug should work, not sure why it doesn't in this route. Maybe a next.js bug?
@@ -64,21 +19,34 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return new Response("No slug", { status: 400 });
   }
 
-  const event = await db
-    .selectFrom("Event")
-    .select(["id", "title", "date", "location"])
-    .where("slug", "=", slug)
-    .executeTakeFirst();
+  const event = await prisma
+    .event
+    .findUnique({
+      select: {
+        id: true,
+        title: true,
+        date: true,
+        location: true,
+      },
+      where: {
+        slug,
+      }
+    });
   if (!event) {
     return new Response("Not found", { status: 404 });
   }
 
-  const speakers = await db
-    .selectFrom("_EventToSpeaker")
-    .where("A", "=", event.id)
-    .innerJoin("Speaker", "B", "id")
-    .select(["Speaker.name", "Speaker.title", "Speaker.imageUrl"])
-    .execute();
+  const speakers = await prisma
+    .speaker
+    .findMany({
+      where: {
+        events: {
+          some: {
+            id: event.id
+          }
+        }
+      }
+    });
 
   return new ImageResponse(
     (
