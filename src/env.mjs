@@ -5,7 +5,8 @@ import { z } from "zod";
  * built with invalid env vars.
  */
 const server = z.object({
-  DATABASE_URL: z.string().url(),
+  TURSO_DATABASE_URL: z.string().url(),
+  TURSO_AUTH_TOKEN: z.string(),
   NODE_ENV: z.enum(["development", "test", "production"]),
   NEXTAUTH_SECRET:
     process.env.NODE_ENV === "production"
@@ -27,9 +28,6 @@ const server = z.object({
   TELEGRAM_JOBS_CHAT_ID: z.string().optional(),
   LISTMONK_USERNAME: z.string().optional(),
   LISTMONK_PASSWORD: z.string().optional(),
-  PSCALE_HOST: z.string().optional(),
-  PSCALE_USERNAME: z.string().optional(),
-  PSCALE_PASSWORD: z.string().optional(),
 });
 
 /**
@@ -47,7 +45,8 @@ const client = z.object({
  * @type {Record<keyof z.infer<typeof server> | keyof z.infer<typeof client>, string | undefined>}
  */
 const processEnv = {
-  DATABASE_URL: process.env.DATABASE_URL,
+  TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL,
+  TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
   NODE_ENV: process.env.NODE_ENV,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -61,9 +60,6 @@ const processEnv = {
   TELEGRAM_JOBS_CHAT_ID: process.env.TELEGRAM_JOBS_CHAT_ID,
   LISTMONK_USERNAME: process.env.LISTMONK_USERNAME,
   LISTMONK_PASSWORD: process.env.LISTMONK_PASSWORD,
-  PSCALE_HOST: process.env.PSCALE_HOST,
-  PSCALE_USERNAME: process.env.PSCALE_USERNAME,
-  PSCALE_PASSWORD: process.env.PSCALE_PASSWORD,
 };
 
 // Don't touch the part below
