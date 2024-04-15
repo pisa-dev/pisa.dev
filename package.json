@@ -24,7 +24,7 @@
     "@trpc/react-query": "^10.12.0",
     "@trpc/server": "^10.12.0",
     "@vercel/og": "^0.4.0",
-    "classnames": "^2.3.2",
+    "classnames": "^2.5.1",
     "dayjs": "^1.11.5",
     "next": "^13.2.4",
     "next-auth": "^4.19.0",
