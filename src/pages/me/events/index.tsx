@@ -1,9 +1,10 @@
 import { Layout } from "@/components/Me/Layout";
 import Link from "next/link";
 import { api } from "~/utils/api";
-import { FC } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { FiFolderPlus } from "react-icons/fi";
 import { BsPlusLg } from "react-icons/bs";
+import { LinkButton } from "~/components/Form/Button";
 
 export const EventsTableEmpty: FC = () => {
   return (
@@ -30,17 +31,33 @@ export const EventsTableEmpty: FC = () => {
 };
 
 export const EventsPage = () => {
-
   const q = api.events.getAll.useQuery();
+  const _removeEvent = api.admin.events.remove.useMutation();
 
-  if (!q.data) {
+  const isLoading = useMemo(
+    () => q.isLoading || _removeEvent.isLoading,
+    [q.isLoading, _removeEvent.isLoading],
+  );
+
+  const removeEvent = useCallback(async (slug: string) => {
+    await _removeEvent.mutateAsync({ slug });
+    await q.refetch();
+  }, [_removeEvent, q]);
+
+  const events = useMemo(() => {
+    if (!q.data) {
+      return [];
+    }
+
+    return [
+      ...q.data.upcoming.map((e) => ({ ...e, type: "upcoming" })),
+      ...q.data.past.map((e) => ({ ...e, type: "past" })),
+    ]
+  }, [q.data]);
+
+  if (isLoading || !q.data) {
     return <p>Loading...</p>;
   }
-
-  const events = [
-    ...q.data.past.map((e) => ({ ...e, type: "past" })),
-    ...q.data.upcoming.map((e) => ({ ...e, type: "upcoming" })),
-  ];
 
   const content =
     !events.length
@@ -110,10 +127,13 @@ export const EventsPage = () => {
                                 </Link>
                                 <Link
                                   href={`/me/events/${e.slug}/edit`}
-                                  className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                  className="mr-4 text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                                 >
                                   Modifica
                                 </Link>
+                                <LinkButton onClick={() => removeEvent(e.slug)}>
+                                  Elimina
+                                </LinkButton>
                               </td>
                             </tr>
                           ))}
