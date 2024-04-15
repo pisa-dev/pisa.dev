@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-    provider             = "mysql"
+    provider             = "postgresql"
     url                  = env("DATABASE_URL")
     relationMode         = "prisma"
 }
@@ -10,10 +10,6 @@ datasource db {
 generator client {
     provider        = "prisma-client-js"
     previewFeatures = ["driverAdapters"]
-}
-
-model Example {
-    id String @id @default(cuid())
 }
 
 // Neccessary for Next auth
@@ -72,7 +68,7 @@ model EventProposal {
     description  String
     duration     String
     creatorEmail String
-    creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: NoAction)
+    creator      User    @relation(fields: [creatorEmail], references: [email], onDelete: Restrict)
     eventbriteId String?
 }
 
@@ -132,7 +128,7 @@ model Event {
     abstract     String    @db.Text
     description  String    @db.Text
     // TODO: This should instead store the image URLs
-    imageUrl     String?   @db.LongText
+    imageUrl     String?
     speakers     Speaker[]
     unlisted     Boolean   @default(false)
 
