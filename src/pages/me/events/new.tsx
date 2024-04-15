@@ -10,6 +10,10 @@ export const NewEventPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<EventWithSpeaker> = async (data) => {
+    if (!data.eventbriteId) {
+      data.unlisted = true;
+    }
+
     await mutation.mutateAsync({ data });
     await router.push("/me/events");
   };
