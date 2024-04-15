@@ -47,9 +47,9 @@ const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div className="mx-auto mb-16 max-w-prose text-lg">
             <div className="mt-8 w-full items-center justify-between">
               <div className="col-span-2 flex flex-col gap-6">
-                <AdminOnly>
+                {event.eventbriteId && <AdminOnly>
                   <EventAdminInfo eventId={event.eventbriteId} />
-                </AdminOnly>
+                </AdminOnly>}
                 {event.speakers.map((speaker) => (
                   <SpeakerInfo key={speaker.id} speaker={speaker} />
                 ))}
@@ -67,7 +67,7 @@ const EventPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <div className="sticky top-0 left-0 mt-4 flex w-full flex-col items-center gap-2 border-y border-slate-200 bg-white bg-opacity-90 py-4 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900 dark:bg-opacity-60 dark:text-gray-300">
               {event.date > new Date() ? (
                 <>
-                  <EventbriteCheckout eventId={event.eventbriteId} />
+                  {event.eventbriteId && <EventbriteCheckout eventId={event.eventbriteId} />}
                   <span className="text-xs">
                     Evento gratuito previa registrazione
                   </span>
