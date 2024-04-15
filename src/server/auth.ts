@@ -4,12 +4,12 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -35,6 +35,40 @@ declare module "next-auth" {
   }
 }
 
+const getAuthProviders = () => {
+  const providers = [];
+
+  if (env.GOOGLE_ID && env.GOOGLE_SECRET) {
+    providers.push(
+      GoogleProvider({
+        clientId: env.GOOGLE_ID,
+        clientSecret: env.GOOGLE_SECRET,
+      })
+    );
+  }
+
+  if (env.GITHUB_ID && env.GITHUB_SECRET) {
+    providers.push(
+      GithubProvider({
+        clientId: env.GITHUB_ID,
+        clientSecret: env.GITHUB_SECRET,
+      }),
+    );
+  }
+
+  /**
+   * ...add more providers here.
+   *
+   * Most other providers require a bit more work than the Discord provider. For example, the
+   * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
+   * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
+   *
+   * @see https://next-auth.js.org/providers/github
+   */
+
+  return providers;
+};
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
@@ -52,25 +86,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: env.GOOGLE_ID || "error",
-      clientSecret: env.GOOGLE_SECRET || "error",
-    }),
-    GithubProvider({
-      clientId: env.GITHUB_ID || "error",
-      clientSecret: env.GITHUB_SECRET || "error",
-    }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
-  ],
+  providers: getAuthProviders(),
 };
 
 /**

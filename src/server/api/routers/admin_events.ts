@@ -7,7 +7,7 @@ const AdminEventPayload = z.object({
   title: z.string(),
   location: z.string(),
   date: z.date(),
-  eventbriteId: z.string(),
+  eventbriteId: z.string().nullable(),
   abstract: z.string(),
   description: z.string(),
   imageUrl: z.string().nullable(),
@@ -59,5 +59,18 @@ export const adminEventsRouter = createTRPCRouter({
       }
 
       return e;
+    }),
+
+  remove: adminProcedure
+    .input(z.object({ slug: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const e = await ctx.prisma.event.delete({
+        where: { slug: input.slug },
+      });
+
+      if (ctx.next) {
+        // ISR revalidation
+        await ctx.next.res.revalidate(`/event/${e.slug}`);
+      }
     }),
 });

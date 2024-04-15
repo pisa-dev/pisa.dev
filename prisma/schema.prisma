@@ -4,7 +4,7 @@
 datasource db {
     provider             = "mysql"
     url                  = env("DATABASE_URL")
-    relationMode = "prisma"
+    relationMode         = "prisma"
 }
 
 generator client {
@@ -128,7 +128,7 @@ model Event {
     title        String
     location     String
     date         DateTime
-    eventbriteId String
+    eventbriteId String?
     abstract     String    @db.Text
     description  String    @db.Text
     // TODO: This should instead store the image URLs
