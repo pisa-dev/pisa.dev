@@ -40,8 +40,8 @@ export const Sponsors = () => {
               <Link target="_blank" rel="noreferrer" href={href} key={src}>
                 <Image
                   className="opacity-80 saturate-0 hover:opacity-100 hover:saturate-100 dark:opacity-90"
-                  width="64"
-                  height="64"
+                  width="100"
+                  height="100"
                   src={src}
                   alt={alt}
                 />
