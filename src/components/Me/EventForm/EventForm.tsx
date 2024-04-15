@@ -4,9 +4,10 @@ import { Textarea } from "@/components/Form/Textarea";
 import { EventWithSpeaker } from "~/server/api/routers/events";
 import dayjs from "dayjs";
 import Image from "next/image";
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
+import { FallbackEventImage } from "~/components/FallbackEventImage";
 
 export interface EventFormProps {
   inputValues?: Partial<EventWithSpeaker>;
@@ -22,19 +23,6 @@ const isValidURL = (url: string): boolean => {
     return false;
   }
 };
-
-/* TODO: The upload mechanism should stay in a single component.
- * Note: This function should be local.
- */
-export const fileToBase64 = (
-  file: File
-): Promise<string | ArrayBuffer | null> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
 
 /*
  * `datetime-local` input type just handles the DateTime ISO format.
@@ -58,9 +46,15 @@ export const EventForm: FC<EventFormProps> = ({
     formState: { errors },
   } = useForm<EventWithSpeaker>({
     defaultValues: inputValues,
-    mode: "all",
+    mode: 'onSubmit',
   });
   const values = watch();
+
+  useEffect(() => {
+    if (!values.eventbriteId) {
+      setValue('unlisted', true);
+    }
+  }, [setValue, values.eventbriteId]);
 
   return (
     <form onSubmit={handleSubmit(handler)}>
@@ -72,7 +66,7 @@ export const EventForm: FC<EventFormProps> = ({
           >
             Title
           </label>
-          <Input type="text" {...register("title", { required: true })} />
+          <Input type="text" {...register("title", { required: true })} error={errors.title} />
         </div>
 
         <div className="col-span-6 sm:col-span-3">
@@ -82,7 +76,7 @@ export const EventForm: FC<EventFormProps> = ({
           >
             Slug
           </label>
-          <Input type="text" {...register("slug", { required: true, disabled: !!inputValues?.slug })} />
+          <Input type="text" {...register("slug", { required: true, disabled: !!inputValues?.slug })} error={errors.slug} />
           {inputValues?.slug && (
             <small className="mt-2 text-red-400">
               Attenzione! Modificare lo slug invaliderà tutti i link condivisi!
@@ -102,6 +96,7 @@ export const EventForm: FC<EventFormProps> = ({
             type="text"
             multiple={true}
             className="resize-none"
+            error={errors.abstract}
             {...register("abstract", { required: true })}
           />
         </div>
@@ -133,11 +128,12 @@ export const EventForm: FC<EventFormProps> = ({
               cols={15}
               type="text"
               className="h-80"
+              error={errors.description}
               {...register("description", { required: true })}
             />
           )}
           {descrMode === "preview" && (
-            <ReactMarkdown className="prose block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm">
+            <ReactMarkdown className="prose block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm min-w-full">
               {values.description || ""}
             </ReactMarkdown>
           )}
@@ -158,6 +154,7 @@ export const EventForm: FC<EventFormProps> = ({
                   field.onChange(new Date(v.currentTarget.value))
                 }
                 value={field.value ? dateFormatter(field.value) : undefined}
+                error={errors.date}
               />
             )}
           />
@@ -165,33 +162,42 @@ export const EventForm: FC<EventFormProps> = ({
 
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="location">Luogo</label>
-          <Input type="text" {...register("location", { required: true })} />
-        </div>
-
-        <div className="col-span-6 align-middle sm:col-span-3">
-          <label htmlFor="location">EventBrite ID</label>
           <Input
             type="text"
-            {...register("eventbriteId", { required: true })}
+            error={errors.location}
+            {...register("location", { required: true })}
           />
         </div>
 
-        <div className="col-span-6 flex items-center sm:col-span-3">
-          <div className="flex h-5 items-center">
-            <input
-              type="checkbox"
-              className="rounded sm:border-gray-200 dark:sm:border-slate-700"
-              {...register("unlisted")}
-            />
-          </div>
+        <div className="col-span-6 align-middle sm:col-span-3">
+          <label htmlFor="eventbriteId">EventBrite ID</label>
+          <Input
+            type="text"
+            error={errors.eventbriteId}
+            {...register("eventbriteId")}
+          />
+        </div>
 
-          <div className="ml-3 text-sm">
-            <label htmlFor="unlisted" className="font-medium text-gray-700">
-              Unlisted
-            </label>
-            <p className="text-gray-500">
-              Questo evento non sarà visibile sulla piattaforma.
-            </p>
+        <div className="col-span-6 sm:col-span-3 flex flex-col justify-end">
+          <div className="flex items-center">
+            <div className="flex h-5 items-center">
+              <input
+                type="checkbox"
+                className="rounded sm:border-gray-200 dark:sm:border-slate-700"
+                {...register("unlisted", { disabled: !values.eventbriteId })}
+              />
+            </div>
+
+            <div className="ml-3 text-sm">
+              <label htmlFor="unlisted">
+                Nascondi
+              </label>
+            </div>
+          </div>
+          <div style={{ visibility: !values.eventbriteId ? 'visible' : 'hidden' }}>
+            <small className="mt-2 text-red-400 block">
+              Attenzione! Non è possible rendere pubblico l&apos;evento senza fornire un ID EventBrite
+            </small>
           </div>
         </div>
 
@@ -204,34 +210,37 @@ export const EventForm: FC<EventFormProps> = ({
             <Input
               type="URL"
               className="mb-2"
-              {...register("imageUrl", { required: true })}
+              {...register("imageUrl")}
             />
-            {values.imageUrl && isValidURL(values.imageUrl) && (
-              <>
-                <Image
-                  objectFit="contain"
-                  src={values.imageUrl}
-                  alt=""
-                  height={256}
-                  width={512}
-                />
-                <Button
-                  className="block w-full bg-red-400 hover:bg-red-600"
-                  onClick={() => setValue("imageUrl", null, { shouldValidate: true })}
-                >
-                  remove
-                </Button>
-              </>
-            )}
+            <div className="mt-8">
+              {values.imageUrl && isValidURL(values.imageUrl) ? (
+                <>
+                  <Image
+                    objectFit="contain"
+                    src={values.imageUrl}
+                    alt=""
+                    height={256}
+                    width={512}
+                  />
+                  <Button
+                    className="block w-full bg-red-400 hover:bg-red-600"
+                    onClick={() => setValue("imageUrl", null, { shouldValidate: true })}
+                  >
+                    remove
+                  </Button>
+                </>
+              )
+                : <div style={{ width: 512, height: 256, }}>
+                  <FallbackEventImage />
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>
 
       <div className="mt-6 flex w-full justify-end">
-        <Button
-          type="submit"
-          disabled={disabled || Object.keys(errors).length > 0}
-        >
+        <Button type="submit">
           Salva
         </Button>
       </div>
