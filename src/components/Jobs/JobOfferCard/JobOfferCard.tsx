@@ -51,19 +51,17 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
                   {jobOffer.companyName}
                 </div>
                 <div className="mb-1 flex flex-wrap gap-2 text-[10px] sm:text-xs">
-                  {jobOffer.location && (
-                    <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
-                      📍 {jobOffer.location}
-                    </div>
-                  )}
-                  <div className="truncate whitespace-pre rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
-                    {jobOffer.remote === RemoteKind.full && `🌎 Remoto`}
-                    {jobOffer.remote === RemoteKind.no && `🖥️  In sede`}
-                    {jobOffer.remote === RemoteKind.partial && `💻  Ibrido`}
-                  </div>
-                  <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
-                    💰 {jobOffer.salaryRange}
-                  </div>
+                <div
+                className={classNames(
+                  "sm:text-md justify-self-end text-sm font-medium lg:mr-16",
+                  {
+                    "bg-gradient-brand bg-clip-text font-bold uppercase text-transparent":
+                      dayjs(jobOffer.createdAt).fromNow(true) === "New",
+                  }
+                )}
+              >
+                {dayjs(jobOffer.createdAt).fromNow(true)}
+              </div>
                 </div>
               </div>
               <div
@@ -76,16 +74,21 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
                   limit={open ? undefined : 3}
                 />
               </div>
-              <div
-                className={classNames(
-                  "sm:text-md justify-self-end text-sm font-medium lg:mr-16",
-                  {
-                    "bg-gradient-brand bg-clip-text font-bold uppercase text-transparent":
-                      dayjs(jobOffer.createdAt).fromNow(true) === "New",
-                  }
-                )}
-              >
-                {dayjs(jobOffer.createdAt).fromNow(true)}
+              <div className="h-min space-y-1.5">
+              {jobOffer.location && (
+                    <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
+                      📍 {jobOffer.location}
+                    </div>
+                  )}
+                  <div className="truncate whitespace-pre rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700 ">
+                    {jobOffer.remote === RemoteKind.full && `🌎 Remoto`}
+                    {jobOffer.remote === RemoteKind.no && `🖥️  In sede`}
+                    {jobOffer.remote === RemoteKind.partial && `💻  Ibrido`}
+                  </div>
+                  <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700 ">
+                    💰 {jobOffer.salaryRange}
+                  </div>
+             
               </div>
               <ChevronDownIcon
                 className={classNames(
