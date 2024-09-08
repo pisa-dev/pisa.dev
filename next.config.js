@@ -2,6 +2,7 @@
 const { withPlausibleProxy } = require("next-plausible");
 
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   images: {
     remotePatterns: [
