@@ -38,4 +38,26 @@ export async function registerUser(email: string) {
     const txt = await res.text();
     throw new Error(`listmonk error (status code ${res.status}): ${txt}`);
   }
+
+  const subscriber = await res.json();
+
+  const optInRes = await fetch(`https://mailinglist.pisa.dev/api/subscribers/${subscriber.data.id}/optin`, {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authorization,
+    },
+    body: JSON.stringify({
+      email,
+      name: email,
+      status: "enabled",
+      lists: includeListIds,
+    }),
+  });
+
+  if (optInRes.status !== 200 && optInRes.status !== 201) {
+    const txt = await optInRes.text();
+    throw new Error(`listmonk optin error (status code ${res.status}): ${txt}`);
+  }
 }
