@@ -1,9 +1,9 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
+"use client";
+
 import { useRef } from "react";
-import { usePlausible } from "next-plausible";
+
 import { Announcement } from "@/components/Announcement";
+import { EventsList } from "@/components/EventsList";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeaderBanner } from "@/components/Headerbanner";
@@ -11,15 +11,16 @@ import { Hero } from "@/components/Hero";
 import { NewsletterBanner } from "@/components/Newsletter";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
-import { EventsList } from "@/components/EventsList";
-import superjson from "superjson";
 import { api } from "@/utils/api";
-import { createServerSideHelpers } from "@trpc/react-query/server";
-import { createInnerTRPCContext } from "~/server/api/trpc";
-import { appRouter } from "~/server/api/root";
+import { usePlausible } from "next-plausible";
 
-const Home: NextPage = () => {
-  const router = useRouter();
+type HomePageClientProps = {
+  showEmailVerifiedBanner: boolean;
+};
+
+export default function HomePageClient({
+  showEmailVerifiedBanner,
+}: HomePageClientProps) {
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
   const q = api.events.getAll.useQuery(
@@ -36,23 +37,16 @@ const Home: NextPage = () => {
   }
 
   const { past, upcoming } = q.data;
-  const showEmailVerifiedBanner = !!router.query.email_verified;
 
   return (
     <>
-      <Head>
-        <title>pisa.dev - la community degli sviluppatori pisani</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       {showEmailVerifiedBanner && (
         <HeaderBanner
           className="bg-lime-600"
           text="Il tuo indirizzo email è stato verificato con successo!"
         />
       )}
-      {upcoming.length > 0 && upcoming[0] && (
-        <Announcement event={upcoming[0]} />
-      )}
+      {upcoming.length > 0 && upcoming[0] && <Announcement event={upcoming[0]} />}
       <Header />
       <main>
         <Hero
@@ -89,23 +83,4 @@ const Home: NextPage = () => {
       <Footer />
     </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const ssg = createServerSideHelpers({
-    router: appRouter,
-    ctx: createInnerTRPCContext({ session: null }),
-    transformer: superjson,
-  });
-
-  await ssg.events.getAll.prefetch({ unlisted: false });
-
-  // Make sure to return { props: { trpcState: ssg.dehydrate() } }
-  return {
-    props: {
-      trpcState: ssg.dehydrate(),
-    },
-  };
-};
-
-export default Home;
+}

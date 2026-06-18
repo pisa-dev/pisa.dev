@@ -6,7 +6,7 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import PlausibleProvider from "next-plausible";
 import { Session } from "next-auth";
-import { api } from "~/utils/api";
+import { TRPCProvider } from "@/components/TRPCProvider";
 
 const MyApp: AppType<{ session: Session }> = ({
   Component,
@@ -43,11 +43,13 @@ const MyApp: AppType<{ session: Session }> = ({
         domain="pisa.dev"
       >
         <SessionProvider session={session}>
-          <Component {...pageProps} />
+          <TRPCProvider>
+            <Component {...pageProps} />
+          </TRPCProvider>
         </SessionProvider>
       </PlausibleProvider>
     </>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;

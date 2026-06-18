@@ -1,17 +1,18 @@
+"use client";
+
 import React, { useMemo } from "react";
-import { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { api } from "@/utils/api";
+
+import { AnchorButton } from "@/components/Form/AnchorButton";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JobOfferCard } from "@/components/Jobs/JobOfferCard/JobOfferCard";
-import { AnchorButton } from "@/components/Form/AnchorButton";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { JobOfferSkeleton } from "@/components/Jobs/JobOfferSkeleton";
+import { api } from "@/utils/api";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Link from "next/link";
 
-const JobsPage: NextPage = () => {
+export default function JobsPage() {
   const { data, isPending, hasNextPage, fetchNextPage } =
     api.jobs.getPage.useInfiniteQuery(
       { limit: 20 },
@@ -28,9 +29,6 @@ const JobsPage: NextPage = () => {
 
   return (
     <div className="flex min-h-screen w-screen flex-col">
-      <Head>
-        <title>Offerte di lavoro - pisa.dev</title>
-      </Head>
       <Header />
       <main className="mx-auto w-full max-w-7xl flex-1 px-4 pb-20 sm:px-6 lg:px-8">
         <div className="flex justify-between pt-10">
@@ -80,6 +78,4 @@ const JobsPage: NextPage = () => {
       <Footer />
     </div>
   );
-};
-
-export default JobsPage;
+}

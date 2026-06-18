@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BsTelegram, BsGithub, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { MdWork } from "react-icons/md";
 import classNames from "classnames";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
 
 const navigation = [
   // { name: "Contatti", href: "#", current: false },
@@ -86,13 +86,13 @@ export const Header = () => {
                         target={item.external ? "_blank" : undefined}
                         rel="noopener noreferrer"
                         className={classNames(
-                          item.current && router.pathname === item.href
+                          item.current && router?.pathname === item.href
                             ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
                             : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
                           "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium",
                         )}
                         aria-current={
-                          item.current && router.pathname === item.href
+                          item.current && router?.pathname === item.href
                             ? "page"
                             : undefined
                         }
@@ -115,14 +115,14 @@ export const Header = () => {
                   key={item.name}
                   href={item.href}
                   aria-current={
-                    item.current && router.pathname === item.href
-                      ? "page"
-                      : undefined
+                     item.current && router?.pathname === item.href
+                       ? "page"
+                       : undefined
                   }
                 >
                   <span
                     className={classNames(
-                      item.current && router.pathname === item.href
+                      item.current && router?.pathname === item.href
                         ? "bg-slate-700 text-white dark:bg-black dark:bg-opacity-40 dark:text-slate-300"
                         : "text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-black dark:hover:bg-opacity-20",
                       "flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-base font-medium",
