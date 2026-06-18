@@ -11,7 +11,7 @@ export const SpeakerInfo: FC<SpeakerInfoProps> = ({ speaker }) => (
     <Image
       height="36"
       width="36"
-      objectFit="cover"
+      style={{ objectFit: "cover" }}
       className="inline-block rounded-full"
       src={speaker.imageUrl}
       alt=""

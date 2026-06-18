@@ -23,7 +23,13 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
   >
     <div className="relative h-[250px] flex-shrink-0">
       {event.imageUrl ? (
-        <Image fill className="object-cover" src={event.imageUrl} alt="" />
+        <Image
+          fill
+          sizes="(max-width: 1024px) 100vw, 33vw"
+          className="object-cover"
+          src={event.imageUrl}
+          alt=""
+        />
       ) : (
         <FallbackEventImage />
       )}

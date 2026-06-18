@@ -224,7 +224,7 @@ export const EventForm: FC<EventFormProps> = ({
               {values.imageUrl && isValidURL(values.imageUrl) ? (
                 <>
                   <Image
-                    objectFit="contain"
+                    style={{ objectFit: "contain" }}
                     src={values.imageUrl}
                     alt=""
                     height={256}

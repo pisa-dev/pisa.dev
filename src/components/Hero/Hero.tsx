@@ -15,6 +15,7 @@ export const Hero: FC<HeroProps> = ({ cta }) => {
             <Image
               priority
               fill
+              sizes="100vw"
               src="/hero.jpeg"
               className="object-cover"
               alt="Conference crowd"
