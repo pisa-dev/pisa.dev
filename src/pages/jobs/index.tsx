@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JobOfferCard } from "@/components/Jobs/JobOfferCard/JobOfferCard";
 import { AnchorButton } from "@/components/Form/AnchorButton";
-import { ArrowRightIcon } from "@heroicons/react/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { JobOfferSkeleton } from "@/components/Jobs/JobOfferSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 

@@ -1,7 +1,7 @@
 import { FC, Fragment, MouseEvent } from "react";
 import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { XIcon, MenuIcon } from "@heroicons/react/outline";
+import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { signIn, useSession } from "next-auth/react";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
@@ -145,9 +145,9 @@ export const Layout: FC<LayoutProps> = ({
                     <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-slate-400 dark:hover:bg-slate-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <MenuIcon
+                        <Bars3Icon
                           className="block h-6 w-6"
                           aria-hidden="true"
                         />

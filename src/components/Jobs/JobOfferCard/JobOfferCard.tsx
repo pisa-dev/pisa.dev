@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { RemoteKind } from "@prisma/client";
 import { JobOfferWithTags } from "~/server/api/routers/jobs";
 import classNames from "classnames";

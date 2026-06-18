@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CheckIcon } from "@heroicons/react/solid";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 export interface StepsProgressProps {
   current: number;
