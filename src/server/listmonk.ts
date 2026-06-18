@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { env } from "~/env.mjs";
 
 export async function registerUser(email: string) {

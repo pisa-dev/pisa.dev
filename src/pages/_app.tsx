@@ -1,7 +1,7 @@
 // src/pages/_app.tsx
 import type { AppType } from "next/dist/shared/lib/utils";
 import { SessionProvider } from "next-auth/react";
-import "@fontsource/inter/variable.css";
+import "@fontsource-variable/inter";
 import "@/styles/globals.css";
 import Head from "next/head";
 import PlausibleProvider from "next-plausible";

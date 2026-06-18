@@ -7,17 +7,17 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JobOfferCard } from "@/components/Jobs/JobOfferCard/JobOfferCard";
 import { AnchorButton } from "@/components/Form/AnchorButton";
-import { ArrowRightIcon } from "@heroicons/react/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { JobOfferSkeleton } from "@/components/Jobs/JobOfferSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const JobsPage: NextPage = () => {
-  const { data, isLoading, hasNextPage, fetchNextPage } =
+  const { data, isPending, hasNextPage, fetchNextPage } =
     api.jobs.getPage.useInfiniteQuery(
       { limit: 20 },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
-      }
+      },
     );
 
   const dataLength = useMemo(() => {
@@ -74,7 +74,7 @@ const JobsPage: NextPage = () => {
               ))}
           </InfiniteScroll>
 
-          {isLoading && <JobOfferSkeleton />}
+          {isPending && <JobOfferSkeleton />}
         </div>
       </main>
       <Footer />

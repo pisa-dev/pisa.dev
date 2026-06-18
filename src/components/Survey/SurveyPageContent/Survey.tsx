@@ -66,7 +66,7 @@ export const Survey: FC<SurveyProps> = ({ survey }) => {
                 q={step.question}
                 details={step.details}
                 required={step.required}
-                loading={addAnswerMut.isLoading}
+                loading={addAnswerMut.isPending}
                 onSubmit={onSubmit}
                 onBack={currentStepIdx > 0 ? goBack : undefined}
                 data={step.data}

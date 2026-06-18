@@ -15,7 +15,7 @@ export const proposalsRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.eventProposal.findFirst({
@@ -35,7 +35,7 @@ export const proposalsRouter = createTRPCRouter({
           description: z.string(),
           duration: z.string(),
         }),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       if (!input.id) {

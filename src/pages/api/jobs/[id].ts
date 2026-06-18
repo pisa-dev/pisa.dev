@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import fetch from "node-fetch";
 import requestIp from "request-ip";
 import { prisma } from "~/server/db";
 

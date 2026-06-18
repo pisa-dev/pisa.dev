@@ -15,7 +15,7 @@ const SurveyQuestionResultsPage: NextPage = () => {
     surveyId: surveySlug,
   });
 
-  if (q.isLoading) {
+  if (q.isPending) {
     return <div>Loading...</div>;
   }
 

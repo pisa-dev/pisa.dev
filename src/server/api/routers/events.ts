@@ -9,7 +9,7 @@ export const eventsRouter = createTRPCRouter({
     .input(
       z.object({
         slug: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.event.findFirst({
@@ -27,7 +27,7 @@ export const eventsRouter = createTRPCRouter({
         .object({
           unlisted: z.boolean(),
         })
-        .optional()
+        .optional(),
     )
     .query(async ({ ctx, input }) => {
       const upcoming: EventWithSpeaker[] = await ctx.prisma.event.findMany({

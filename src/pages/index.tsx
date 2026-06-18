@@ -14,7 +14,7 @@ import { Team } from "@/components/Team";
 import { EventsList } from "@/components/EventsList";
 import superjson from "superjson";
 import { api } from "@/utils/api";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { createServerSideHelpers } from "@trpc/react-query/server";
 import { createInnerTRPCContext } from "~/server/api/trpc";
 import { appRouter } from "~/server/api/root";
 
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     },
     {
       staleTime: Infinity,
-    }
+    },
   );
 
   if (!q.data) {
@@ -92,7 +92,7 @@ const Home: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const ssg = createProxySSGHelpers({
+  const ssg = createServerSideHelpers({
     router: appRouter,
     ctx: createInnerTRPCContext({ session: null }),
     transformer: superjson,

@@ -68,7 +68,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
                   <input
                     type="text"
                     className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
-                    disabled={mutation.isLoading}
+                    disabled={mutation.isPending}
                     {...register("title", { required: true })}
                   />
                 </div>
@@ -86,7 +86,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
                 <div className="flex max-w-lg rounded-md shadow-sm">
                   <select
                     className="block w-full min-w-0 flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
-                    disabled={mutation.isLoading}
+                    disabled={mutation.isPending}
                     {...register("duration", { required: true })}
                   >
                     <option value="Lightning">Lightning (10 minuti)</option>
@@ -109,7 +109,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
                 <textarea
                   rows={6}
                   className="block w-full max-w-lg rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 sm:text-sm"
-                  disabled={mutation.isLoading}
+                  disabled={mutation.isPending}
                   {...register("description", { required: true })}
                 />
               </div>
@@ -123,7 +123,7 @@ export const ProposalForm: FC<ProposalFormProps> = ({
           <button
             type="submit"
             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-30 dark:bg-indigo-700 dark:hover:bg-indigo-600"
-            disabled={mutation.isLoading}
+            disabled={mutation.isPending}
           >
             Salva
           </button>

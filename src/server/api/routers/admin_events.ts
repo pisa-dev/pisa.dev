@@ -20,7 +20,7 @@ export const adminEventsRouter = createTRPCRouter({
       z.object({
         id: z.string(),
         data: AdminEventPayload.partial(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       const e = await ctx.prisma.event.findFirst({ where: { id: input.id } });

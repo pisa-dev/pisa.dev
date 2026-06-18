@@ -11,7 +11,7 @@ const SurveyQuestionResultsPage: NextPage = () => {
   const questionId = router.query.questionId as string;
   const q = api.survey.getQuestionById.useQuery({ questionId });
 
-  if (q.isLoading) {
+  if (q.isPending) {
     return <div>Loading...</div>;
   }
 

@@ -1,7 +1,6 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { JobOffer, JobOfferTags, RemoteKind } from "@prisma/client";
-import fetch from "node-fetch";
 import { env } from "~/env.mjs";
 
 export type JobOfferWithTags = JobOffer & {
@@ -14,7 +13,7 @@ export const jobsRouter = createTRPCRouter({
       z.object({
         limit: z.number().min(1).max(100).nullish(),
         cursor: z.date().nullish(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const limit = input.limit ?? 20;
@@ -55,7 +54,7 @@ export const jobsRouter = createTRPCRouter({
           remote: z.nativeEnum(RemoteKind),
         }),
         tags: z.array(z.string()),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       const tags = input.tags
@@ -129,12 +128,12 @@ const sendTelegramMessage = async (offer: JobOfferWithTags) => {
           ],
         },
       }),
-    }
+    },
   );
   if (res.status != 200) {
     const text = await res.text();
     throw new Error(
-      `Telegram error: status code = ${res.status}, message = ${text}`
+      `Telegram error: status code = ${res.status}, message = ${text}`,
     );
   }
 
@@ -171,7 +170,7 @@ const renderRemoteEnum = (r: RemoteKind): string =>
     [RemoteKind.full]: "Sì, full time",
     [RemoteKind.partial]: "Parziale / ibrido",
     [RemoteKind.no]: "No",
-  }[r]);
+  })[r];
 
 const renderJobOfferTags = (tags: JobOfferTags[]): string =>
   tags.map((t) => telegramEscapeTag(t.tagPretty)).join(" ");

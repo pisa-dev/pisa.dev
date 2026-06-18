@@ -1,7 +1,7 @@
 import { FC, Fragment, MouseEvent } from "react";
 import Image from "next/image";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { XIcon, MenuIcon } from "@heroicons/react/outline";
+import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { signIn, useSession } from "next-auth/react";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
@@ -16,7 +16,11 @@ export interface LayoutProps {
   title?: string;
 }
 
-export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' }) => {
+export const Layout: FC<LayoutProps> = ({
+  children,
+  title,
+  name = "Dashboard",
+}) => {
   const { data: session, status } = useSession();
 
   if (status == "unauthenticated") {
@@ -69,7 +73,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                                 itemName === name
                                   ? "border-indigo-500 text-gray-900 dark:text-slate-200"
                                   : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-slate-200",
-                                "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
+                                "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium",
                               )}
                               aria-current={
                                 name === itemName ? "page" : undefined
@@ -77,7 +81,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                             >
                               {itemName}
                             </Link>
-                          )
+                          ),
                       )}
                     </div>
                   </div>
@@ -93,7 +97,8 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                             height="32"
                             src={
                               session.user.image ||
-                              `https://ui-avatars.com/api/?name=${session.user.name || session.user.email
+                              `https://ui-avatars.com/api/?name=${
+                                session.user.name || session.user.email
                               }`
                             }
                             alt=""
@@ -123,7 +128,7 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                                   }}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
+                                    "block px-4 py-2 text-sm text-gray-700",
                                   )}
                                 >
                                   {item.name}
@@ -140,9 +145,9 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                     <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-slate-400 dark:hover:bg-slate-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <MenuIcon
+                        <Bars3Icon
                           className="block h-6 w-6"
                           aria-hidden="true"
                         />
@@ -165,13 +170,13 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                             itemName === name
                               ? "border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-100"
                               : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-300",
-                            "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
+                            "block border-l-4 py-2 pl-3 pr-4 text-base font-medium",
                           )}
                           aria-current={itemName === name ? "page" : undefined}
                         >
                           {itemName}
                         </Disclosure.Button>
-                      )
+                      ),
                   )}
                 </div>
                 <div className="border-t border-gray-200 pt-4 pb-3">
@@ -183,7 +188,8 @@ export const Layout: FC<LayoutProps> = ({ children, title, name = 'Dashboard' })
                         height="40"
                         src={
                           session.user.image ||
-                          `https://ui-avatars.com/api/?name=${session.user.name || session.user.email
+                          `https://ui-avatars.com/api/?name=${
+                            session.user.name || session.user.email
                           }`
                         }
                         alt=""

@@ -16,7 +16,7 @@ export const eventbriteRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const url = `https://www.eventbriteapi.com/v3/events/${input.id}/ticket_classes/`;

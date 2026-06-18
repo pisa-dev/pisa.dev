@@ -15,10 +15,10 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
   const q = api.survey.getSurvey.useQuery({ id });
 
   useEffect(() => {
-    if (!q.data && !q.isLoading && !q.isError) {
+    if (!q.data && !q.isPending && !q.isError) {
       router.push("/404");
     }
-  }, [router, q.data, q.isLoading, q.isError]);
+  }, [router, q.data, q.isPending, q.isError]);
 
   return (
     <>
@@ -31,7 +31,7 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
         <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col items-center justify-between gap-8 py-8 px-4">
           {q.data ? (
             <Survey survey={q.data} />
-          ) : q.isLoading ? (
+          ) : q.isPending ? (
             <SurveyPageLoading />
           ) : null}
 
