@@ -3,13 +3,14 @@ import { Header } from "@/components/Header";
 import { IoMdSend } from "react-icons/io";
 
 type JobsMailtoPageProps = {
-  searchParams?: {
+  searchParams?: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 };
 
-export default function JobsMailtoPage({ searchParams }: JobsMailtoPageProps) {
-  const address = searchParams?.address;
+export default async function JobsMailtoPage({ searchParams }: JobsMailtoPageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const address = resolvedSearchParams?.address;
 
   return (
     <>

@@ -12,9 +12,9 @@ import { Header } from "@/components/Header";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
 
 type EventPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 async function getEvent(slug: string) {
@@ -36,7 +36,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: EventPageProps): Promise<Metadata> {
-  const event = await getEvent(params.slug);
+  const { slug } = await params;
+  const event = await getEvent(slug);
 
   if (!event) {
     return {};
@@ -45,13 +46,14 @@ export async function generateMetadata({
   return {
     title: `${event.title} - pisa.dev`,
     openGraph: {
-      images: [`/api/img/events/${params.slug}`],
+      images: [`/api/img/events/${slug}`],
     },
   };
 }
 
 export default async function EventPage({ params }: EventPageProps) {
-  const event = await getEvent(params.slug);
+  const { slug } = await params;
+  const event = await getEvent(slug);
 
   if (!event) {
     notFound();

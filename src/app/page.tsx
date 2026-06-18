@@ -1,14 +1,15 @@
 import HomePageClient from "./page-client";
 
 type HomePageProps = {
-  searchParams?: {
+  searchParams?: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 };
 
-export default function HomePage({ searchParams }: HomePageProps) {
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const showEmailVerifiedBanner =
-    typeof searchParams?.email_verified !== "undefined";
+    typeof resolvedSearchParams?.email_verified !== "undefined";
 
   return <HomePageClient showEmailVerifiedBanner={showEmailVerifiedBanner} />;
 }
