@@ -9,6 +9,11 @@ export const FallbackEventImage = () => (
       backgroundColor: "black",
     }}
   >
-    <Image src="/logo2.svg" alt="Pisa.dev logo" fill={true} />
+    <Image
+      src="/logo2.svg"
+      alt="Pisa.dev logo"
+      fill={true}
+      sizes="(max-width: 1024px) 100vw, 33vw"
+    />
   </div>
 );
