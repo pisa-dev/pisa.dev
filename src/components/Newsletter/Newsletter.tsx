@@ -14,7 +14,7 @@ export const NewsletterBanner: FC = () => {
   };
 
   const disabled =
-    newsletterMutation.isLoading ||
+    newsletterMutation.isPending ||
     newsletterMutation.isError ||
     newsletterMutation.isSuccess;
   const success = newsletterMutation.isSuccess;

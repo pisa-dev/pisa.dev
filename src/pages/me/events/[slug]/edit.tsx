@@ -12,11 +12,11 @@ export const EditEventPage = () => {
   const query = api.events.getBySlug.useQuery(
     { slug },
     {
-      cacheTime: 0,
+      gcTime: 0,
     },
   );
 
-  if (query.isLoading) {
+  if (query.isPending) {
     return <p>Loading...</p>;
   }
 
@@ -37,7 +37,7 @@ export const EditEventPage = () => {
     <Layout title="Modifca Evento" name="Eventi">
       {!!event && (
         <EventForm
-          disabled={mutation.isLoading || mutation.isSuccess}
+          disabled={mutation.isPending || mutation.isSuccess}
           handler={(data, e) => onSubmit({ id: event.id, data }, e)}
           inputValues={event}
         ></EventForm>

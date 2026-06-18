@@ -34,9 +34,9 @@ export const EventsPage = () => {
   const q = api.events.getAll.useQuery();
   const _removeEvent = api.admin.events.remove.useMutation();
 
-  const isLoading = useMemo(
-    () => q.isLoading || _removeEvent.isLoading,
-    [q.isLoading, _removeEvent.isLoading],
+  const isPending = useMemo(
+    () => q.isPending || _removeEvent.isPending,
+    [q.isPending, _removeEvent.isPending],
   );
 
   const removeEvent = useCallback(
@@ -58,7 +58,7 @@ export const EventsPage = () => {
     ];
   }, [q.data]);
 
-  if (isLoading || !q.data) {
+  if (isPending || !q.data) {
     return <p>Loading...</p>;
   }
 

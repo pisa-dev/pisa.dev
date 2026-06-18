@@ -15,7 +15,7 @@ const SurveyResultsPage: NextPage = () => {
   }
 
   const q = api.survey.getSurveyResults.useQuery({ id: slug });
-  if (q.isLoading) {
+  if (q.isPending) {
     return <div>Loading...</div>;
   }
 

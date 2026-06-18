@@ -21,7 +21,7 @@ export const NewEventPage = () => {
   return (
     <Layout title="Nuovo Evento" name="Eventi">
       <EventForm
-        disabled={mutation.isLoading}
+        disabled={mutation.isPending}
         handler={(d, e) => onSubmit(d, e)}
       ></EventForm>
     </Layout>

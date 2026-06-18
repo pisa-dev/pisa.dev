@@ -11,7 +11,7 @@ const ProposalPage = () => {
 
   const q = api.proposals.getById.useQuery({ id: router.query.id });
 
-  if (q.isLoading) {
+  if (q.isPending) {
     return <p>Loading...</p>;
   }
 

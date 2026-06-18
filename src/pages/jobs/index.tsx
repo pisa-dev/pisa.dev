@@ -12,7 +12,7 @@ import { JobOfferSkeleton } from "@/components/Jobs/JobOfferSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const JobsPage: NextPage = () => {
-  const { data, isLoading, hasNextPage, fetchNextPage } =
+  const { data, isPending, hasNextPage, fetchNextPage } =
     api.jobs.getPage.useInfiniteQuery(
       { limit: 20 },
       {
@@ -74,7 +74,7 @@ const JobsPage: NextPage = () => {
               ))}
           </InfiniteScroll>
 
-          {isLoading && <JobOfferSkeleton />}
+          {isPending && <JobOfferSkeleton />}
         </div>
       </main>
       <Footer />

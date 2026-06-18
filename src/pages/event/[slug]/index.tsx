@@ -13,7 +13,7 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from "next";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { createServerSideHelpers } from "@trpc/react-query/server";
 import { createInnerTRPCContext } from "~/server/api/trpc";
 import { api } from "@/utils/api";
 import { appRouter } from "@/server/api/root";
@@ -101,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const ssg = createProxySSGHelpers({
+  const ssg = createServerSideHelpers({
     router: appRouter,
     ctx: createInnerTRPCContext({
       session: null,
