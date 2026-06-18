@@ -275,7 +275,7 @@ const JobOffersNewPage = () => {
                                     selected
                                       ? "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:border-indigo-500 dark:bg-slate-600 dark:text-gray-200 dark:ring-indigo-500 dark:hover:bg-slate-500"
                                       : "bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:bg-slate-800 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-gray-300",
-                                    "rounded-md border border-transparent px-3 py-1.5 text-sm font-medium"
+                                    "rounded-md border border-transparent px-3 py-1.5 text-sm font-medium",
                                   )
                                 }
                               >
@@ -287,7 +287,7 @@ const JobOffersNewPage = () => {
                                     selected
                                       ? "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:border-indigo-500 dark:bg-slate-600 dark:text-gray-200 dark:ring-indigo-500 dark:hover:bg-slate-500"
                                       : "bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:bg-slate-800 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-gray-300",
-                                    "ml-2 rounded-md border border-transparent px-3 py-1.5 text-sm font-medium"
+                                    "ml-2 rounded-md border border-transparent px-3 py-1.5 text-sm font-medium",
                                   )
                                 }
                               >

@@ -13,7 +13,7 @@ export const EditEventPage = () => {
     { slug },
     {
       cacheTime: 0,
-    }
+    },
   );
 
   if (query.isLoading) {

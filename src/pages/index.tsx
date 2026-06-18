@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     },
     {
       staleTime: Infinity,
-    }
+    },
   );
 
   if (!q.data) {

@@ -7,7 +7,7 @@ export const surveyRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.survey.findFirst({
@@ -28,7 +28,7 @@ export const surveyRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.survey.findFirst({
@@ -58,7 +58,7 @@ export const surveyRouter = createTRPCRouter({
     .input(
       z.object({
         questionId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.surveyQuestion.findFirst({
@@ -82,7 +82,7 @@ export const surveyRouter = createTRPCRouter({
       z.object({
         surveyId: z.string(),
         correlationId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.surveyAnswer.findMany({
@@ -107,7 +107,7 @@ export const surveyRouter = createTRPCRouter({
           answer: z.string(),
           correlationId: z.string(),
         }),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       if (!input.id) {

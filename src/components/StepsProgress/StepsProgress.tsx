@@ -21,7 +21,7 @@ export const StepsProgress: FC<StepsProgressProps> = ({ current, total }) => {
               key={i}
               className={classNames(
                 i !== total - 1 ? "pr-8 md:pr-20" : "",
-                "relative"
+                "relative",
               )}
             >
               {i < current ? (

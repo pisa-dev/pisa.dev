@@ -4,7 +4,7 @@ import { useLocalStorage } from "usehooks-ts";
 export const useSurveyCorrelationId = () => {
   const [correlationId, setCorrelationId] = useLocalStorage(
     "correlation-id",
-    ""
+    "",
   );
   useEffect(() => {
     if (!correlationId) {

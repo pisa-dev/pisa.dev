@@ -46,13 +46,13 @@ export const EventForm: FC<EventFormProps> = ({
     formState: { errors },
   } = useForm<EventWithSpeaker>({
     defaultValues: inputValues,
-    mode: 'onSubmit',
+    mode: "onSubmit",
   });
   const values = watch();
 
   useEffect(() => {
     if (!values.eventbriteId) {
-      setValue('unlisted', true);
+      setValue("unlisted", true);
     }
   }, [setValue, values.eventbriteId]);
 
@@ -66,7 +66,11 @@ export const EventForm: FC<EventFormProps> = ({
           >
             Title
           </label>
-          <Input type="text" {...register("title", { required: true })} error={errors.title} />
+          <Input
+            type="text"
+            {...register("title", { required: true })}
+            error={errors.title}
+          />
         </div>
 
         <div className="col-span-6 sm:col-span-3">
@@ -76,7 +80,14 @@ export const EventForm: FC<EventFormProps> = ({
           >
             Slug
           </label>
-          <Input type="text" {...register("slug", { required: true, disabled: !!inputValues?.slug })} error={errors.slug} />
+          <Input
+            type="text"
+            {...register("slug", {
+              required: true,
+              disabled: !!inputValues?.slug,
+            })}
+            error={errors.slug}
+          />
           {inputValues?.slug && (
             <small className="mt-2 text-red-400">
               Attenzione! Modificare lo slug invaliderà tutti i link condivisi!
@@ -189,14 +200,15 @@ export const EventForm: FC<EventFormProps> = ({
             </div>
 
             <div className="ml-3 text-sm">
-              <label htmlFor="unlisted">
-                Nascondi
-              </label>
+              <label htmlFor="unlisted">Nascondi</label>
             </div>
           </div>
-          <div style={{ visibility: !values.eventbriteId ? 'visible' : 'hidden' }}>
+          <div
+            style={{ visibility: !values.eventbriteId ? "visible" : "hidden" }}
+          >
             <small className="mt-2 text-red-400 block">
-              Attenzione! Non è possible rendere pubblico l&apos;evento senza fornire un ID EventBrite
+              Attenzione! Non è possible rendere pubblico l&apos;evento senza
+              fornire un ID EventBrite
             </small>
           </div>
         </div>
@@ -207,11 +219,7 @@ export const EventForm: FC<EventFormProps> = ({
             Scegli la cover da usare per la card dell&apos;evento
           </small>
           <div className="mt-4 flex flex-col items-center justify-center">
-            <Input
-              type="URL"
-              className="mb-2"
-              {...register("imageUrl")}
-            />
+            <Input type="URL" className="mb-2" {...register("imageUrl")} />
             <div className="mt-8">
               {values.imageUrl && isValidURL(values.imageUrl) ? (
                 <>
@@ -224,25 +232,25 @@ export const EventForm: FC<EventFormProps> = ({
                   />
                   <Button
                     className="block w-full bg-red-400 hover:bg-red-600"
-                    onClick={() => setValue("imageUrl", null, { shouldValidate: true })}
+                    onClick={() =>
+                      setValue("imageUrl", null, { shouldValidate: true })
+                    }
                   >
                     remove
                   </Button>
                 </>
-              )
-                : <div style={{ width: 512, height: 256, }}>
+              ) : (
+                <div style={{ width: 512, height: 256 }}>
                   <FallbackEventImage />
                 </div>
-              }
+              )}
             </div>
           </div>
         </div>
       </div>
 
       <div className="mt-6 flex w-full justify-end">
-        <Button type="submit">
-          Salva
-        </Button>
+        <Button type="submit">Salva</Button>
       </div>
     </form>
   );

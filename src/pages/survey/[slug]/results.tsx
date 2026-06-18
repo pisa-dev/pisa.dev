@@ -101,7 +101,7 @@ const average = (answers: SurveyAnswer[]): string =>
   ).toFixed(2);
 
 const topAnswer = (
-  answers: SurveyAnswer[]
+  answers: SurveyAnswer[],
 ): { answer: string; percentage: string } | null => {
   if (!answers || !answers.length || !answers[0]) {
     return null;

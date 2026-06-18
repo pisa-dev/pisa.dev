@@ -7,7 +7,7 @@ export const newsletterRouter = createTRPCRouter({
     .input(
       z.object({
         email: z.string().email(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       await registerUser(input.email);

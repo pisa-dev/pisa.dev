@@ -36,7 +36,7 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
       key={jobOffer.id}
       className={classNames(
         "w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md dark:border-slate-600 dark:bg-slate-800",
-        "hover:shadow-slate-300 dark:hover:shadow-purple-900"
+        "hover:shadow-slate-300 dark:hover:shadow-purple-900",
       )}
     >
       <Disclosure>
@@ -82,7 +82,7 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
                   {
                     "bg-gradient-brand bg-clip-text font-bold uppercase text-transparent":
                       dayjs(jobOffer.createdAt).fromNow(true) === "New",
-                  }
+                  },
                 )}
               >
                 {dayjs(jobOffer.createdAt).fromNow(true)}
@@ -90,7 +90,7 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
               <ChevronDownIcon
                 className={classNames(
                   "w-5 flex-shrink-0 transition-transform",
-                  { "rotate-180": open }
+                  { "rotate-180": open },
                 )}
               />
             </Disclosure.Button>

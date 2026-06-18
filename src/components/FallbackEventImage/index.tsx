@@ -1,1 +1,1 @@
-export * from './FallbackEventImage';
+export * from "./FallbackEventImage";

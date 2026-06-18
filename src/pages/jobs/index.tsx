@@ -17,7 +17,7 @@ const JobsPage: NextPage = () => {
       { limit: 20 },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
-      }
+      },
     );
 
   const dataLength = useMemo(() => {

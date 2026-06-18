@@ -43,7 +43,7 @@ const getAuthProviders = () => {
       GoogleProvider({
         clientId: env.GOOGLE_ID,
         clientSecret: env.GOOGLE_SECRET,
-      })
+      }),
     );
   }
 

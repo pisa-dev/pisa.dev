@@ -34,7 +34,7 @@ export const EventAdminInfo: FC<EventAdminInfoProps> = ({ eventId }) => {
 
                     <div className="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 md:mt-2 lg:mt-0">
                       {Math.floor(
-                        (item.quantity_sold / item.quantity_total) * 100
+                        (item.quantity_sold / item.quantity_total) * 100,
                       )}
                       %
                     </div>

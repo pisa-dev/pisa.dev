@@ -28,7 +28,7 @@ export const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({
   const plausible = usePlausible();
 
   const status = useScript(
-    "https://www.eventbrite.it/static/widgets/eb_widgets.js"
+    "https://www.eventbrite.it/static/widgets/eb_widgets.js",
   );
 
   useEffect(() => {

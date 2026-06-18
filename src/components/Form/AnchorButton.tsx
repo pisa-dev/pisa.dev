@@ -4,7 +4,7 @@ import { defaultButtonClasses } from "./Button";
 
 const _AnchorButton = (
   { className, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>,
-  ref: ForwardedRef<HTMLAnchorElement>
+  ref: ForwardedRef<HTMLAnchorElement>,
 ) => (
   <a
     ref={ref}
@@ -15,5 +15,7 @@ const _AnchorButton = (
   </a>
 );
 
-export const AnchorButton =
-  React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(_AnchorButton);
+export const AnchorButton = React.forwardRef<
+  HTMLAnchorElement,
+  AnchorHTMLAttributes<HTMLAnchorElement>
+>(_AnchorButton);

@@ -16,7 +16,7 @@ export interface SurveyQuestionProps {
 }
 
 export const questionElementByKind = (
-  k: SurveyQuestionKind
+  k: SurveyQuestionKind,
 ): FC<SurveyQuestionProps> | null => {
   switch (k) {
     case "stars":
