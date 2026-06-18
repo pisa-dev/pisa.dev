@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { api } from "@/utils/api";

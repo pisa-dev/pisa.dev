@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, useEffect } from "react";
 import { usePlausible } from "next-plausible";
 import { useScript } from "usehooks-ts";

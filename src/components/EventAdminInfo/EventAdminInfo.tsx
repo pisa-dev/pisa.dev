@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { api } from "@/utils/api";
 

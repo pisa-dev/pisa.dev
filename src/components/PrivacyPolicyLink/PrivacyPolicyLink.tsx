@@ -1,3 +1,5 @@
+"use client";
+
 import { useScript } from "usehooks-ts";
 import { usePlausible } from "next-plausible";
 

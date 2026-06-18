@@ -1,7 +1,8 @@
+"use client";
+
 import { Header } from "@/components/Header";
 import { api } from "@/utils/api";
-import Head from "next/head";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FC, useEffect } from "react";
 import { Survey } from "./Survey";
 import { SurveyPageLoading } from "./SurveyPageLoading";
@@ -22,10 +23,6 @@ export const SurveyPageContent: FC<SurveyPageContentProps> = ({ id }) => {
 
   return (
     <>
-      <Head>
-        <title>{q.data?.title || "Survey"} - pisa.dev</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col items-center justify-between gap-8 py-8 px-4">
