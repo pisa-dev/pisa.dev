@@ -59,6 +59,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         <div tw="h-full w-2/3 grow flex flex-col justify-between p-16">
           <div tw="flex h-14 w-full">
             <img
+              alt="pisa.dev logo"
               style={{
                 objectFit: "contain",
               }}
@@ -113,6 +114,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 >
                   <div tw="flex overflow-hidden rounded-full h-24 w-24">
                     <img
+                      alt={speaker.name}
                       style={{ objectFit: "cover" }}
                       tw=" h-full w-full"
                       src={speaker.imageUrl}
@@ -150,6 +152,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     tw="flex overflow-hidden rounded-full h-22 w-22"
                   >
                     <img
+                      alt={speaker.name}
                       style={{ objectFit: "cover" }}
                       tw=" h-full w-full"
                       src={speaker.imageUrl}
@@ -173,6 +176,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         <div tw="flex h-full w-1/3">
           <img
+            alt="Event background"
             style={{
               objectFit: "cover",
               width: "100%",

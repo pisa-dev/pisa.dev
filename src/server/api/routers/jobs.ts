@@ -1,7 +1,6 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 import { JobOffer, JobOfferTags, RemoteKind } from "@prisma/client";
-import fetch from "node-fetch";
 import { env } from "~/env.mjs";
 
 export type JobOfferWithTags = JobOffer & {
