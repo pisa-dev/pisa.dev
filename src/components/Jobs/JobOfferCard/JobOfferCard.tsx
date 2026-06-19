@@ -1,13 +1,14 @@
+"use client";
+
 import { FC } from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { RemoteKind } from "@prisma/client";
-import { JobOfferWithTags } from "~/server/api/routers/jobs";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { JobOfferTagList } from "../JobOfferTagList";
+import { JobOffer } from "@/lib/jobs";
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocale);
@@ -28,9 +29,7 @@ dayjs.updateLocale("en", {
   },
 });
 
-export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
-  jobOffer,
-}) => {
+export const JobOfferCard: FC<{ jobOffer: JobOffer }> = ({ jobOffer }) => {
   return (
     <div
       key={jobOffer.id}
@@ -57,9 +56,9 @@ export const JobOfferCard: FC<{ jobOffer: JobOfferWithTags }> = ({
                     </div>
                   )}
                   <div className="truncate whitespace-pre rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
-                    {jobOffer.remote === RemoteKind.full && `🌎 Remoto`}
-                    {jobOffer.remote === RemoteKind.no && `🖥️  In sede`}
-                    {jobOffer.remote === RemoteKind.partial && `💻  Ibrido`}
+                    {jobOffer.remote === "full" && `🌎 Remoto`}
+                    {jobOffer.remote === "no" && `🖥️  In sede`}
+                    {jobOffer.remote === "partial" && `💻  Ibrido`}
                   </div>
                   <div className="truncate rounded-lg border border-gray-300 py-[2px] px-1 dark:border-slate-600 dark:bg-slate-700">
                     💰 {jobOffer.salaryRange}

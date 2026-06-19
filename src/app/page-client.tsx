@@ -8,7 +8,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeaderBanner } from "@/components/Headerbanner";
 import { Hero } from "@/components/Hero";
-import { NewsletterBanner } from "@/components/Newsletter";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
 import { usePlausible } from "next-plausible";
@@ -23,7 +22,7 @@ export default function HomePageClient({
   showEmailVerifiedBanner,
   events,
 }: HomePageClientProps) {
-  const newsletterRef = useRef<HTMLDivElement>(null);
+  const teamRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
 
   const now = new Date();
@@ -44,7 +43,7 @@ export default function HomePageClient({
         <Hero
           cta={() => {
             plausible("newsletter-cta");
-            newsletterRef.current?.scrollIntoView({
+            teamRef.current?.scrollIntoView({
               behavior: "smooth",
               block: "center",
             });
@@ -67,10 +66,9 @@ export default function HomePageClient({
         )}
 
         <Team />
-        <div ref={newsletterRef}>
-          <NewsletterBanner />
+        <div ref={teamRef}>
+          <Sponsors />
         </div>
-        <Sponsors />
       </main>
       <Footer />
     </>
