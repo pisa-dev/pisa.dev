@@ -2,10 +2,20 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JobOfferCard } from "@/components/Jobs/JobOfferCard/JobOfferCard";
 import { getAllJobs } from "@/lib/jobs";
+import { compileMDX } from "next-mdx-remote/rsc";
 import Link from "next/link";
 
 export default async function JobsPage() {
   const jobs = await getAllJobs();
+
+  const jobsWithMdx = await Promise.all(
+    jobs.map(async (job) => {
+      const mdx = await compileMDX({
+        source: job.content,
+      });
+      return { ...job, mdxContent: mdx.content };
+    }),
+  );
 
   return (
     <div className="flex min-h-screen w-screen flex-col">
@@ -29,8 +39,8 @@ export default async function JobsPage() {
         </p>
 
         <div className="mt-10 space-y-4">
-          {jobs.map((jobOffer) => (
-            <JobOfferCard key={jobOffer.id} jobOffer={jobOffer} />
+          {jobsWithMdx.map((jobOffer) => (
+            <JobOfferCard key={jobOffer.slug} jobOffer={jobOffer} />
           ))}
         </div>
       </main>

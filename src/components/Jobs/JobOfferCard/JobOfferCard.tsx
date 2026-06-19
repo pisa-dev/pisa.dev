@@ -29,10 +29,12 @@ dayjs.updateLocale("en", {
   },
 });
 
-export const JobOfferCard: FC<{ jobOffer: JobOffer }> = ({ jobOffer }) => {
+export const JobOfferCard: FC<{
+  jobOffer: JobOffer & { mdxContent: React.ReactNode };
+}> = ({ jobOffer }) => {
   return (
     <div
-      key={jobOffer.id}
+      key={jobOffer.slug}
       className={classNames(
         "w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md dark:border-slate-600 dark:bg-slate-800",
         "hover:shadow-slate-300 dark:hover:shadow-purple-900",
@@ -99,9 +101,9 @@ export const JobOfferCard: FC<{ jobOffer: JobOffer }> = ({ jobOffer }) => {
                   <JobOfferTagList tags={jobOffer.tags} />
                 </div>
               )}
-              <p className="whitespace-pre-line text-sm sm:text-base">
-                {jobOffer.description}
-              </p>
+              <div className="prose prose-sm prose-indigo mx-auto mt-2 mb-4 dark:prose-invert sm:prose-base">
+                {jobOffer.mdxContent}
+              </div>
               {jobOffer.offerURL && (
                 <div className="prose prose-indigo mx-auto mt-10 mb-4 text-center text-sm dark:prose-invert sm:text-base">
                   Interessato?{" "}
