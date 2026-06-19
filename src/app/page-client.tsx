@@ -6,7 +6,6 @@ import { Announcement } from "@/components/Announcement";
 import { EventsList } from "@/components/EventsList";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { HeaderBanner } from "@/components/Headerbanner";
 import { Hero } from "@/components/Hero";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
@@ -14,14 +13,10 @@ import { usePlausible } from "next-plausible";
 import { MdxEvent } from "@/lib/events";
 
 type HomePageClientProps = {
-  showEmailVerifiedBanner: boolean;
   events: MdxEvent[];
 };
 
-export default function HomePageClient({
-  showEmailVerifiedBanner,
-  events,
-}: HomePageClientProps) {
+export default function HomePageClient({ events }: HomePageClientProps) {
   const teamRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
 
@@ -31,12 +26,6 @@ export default function HomePageClient({
 
   return (
     <>
-      {showEmailVerifiedBanner && (
-        <HeaderBanner
-          className="bg-lime-600"
-          text="Il tuo indirizzo email è stato verificato con successo!"
-        />
-      )}
       {upcoming.length > 0 && upcoming[0] && <Announcement event={upcoming[0]} />}
       <Header />
       <main>

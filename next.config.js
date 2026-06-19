@@ -1,28 +1,11 @@
 /** @type {import('next').NextConfig} */
-const { withPlausibleProxy } = require("next-plausible");
-
 const nextConfig = {
-  output: "standalone",
+  output: "export",
+  distDir: "dist",
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "ui-avatars.com" },
-      { protocol: "https", hostname: "*.googleusercontent.com" },
-      { protocol: "https", hostname: "avatars.githubusercontent.com" },
-      { protocol: "https", hostname: "data.pisa.dev" },
-    ],
-  },
-  async redirects() {
-    return [
-      {
-        source: "/me",
-        destination: "/me/dashboard",
-        permanent: true,
-      },
-    ];
+    unoptimized: true,
   },
 };
 
-module.exports = withPlausibleProxy({
-  customDomain: "https://plausible.anto.pt",
-})(nextConfig);
+module.exports = nextConfig;
