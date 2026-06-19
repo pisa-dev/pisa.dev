@@ -1,6 +1,6 @@
-import { Event } from "@prisma/client";
 import Link from "next/link";
 import { FC } from "react";
+import { Event } from "@/types/event";
 
 export interface AnnouncementProps {
   event: Event;
@@ -13,7 +13,7 @@ export const Announcement: FC<AnnouncementProps> = ({ event }) => {
         <div className="text-sm sm:px-16 sm:text-center sm:text-base">
           <p className="font-medium text-white">
             <span>
-              🎉🔥 “{event.title}”,&nbsp;
+              🎉🔥 "{event.title}",&nbsp;
               {event.date.toLocaleDateString(new Intl.Locale("it"), {
                 day: "numeric",
                 month: "long",

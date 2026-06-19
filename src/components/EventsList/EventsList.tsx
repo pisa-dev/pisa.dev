@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { EventCard } from "@/components/EventCard";
-import { EventWithSpeaker } from "~/server/api/routers/events";
+import { Event } from "@/types/event";
 
 export interface UpcomingEventsProps {
   title: string;
   description: string;
-  events: EventWithSpeaker[];
+  events: Event[];
 }
 
 export const EventsList: FC<UpcomingEventsProps> = ({
@@ -30,7 +30,7 @@ export const EventsList: FC<UpcomingEventsProps> = ({
         <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
           {events.length < 2 && <div />}
           {events.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <EventCard key={event.slug} event={event} />
           ))}
         </div>
       </div>

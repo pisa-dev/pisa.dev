@@ -11,32 +11,24 @@ import { Hero } from "@/components/Hero";
 import { NewsletterBanner } from "@/components/Newsletter";
 import { Sponsors } from "@/components/Sponsors";
 import { Team } from "@/components/Team";
-import { api } from "@/utils/api";
 import { usePlausible } from "next-plausible";
+import { MdxEvent } from "@/lib/events";
 
 type HomePageClientProps = {
   showEmailVerifiedBanner: boolean;
+  events: MdxEvent[];
 };
 
 export default function HomePageClient({
   showEmailVerifiedBanner,
+  events,
 }: HomePageClientProps) {
   const newsletterRef = useRef<HTMLDivElement>(null);
   const plausible = usePlausible();
-  const q = api.events.getAll.useQuery(
-    {
-      unlisted: false,
-    },
-    {
-      staleTime: Infinity,
-    },
-  );
 
-  if (!q.data) {
-    return <div>loading</div>;
-  }
-
-  const { past, upcoming } = q.data;
+  const now = new Date();
+  const upcoming = events.filter((e) => e.date > now);
+  const past = events.filter((e) => e.date <= now);
 
   return (
     <>

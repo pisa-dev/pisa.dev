@@ -1,6 +1,11 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Speaker } from "@prisma/client";
+
+export interface Speaker {
+  name: string;
+  title?: string;
+  imageUrl?: string;
+}
 
 export interface SpeakerInfoProps {
   speaker: Speaker;
@@ -13,7 +18,7 @@ export const SpeakerInfo: FC<SpeakerInfoProps> = ({ speaker }) => (
       width="36"
       style={{ objectFit: "cover" }}
       className="inline-block rounded-full"
-      src={speaker.imageUrl}
+      src={speaker.imageUrl || "/logo2.svg"}
       alt=""
     />
     <div className="ml-3">

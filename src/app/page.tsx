@@ -1,4 +1,5 @@
 import HomePageClient from "./page-client";
+import { getAllEvents } from "@/lib/events";
 
 type HomePageProps = {
   searchParams?: Promise<{
@@ -11,5 +12,12 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const showEmailVerifiedBanner =
     typeof resolvedSearchParams?.email_verified !== "undefined";
 
-  return <HomePageClient showEmailVerifiedBanner={showEmailVerifiedBanner} />;
+  const events = await getAllEvents();
+
+  return (
+    <HomePageClient
+      showEmailVerifiedBanner={showEmailVerifiedBanner}
+      events={events}
+    />
+  );
 }

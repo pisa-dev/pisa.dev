@@ -4,18 +4,18 @@ import Link from "next/link";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { SpeakerInfo } from "@/components/SpeakerInfo";
-import { EventWithSpeaker } from "~/server/api/routers/events";
+import { Event } from "@/types/event";
 import { FallbackEventImage } from "../FallbackEventImage";
 
 import cls from "classnames";
 
 export interface EventCardProps {
-  event: EventWithSpeaker;
+  event: Event;
 }
 
 export const EventCard: FC<EventCardProps> = ({ event }) => (
   <div
-    key={event.title}
+    key={event.slug}
     className={cls(
       "flex flex-col overflow-hidden rounded-lg bg-white shadow-lg dark:bg-slate-800",
       { "opacity-80 grayscale": new Date() > event.date },
@@ -59,8 +59,8 @@ export const EventCard: FC<EventCardProps> = ({ event }) => (
         </Link>
       </div>
       <div className="align-center mt-6 flex flex-col gap-4">
-        {event.speakers.map((speaker) => (
-          <SpeakerInfo key={speaker.id} speaker={speaker} />
+        {event.speakers.map((speaker, i) => (
+          <SpeakerInfo key={i} speaker={speaker} />
         ))}
       </div>
     </div>
