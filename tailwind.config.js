@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["InterVariable", "sans-serif"],
+        sans: ["Inter Variable", "sans-serif"],
       },
       animation: {
         blob: "blob 7s infinite",

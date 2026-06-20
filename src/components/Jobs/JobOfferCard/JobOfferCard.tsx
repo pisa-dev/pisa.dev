@@ -101,7 +101,7 @@ export const JobOfferCard: FC<{
                   <JobOfferTagList tags={jobOffer.tags} />
                 </div>
               )}
-              <div className="prose prose-sm prose-indigo mx-auto mt-2 mb-4 dark:prose-invert sm:prose-base">
+              <div className="mt-2 mb-4 dark:prose-invert sm:prose-base">
                 {jobOffer.mdxContent}
               </div>
               {jobOffer.offerURL && (
