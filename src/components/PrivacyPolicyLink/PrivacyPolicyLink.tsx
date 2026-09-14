@@ -1,12 +1,11 @@
 import { useScript } from "usehooks-ts";
-import { usePlausible } from "next-plausible";
+import { trackGoatCounterEvent } from "~/utils/goatcounter";
 
 export const PrivacyPolicyLink = () => {
-  const plausible = usePlausible();
   useScript("https://cdn.iubenda.com/iubenda.js");
 
   const onClick = () => {
-    plausible("privacy-policy-link-click");
+    trackGoatCounterEvent("privacy-policy-link-click");
   };
 
   return (

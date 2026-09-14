@@ -2,7 +2,7 @@ import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
-import { usePlausible } from "next-plausible";
+import { trackGoatCounterEvent } from "~/utils/goatcounter";
 import { Announcement } from "@/components/Announcement";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -21,7 +21,6 @@ import { appRouter } from "~/server/api/root";
 const Home: NextPage = () => {
   const router = useRouter();
   const newsletterRef = useRef<HTMLDivElement>(null);
-  const plausible = usePlausible();
   const q = api.events.getAll.useQuery(
     {
       unlisted: false,
@@ -57,7 +56,7 @@ const Home: NextPage = () => {
       <main>
         <Hero
           cta={() => {
-            plausible("newsletter-cta");
+            trackGoatCounterEvent("newsletter-cta");
             newsletterRef.current?.scrollIntoView({
               behavior: "smooth",
               block: "center",

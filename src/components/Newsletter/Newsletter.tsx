@@ -1,12 +1,11 @@
 import { FC, FormEvent, useState } from "react";
 import { IoMdSend } from "react-icons/io";
-import { usePlausible } from "next-plausible";
+import { trackGoatCounterEvent } from "~/utils/goatcounter";
 import { api } from "@/utils/api";
 
 export const NewsletterBanner: FC = () => {
   const [email, setEmail] = useState("");
   const newsletterMutation = api.newsletter.subscribe.useMutation();
-  const plausible = usePlausible();
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -58,7 +57,9 @@ export const NewsletterBanner: FC = () => {
                   required
                   placeholder="Indirizzo email"
                   className="-my-2.5 flex-auto border-none bg-transparent pl-6 pr-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:ring-0"
-                  onFocus={() => plausible("newsletter-input-focus")}
+                  onFocus={() =>
+                    trackGoatCounterEvent("newsletter-input-focus")
+                  }
                 />
                 <button
                   className="inline-flex justify-center rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 p-2 text-base font-semibold text-white hover:bg-blue-500 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70 disabled:opacity-40 sm:p-4"

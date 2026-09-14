@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { usePlausible } from "next-plausible";
+import { trackGoatCounterEvent } from "~/utils/goatcounter";
 import { useScript } from "usehooks-ts";
 
 export interface EventbriteCheckoutProps {
@@ -25,15 +25,13 @@ declare global {
 export const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({
   eventId,
 }) => {
-  const plausible = usePlausible();
-
   const status = useScript(
     "https://www.eventbrite.it/static/widgets/eb_widgets.js"
   );
 
   useEffect(() => {
     const onOrderComplete = () => {
-      plausible("eventbrite-checkout-success", { props: { eventId } });
+      trackGoatCounterEvent(`eventbrite-checkout-success/${eventId}`);
     };
 
     if (!eventId || status !== "ready") {
@@ -47,7 +45,7 @@ export const EventbriteCheckout: FC<EventbriteCheckoutProps> = ({
       modalTriggerElementId: "eventbrite-widget-modal-trigger",
       onOrderComplete,
     });
-  }, [eventId, status, plausible]);
+  }, [eventId, status]);
 
   return (
     <div className="mt-2 flex w-full flex-shrink-0 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:inline-flex sm:w-auto">

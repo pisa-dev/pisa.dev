@@ -27,7 +27,6 @@
     "dayjs": "^1.11.5",
     "next": "^13.2.4",
     "next-auth": "^4.19.0",
-    "next-plausible": "^3.7.2",
     "pg": "^8.11.5",
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",

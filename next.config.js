@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { withPlausibleProxy } = require("next-plausible");
 
 const nextConfig = {
   output: "standalone",
@@ -18,11 +17,9 @@ const nextConfig = {
         source: "/me",
         destination: "/me/dashboard",
         permanent: true,
-      }
+      },
     ];
   },
 };
 
-module.exports = withPlausibleProxy({
-  customDomain: "https://plausible.anto.pt",
-})(nextConfig);
+module.exports = nextConfig;
