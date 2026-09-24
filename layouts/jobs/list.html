@@ -3,6 +3,8 @@
   <p class="eyebrow">Archivio</p>
   <h1>{{ .Title }}</h1>
   <p class="intro">Archivio delle offerte di lavoro condivise dalla community. Per le nuove offerte puoi seguire il <a href="https://t.me/pisajobs" target="_blank" rel="noopener noreferrer">canale Telegram pisa.jobs</a>.</p>
+  {{ $template := "---\ntitle: \"Titolo dell’offerta\"\ndate: \"YYYY-MM-DD\"\ncompany: \"Nome azienda\"\napplication_url: \"https://link-per-candidarsi\"\nsalary: \"RAL o compenso\"\nremote: \"partial\"\nlocation: \"Pisa\"\ntags: []\n---\n\nDescrizione completa dell’offerta.\n" }}
+  <p class="job-publish"><a class="button" href="https://github.com/pisa-dev/pisa.dev/new/main/content/jobs?filename=YYYY-MM-DD-titolo-offerta.md&amp;value={{ $template | urlquery }}">Pubblica offerta</a></p>
   <ol class="job-list">
     {{ range .RegularPages.ByDate.Reverse }}
     <li>

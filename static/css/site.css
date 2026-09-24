@@ -139,6 +139,9 @@ h3 { font-size: 1.25rem; }
 .jobs-page { width: min(calc(100% - 2rem), var(--width)); max-width: var(--width); margin-top: 2rem; padding-inline: 2rem; }
 .jobs-page h1 { margin: 0 0 .5rem; font-size: 2rem; font-weight: 700; }
 .jobs-page .intro { color: var(--muted); font-size: .875rem; }
+.jobs-page .job-publish { margin: 1.5rem 0 0; }
+.jobs-page .button { background: var(--accent); }
+.jobs-page .button:hover { background: #71123f; color: white; }
 .job-list { display: grid; gap: 1rem; margin: 2.5rem 0 5rem; padding: 0; list-style: none; }
 .job-card { overflow: hidden; border: 1px solid #e5e7eb; border-radius: .75rem; background: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%); }
 .job-card:hover { box-shadow: 0 10px 15px -3px rgb(148 163 184 / 35%); }

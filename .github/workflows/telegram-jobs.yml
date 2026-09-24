@@ -1,0 +1,30 @@
+name: Announce new job offers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/jobs/*.md'
+  workflow_dispatch:
+    inputs:
+      job_file:
+        description: Markdown file to announce (for a one-off test)
+        required: true
+        type: string
+        default: content/jobs/2025-11-20-tecnico-specializzato-industrial-iot-ai.md
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Post new offers to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          JOB_FILE: ${{ inputs.job_file }}
+        run: python3 scripts/post_job_to_telegram.py "${{ github.event.before }}" "${{ github.sha }}"
