@@ -1,0 +1,10 @@
+<header class="site-header">
+  <a class="brand" href="/" aria-label="pisa.dev, homepage"><img src="/logo.svg" width="200" height="60" alt="pisa.dev"></a>
+  <nav aria-label="Navigazione principale">
+    <a href="https://t.me/pisadev" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-telegram"></use></svg>Gruppo Telegram</a>
+    <a href="/jobs/" {{ if eq .RelPermalink "/jobs/" }}aria-current="page"{{ end }}><svg class="icon"><use href="#icon-briefcase"></use></svg>Offerte di lavoro</a>
+    <a href="https://twitter.com/pisa_dev" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-twitter"></use></svg>Twitter</a>
+    <a href="https://linkedin.com/company/pisa-dev" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-linkedin"></use></svg>LinkedIn</a>
+    <a href="https://github.com/pisa-dev" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#icon-github"></use></svg>GitHub</a>
+  </nav>
+</header>

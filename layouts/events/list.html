@@ -1,0 +1,7 @@
+{{ define "main" }}
+<main class="page-shell">
+  <p class="eyebrow">Archivio</p>
+  <h1>Eventi</h1>
+  <div class="event-grid">{{ range where .RegularPages "Params.unlisted" "ne" true }}{{ partial "event-card.html" . }}{{ end }}</div>
+</main>
+{{ end }}

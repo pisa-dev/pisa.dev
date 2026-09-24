@@ -1,0 +1,25 @@
+{{ define "main" }}
+<main class="page-shell jobs-page">
+  <p class="eyebrow">Archivio</p>
+  <h1>{{ .Title }}</h1>
+  <p class="intro">Archivio delle offerte di lavoro condivise dalla community. Per le nuove offerte puoi seguire il <a href="https://t.me/pisajobs" target="_blank" rel="noopener noreferrer">canale Telegram pisa.jobs</a>.</p>
+  <ol class="job-list">
+    {{ range .RegularPages.ByDate.Reverse }}
+    <li>
+      <details class="job-card">
+        <summary>
+          <span class="job-heading"><strong>{{ .Title }}</strong><span>{{ .Params.company }}</span><span class="job-facts">{{ with .Params.location }}<span>📍 {{ . }}</span>{{ end }}<span>{{ if eq .Params.remote "full" }}🌎 Remoto{{ else if eq .Params.remote "partial" }}💻 Ibrido{{ else }}🖥️ In sede{{ end }}</span><span>💰 {{ .Params.salary }}</span></span></span>
+          {{ with .Params.tags }}<span class="tags job-tags">{{ range . }}<span>{{ . }}</span>{{ end }}</span>{{ end }}
+          <time class="job-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
+          <span class="job-chevron"><svg class="icon"><use href="#icon-chevron-down"></use></svg></span>
+        </summary>
+        <div class="job-body prose">
+          {{ .Content }}
+          <p class="apply-link">Interessato? <a href="{{ if strings.Contains .Params.application_url "@" }}mailto:{{ .Params.application_url }}{{ else }}{{ .Params.application_url }}{{ end }}" target="_blank" rel="noopener noreferrer">Clicca qui per candidarti</a>.</p>
+        </div>
+      </details>
+    </li>
+    {{ end }}
+  </ol>
+</main>
+{{ end }}

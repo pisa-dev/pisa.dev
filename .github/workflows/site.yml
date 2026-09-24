@@ -1,0 +1,42 @@
+name: Build static site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.166.0'
+          extended: true
+      - name: Build
+        run: hugo --minify
+      - name: Verify static output
+        run: python3 scripts/check_static.py public
+      - name: Build static web-server image
+        run: docker build --file Dockerfile.ci --tag pisa.dev:ci .
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

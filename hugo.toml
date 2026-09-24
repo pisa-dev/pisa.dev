@@ -1,0 +1,25 @@
+baseURL = 'https://pisa.dev/'
+defaultContentLanguage = 'it'
+title = 'pisa.dev - la community degli sviluppatori pisani'
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term', 'RSS']
+
+[languages.it]
+  label = 'Italiano'
+  weight = 1
+
+[permalinks]
+  events = '/event/:slug/'
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[frontmatter]
+  date = ['date', 'publishDate']
+
+[[cascade]]
+  [cascade.build]
+    render = 'never'
+    list = 'local'
+  [cascade.target]
+    path = '/jobs/**'

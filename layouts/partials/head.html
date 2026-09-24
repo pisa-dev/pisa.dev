@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ $title := site.Title }}{{ if not .IsHome }}{{ $title = printf "%s | pisa.dev" .Title }}{{ end }}
+<title>{{ $title }}</title>
+{{ $description := .Description | default "La community degli sviluppatori pisani. Eventi gratuiti e informali per favorire lo scambio di conoscenza e la crescita professionale." }}
+<meta name="description" content="{{ $description }}">
+<meta property="og:site_name" content="pisa.dev">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="https://pisa.dev/hero.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/site.css">
+<script data-goatcounter="https://stats.pisa.dev/count" async src="//stats.pisa.dev/count.js"></script>

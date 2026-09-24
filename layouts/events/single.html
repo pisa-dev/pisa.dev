@@ -1,0 +1,20 @@
+{{ define "main" }}
+<main class="page-shell event-page">
+  {{ with .Params.speakers }}<ul class="speaker-list event-speakers">{{ range . }}<li>{{ with .image_url }}<img src="{{ . }}" alt="">{{ end }}<span><strong>{{ .name }}</strong><small>{{ .title }}</small></span></li>{{ end }}</ul>{{ end }}
+  <h1>{{ .Title }}</h1>
+  <div class="event-meta">
+    <p><svg class="icon"><use href="#icon-calendar"></use></svg><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format ":date_full" }} · {{ .Date.Format "15:04" }}</time></p>
+    <p><svg class="icon"><use href="#icon-map-pin"></use></svg><a href="https://www.google.com/maps/search/?api=1&query={{ .Params.location | urlquery }}" target="_blank" rel="noopener noreferrer">{{ .Params.location }}</a></p>
+  </div>
+  <div class="event-registration">
+    {{ if .Date.After now }}
+      {{ with .Params.eventbrite_id }}<p><a class="button" href="https://www.eventbrite.it/e/{{ . }}" target="_blank" rel="noopener noreferrer">Prenota il tuo posto su Eventbrite</a></p>{{ end }}
+      <span>Evento gratuito previa registrazione.</span>
+    {{ else }}
+      <span>Iscrizioni terminate.</span>
+    {{ end }}
+  </div>
+  {{ with .Params.abstract }}<p class="event-abstract">{{ . }}</p>{{ end }}
+  <article class="prose">{{ .Content }}</article>
+</main>
+{{ end }}
