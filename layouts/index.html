@@ -1,0 +1,54 @@
+{{ define "main" }}
+<main>
+  <section class="hero">
+    <div class="hero-shade"></div>
+    <div class="hero-content">
+      <h1><span>La community degli</span><span class="hero-title-accent">Sviluppatori pisani</span></h1>
+      <p>Eventi gratuiti e informali per favorire lo scambio di conoscenza e la crescita professionale.</p>
+      <a class="button button-light" href="https://mailinglist.pisa.dev/subscription/form" target="_blank" rel="noopener noreferrer">Iscriviti alla newsletter</a>
+    </div>
+  </section>
+
+  {{ $events := where site.RegularPages "Section" "events" }}
+  {{ $publicEvents := where $events "Params.unlisted" "ne" true }}
+  {{ $upcoming := sort (where $publicEvents "Date" "ge" now) "Date" "asc" }}
+  {{ $past := sort (where $publicEvents "Date" "lt" now) "Date" "desc" }}
+  {{ if $upcoming }}
+  <section class="section" aria-labelledby="upcoming-title">
+    <div class="section-heading"><p class="eyebrow">Incontriamoci</p><h2 id="upcoming-title">I prossimi eventi</h2><p>Siamo continuamente alla ricerca di speaker e nuove idee. Contattaci e proponi un talk!</p></div>
+    <div class="event-grid">{{ range $upcoming }}{{ partial "event-card.html" . }}{{ end }}</div>
+  </section>
+  {{ end }}
+
+  {{ if $past }}
+  <section class="section section-muted" aria-labelledby="past-title">
+    <div class="section-heading"><h2 id="past-title">Eventi passati</h2><p>Troppo tardi! Questi sono gli eventi che abbiamo già avuto, iscriviti alla newsletter per non perderne altri!</p></div>
+    <div class="event-grid">{{ range $past }}{{ partial "event-card.html" . }}{{ end }}</div>
+  </section>
+  {{ end }}
+
+  <section class="section team-section" aria-labelledby="team-title">
+    <div class="section-heading"><p class="eyebrow">Chi siamo</p><h2 id="team-title">Il team di pisa.dev</h2><p>Siamo volontari, sviluppatori, creatori e collaboratori di questa community.</p></div>
+    <ul class="people-grid">
+      <li><img src="/antonio.jpg" alt=""><h3>Antonio Pitasi</h3><p><a href="https://github.com/pitasi" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://twitter.com/pitasiantonio" aria-label="Twitter"><svg class="icon"><use href="#icon-twitter"></use></svg><span class="sr-only">Twitter</span></a><a href="https://linkedin.com/in/pitasi" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+      <li><img src="/federico.jpg" alt=""><h3>Federico Gerardi</h3><p><a href="https://azraelsec.it" aria-label="Website"><svg class="icon"><use href="#icon-home"></use></svg><span class="sr-only">Website</span></a><a href="https://github.com/azraelsec" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://twitter.com/azraelsec" aria-label="Twitter"><svg class="icon"><use href="#icon-twitter"></use></svg><span class="sr-only">Twitter</span></a><a href="https://linkedin.com/in/azraelsec" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+      <li><img src="/luca.webp" alt=""><h3>Luca Corbucci</h3><p><a href="https://lucacorbucci.me" aria-label="Website"><svg class="icon"><use href="#icon-home"></use></svg><span class="sr-only">Website</span></a><a href="https://github.com/lucacorbucci" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://twitter.com/lucacorbucci" aria-label="Twitter"><svg class="icon"><use href="#icon-twitter"></use></svg><span class="sr-only">Twitter</span></a><a href="https://www.linkedin.com/in/lucacorbucci/" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+      <li><img src="/davide_rossi.jpg" alt=""><h3>Davide Rossi</h3><p><a href="https://github.com/daviderossi11" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://www.linkedin.com/in/davide-rossi-030a73212" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+      <li><img src="/ettore.jpg" alt=""><h3>Ettore Puccetti</h3><p><a href="https://github.com/EttorePuccio" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://twitter.com/EttorePuccio" aria-label="Twitter"><svg class="icon"><use href="#icon-twitter"></use></svg><span class="sr-only">Twitter</span></a><a href="https://linkedin.com/in/ettorepuccetti" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+      <li><img src="/francesca.jpeg" alt=""><h3>Francesca Paluello</h3><p><a href="https://github.com/francypalu" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg><span class="sr-only">GitHub</span></a><a href="https://www.linkedin.com/in/francesca-paluello-457616254/" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg><span class="sr-only">LinkedIn</span></a></p></li>
+    </ul>
+  </section>
+
+  <section class="newsletter section" aria-labelledby="newsletter-title">
+    <div><p class="eyebrow">Rimaniamo in contatto</p><h2 id="newsletter-title">Sei pronto a partecipare?</h2><p>I nostri eventi sono gratuiti ma i posti sono limitati. Iscriviti per non perderti i prossimi.</p></div>
+    <a class="button" href="https://mailinglist.pisa.dev/subscription/form" target="_blank" rel="noopener noreferrer">Iscriviti alla newsletter</a>
+  </section>
+
+  <section class="sponsors" aria-label="In collaborazione con">
+    <p>In collaborazione con</p>
+    <a href="https://pointerpodcast.it" target="_blank" rel="noopener noreferrer"><img src="/pointerpodcast.png" alt="Pointer Podcast"></a>
+    <a href="https://superherovalley.fun/" target="_blank" rel="noopener noreferrer"><img src="/superherovalley.png" alt="Superhero Valley"></a>
+    <a href="https://www.schrodinger-hat.it/" target="_blank" rel="noopener noreferrer"><img src="/schroedinger-hat.png" alt="Schrödinger Hat"></a>
+  </section>
+</main>
+{{ end }}

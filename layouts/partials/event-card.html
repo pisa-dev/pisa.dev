@@ -1,0 +1,12 @@
+<article class="event-card{{ if .Date.Before now }} event-past{{ end }}">
+  {{ with .Params.image_url }}<img class="event-image" src="{{ . }}" alt="">{{ else }}<div class="event-image event-placeholder"><img src="/logo2.svg" alt="Pisa.dev logo"></div>{{ end }}
+  <div class="event-card-content">
+    <div class="event-meta">
+      <p><svg class="icon"><use href="#icon-calendar"></use></svg><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format ":date_full" }} · {{ .Date.Format "15:04" }}</time></p>
+      <p><svg class="icon"><use href="#icon-map-pin"></use></svg>{{ .Params.location }}</p>
+    </div>
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p>{{ .Params.abstract }}</p>
+    {{ with .Params.speakers }}<ul class="speaker-list">{{ range . }}<li>{{ with .image_url }}<img src="{{ . }}" alt="">{{ end }}<span><strong>{{ .name }}</strong><small>{{ .title }}</small></span></li>{{ end }}</ul>{{ end }}
+  </div>
+</article>
